@@ -3,3 +3,52 @@
   --body-color: #fdebc7;
   --accent-two-color: #408a41;
 }
+
+@font-face {
+  font-family: 'San Francisco Rounded Black';
+  src: url('../font/SF-Pro-Rounded-Black.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Bold';
+  src: url('../font/SF-Pro-Rounded-Bold.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Heavy';
+  src: url('../font/SF-Pro-Rounded-Heavy.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Light';
+  src: url('../font/SF-Pro-Rounded-Light.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Medium';
+  src: url('../font/SF-Pro-Rounded-Medium.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Regular';
+  src: url('../font/SF-Pro-Rounded-Regular.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Semibold';
+  src: url('../font/SF-Pro-Rounded-Semibold.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Thin';
+  src: url('../font/SF-Pro-Rounded-Thin.otf');
+}
+
+@font-face {
+  font-family: 'San Francisco Rounded Ultralight';
+  src: url('../font/SF-Pro-Rounded-Ultralight.otf');
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li {
+  font-family: 'San Francisco Rounded Regular';
+}
