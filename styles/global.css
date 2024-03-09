@@ -4,10 +4,7 @@
   --accent-two-color: #408a41;
 }
 
-@font-face {
-  font-family: 'San Francisco Rounded Black';
-  src: url('../font/SF-Pro-Rounded-Black.otf');
-}
+
 
 @font-face {
   font-family: 'San Francisco Rounded Bold';

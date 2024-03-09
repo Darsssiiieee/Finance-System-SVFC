@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'San Francisco Rounded Black';
+  src: url('../font/SF-Pro-Rounded-Black.otf');
+}
+
+.whyText {
+  font-family: 'San Francisco Rounded Black';
+}
+
+.testimonialHeading {
+  font-family: 'San Francisco Rounded Black';
+}
