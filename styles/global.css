@@ -4,7 +4,9 @@
   --accent-two-color: #408a41;
 }
 
-
+h1, h2, h3, h4, h5, h6, p, a, li {
+  font-family: 'San Francisco Rounded Regular';
+}
 
 @font-face {
   font-family: 'San Francisco Rounded Bold';
