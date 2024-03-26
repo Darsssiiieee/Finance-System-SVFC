@@ -228,11 +228,17 @@
             </label>
 
 
-            <div class="form-control mt-6">
+            <div class="form-control gap-5 mt-6">
               <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
                 FINALIZE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+                </svg>
+              </button>
+              <button type="button" id="backButton" class="btn btn-ghost bg-zinc-300 hover:scale-105">
+                BACK
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                 </svg>
               </button>
             </div>
@@ -241,5 +247,108 @@
       </div>
     </div>
   </main>
+  <script>
+    $(document).ready(() => {
+      $("#backButton").click(e => {
+        window.location.href = "./role-selection.php"
+      })
+      
+      const firstnameInput = document.getElementById('firstname')
+      const middlenameInput = document.getElementById('middlename')
+      const lastnameInput = document.getElementById('lastname')
+      const birthdateInput = document.getElementById('birthdate')
+      const genderInput = document.getElementById('gender')
+      const emailInput = document.getElementById('email')
+      const phoneInput = document.getElementById('phone')
+      const academicprogramInput = document.getElementById('academicprogram')
+      const yearlevelInput = document.getElementById('yearlevel')
+      const homeaddressInput = document.getElementById('homeaddress')
+      const barangayInput = document.getElementById('barangay')
+      const cityInput = document.getElementById('city')
+
+      firstnameInput.value = sessionStorage.getItem("firstname")
+      middlenameInput.value = sessionStorage.getItem("middlename")
+      lastnameInput.value = sessionStorage.getItem("lastname")
+      birthdateInput.value = sessionStorage.getItem("birthdate")
+      genderInput.value = sessionStorage.getItem("gender")
+      emailInput.value = sessionStorage.getItem("email")
+      phoneInput.value = sessionStorage.getItem("phone")
+      academicprogramInput.value = sessionStorage.getItem("academicprogram")
+      yearlevelInput.value = sessionStorage.getItem("yearlevel")
+      homeaddressInput.value = sessionStorage.getItem("homeaddress")
+      barangayInput.value = sessionStorage.getItem("barangay")
+      cityInput.value = sessionStorage.getItem("city")
+
+      
+
+      
+
+      $("#personalInformationForm").submit(e => {
+        const firstname = $("#firstname").val()
+        const middlename = $("#middlename").val()
+        const lastname = $("#lastname").val()
+        const birthdate = $("#birthdate").val()
+        const gender = $("#gender").val()
+        const email = $("#email").val()
+        const phone = $("#phone").val()
+        const academicprogram = $("#academicprogram").val()
+        const yearlevel = $("#yearlevel").val()
+        const homeaddress = $("#homeaddress").val()
+        const barangay = $("#barangay").val()
+        const city = $("#city").val()
+
+        // Check if any of the fields are empty
+        if (!firstname || !middlename || !lastname || !birthdate || !gender || !email || !phone || !academicprogram || !yearlevel || !homeaddress || !barangay || !city) {
+          alert("Please fill in all fields.");
+          e.preventDefault();
+          return;
+        }
+
+        // Check if email is valid
+        const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+        if (!emailRegex.test(email)) {
+          alert("Please enter a valid email address.");
+          e.preventDefault();
+          return;
+        }
+
+        // Check if phone number is valid
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(phone)) {
+          alert("Please enter a valid phone number.");
+          e.preventDefault();
+          return;
+        }
+
+        // Check if birthdate is valid
+        const birthdateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!birthdateRegex.test(birthdate)) {
+          alert("Please enter a valid birthdate.");
+          e.preventDefault();
+          return;
+        }
+
+        // Check if year level is valid
+        if (yearlevel < 1 || yearlevel > 5) {
+          alert("Please enter a valid year level.");
+          e.preventDefault();
+          return;
+        }
+
+        sessionStorage.setItem("firstname", firstname)
+        sessionStorage.setItem("middlename", middlename)
+        sessionStorage.setItem("lastname", lastname)
+        sessionStorage.setItem("birthdate", birthdate)
+        sessionStorage.setItem("gender", gender)
+        sessionStorage.setItem("email", email)
+        sessionStorage.setItem("phone", phone)
+        sessionStorage.setItem("academicprogram", academicprogram)
+        sessionStorage.setItem("yearlevel", yearlevel)
+        sessionStorage.setItem("homeaddress", homeaddress)
+        sessionStorage.setItem("barangay", barangay)
+        sessionStorage.setItem("city", city)
+      })
+    })
+  </script>
 </body>
 </html>

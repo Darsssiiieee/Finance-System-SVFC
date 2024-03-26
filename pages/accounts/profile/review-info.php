@@ -26,7 +26,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EPAY | Review Information</title>
-  <link rel="icon" type="image/x-icon" href="../../res/images/logo.ico">
+  <link rel="icon" type="image/x-icon" href="../../../res/images/logo.ico">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -222,11 +222,17 @@
               </div>
             </label>
 
-            <div class="form-control mt-6">
+            <div class="form-control gap-5 mt-6">
               <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
                 FINALIZE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
+                </svg>
+              </button>
+              <button id="backButton" class="btn btn-ghost bg-zinc-300 hover:scale-105">
+                BACK
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                 </svg>
               </button>
             </div>
@@ -235,5 +241,13 @@
       </div>
     </div>
   </main>
+  <script>
+    $(document).ready(() => {
+      $("#backButton").click(e => {
+        e.preventDefault()
+        window.location.href = "./personal-information.php"
+      })
+    })
+  </script>
 </body>
 </html>

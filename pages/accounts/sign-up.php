@@ -113,7 +113,7 @@
                 <input type="checkbox" class="checkbox checkbox-secondary" />
               </label>
             </div>
-            <div class="form-control mt-6">
+            <div class="form-control gap-5 mt-6">
               <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
                 CONTINUE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -128,8 +128,17 @@
   </main>
   <script>
     $(document).ready(() => {
-      const password = document.querySelector('input[type="password"]');
-      const checkbox = document.querySelector('input[type="checkbox"]');
+      const usernameInput = document.getElementById('username')
+      const storedUsername = sessionStorage.getItem('username')
+      if (storedUsername) usernameInput.value = storedUsername
+      const passwordInput = document.getElementById('password')
+      const confirmPasswordInput = document.getElementById('confirmPassword')
+      const storedPassword = sessionStorage.getItem('password')
+      if (storedPassword) { 
+        passwordInput.value = storedPassword
+        confirmPasswordInput.value = storedPassword
+      }
+      const checkbox = document.querySelector('input[type="checkbox"]')
       checkbox.addEventListener('change', () => {
         password.type = checkbox.checked ? 'text' : 'password';
       })
@@ -138,13 +147,15 @@
         const password = $("#password").val();
         const confirmPassword = $("#confirmPassword").val()
         if (password.length < 8) {
-          alert("Password must be at least 8 characters long");
-          e.preventDefault();
+          alert("Password must be at least 8 characters long")
+          e.preventDefault()
         }
         else if (password !== confirmPassword) {
-          alert("Passwords do not match");
-          e.preventDefault();
+          alert("Passwords do not match")
+          e.preventDefault()
         }
+        sessionStorage.setItem("username", $("#username").val())
+        sessionStorage.setItem("password", $("#password").val())
       })
 
       $("#password").on("input", () => {
