@@ -52,7 +52,7 @@
   </div>
 
   <main>
-    <div class="hero w-full min-h-screen   bg-base-200">
+    <div class="hero w-full min-h-screen bg-base-200">
       <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
         <div class="text-center flex flex-col-reverse gap-20">
           <ul class="steps">
