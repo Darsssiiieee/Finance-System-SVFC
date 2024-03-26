@@ -37,8 +37,8 @@
     }
   </style>
 </head>
-<body>
-  <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 sticky">
+<body class="relative">
+  <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
