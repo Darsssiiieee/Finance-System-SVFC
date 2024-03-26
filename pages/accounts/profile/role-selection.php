@@ -1,9 +1,26 @@
+<?php
+  session_start();
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $role = $_POST['role'];
+
+    $valid_roles = array("Admin", "Student");
+    if (!in_array($role, $valid_roles)) {
+      echo "<script>alert('Invalid role selected') window.location.href='./role-selection.php'</script>";
+      exit();
+    } else {
+      $_SESSION['role'] = $role;
+      header('Location: ./personal-information.php');
+    }
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="imahe/x-icon" href="../../../res/images/logo.ico">
+  <link rel="icon" type="image/x-icon" href="../../../res/images/logo.ico">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,7 +34,7 @@
 </head>
 <body>
 
-  <div id="navBar" class="z-50 navbar border-b-[1px] border-black glass top-0 sticky">
+  <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 sticky">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -43,12 +60,12 @@
   <main>
     <div class="hero min-h-screen bg-base-200">
       <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
-        <div class="text-center flex flex-col-reverse">
+        <div class="text-center gap-20 flex flex-col-reverse">
           <ul class="steps">
-            <li class="currentProgress step step-secondary">Registration</li>
-            <li class="currentProgress step step-secondary">Role Selection</li>
+            <li class="currentProgress step step-secondary">Register</li>
+            <li class="currentProgress step step-secondary">Select Role</li>
             <li class="step">Personal Info</li>
-            <li class="step">Review Info</li>
+            <li class="step">Your Info</li>
           </ul>
           <div>
             <h1 class="text-3xl text-center font-bold">Select Appropriate Role</h1>
@@ -59,12 +76,12 @@
           <form id="roleForm" method="post" class="card-body">
             <div class="form-control">
               <label class="label">
-                <span class="label-text">Email</span>
+                <span class="label-text">Select a Role</span>
               </label>
               <select id="roleSelect" name="role" required aria-required="true" class="select select-bordered w-full max-w-xs">
                 <option disabled selected>Your Role</option>
-                <option>Admin</option>
-                <option>Student</option>
+                <option value="Admin">Admin</option>
+                <option value="Student">Student</option>
               </select>
             </div>
             <div class="form-control mt-6">

@@ -1,3 +1,25 @@
+<?php
+  session_start();
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    function generateRandomNumber() {
+      return str_pad(mt_rand(0, 99999), 5, '0', STR_PAD_LEFT);
+    }
+    if ($password !== $confirmPassword) {
+      echo "<script>alert('Passwords do not match')</script>";
+      exit();
+    } else {
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      $confirmPassword = $_POST['confirmPassword'];
+      $student_number = "C-" . generateRandomNumber();
+      $_SESSION['username'] = $username;
+      $_SESSION['password'] = $password;
+      $_SESSION['student_number'] = $student_number;
+      header('Location: ./profile/role-selection.php');
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +38,7 @@
   </style>
 </head>
 <body>
-  <div id="navBar" class="z-50 navbar border-b-[1px] border-black glass top-0 sticky">
+  <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 sticky">
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -45,7 +67,7 @@
           <ul class="steps">
             <li class="currentProgress step step-secondary">Register</li>
             <li class="step">Select Role</li>
-            <li class="step">Personal Info</li>
+            <li class="step">Your Info</li>
             <li class="step">Review Info</li>
           </ul>
           <div>
@@ -54,8 +76,7 @@
           </div>
         </div>
         <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form action="../../res/utilities/create-account.php" method="post" class="card-body">
-
+          <form method="post" class="card-body">
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Username</span>
