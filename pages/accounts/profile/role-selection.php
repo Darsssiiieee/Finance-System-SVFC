@@ -42,8 +42,8 @@
 
   <main>
     <div class="hero min-h-screen bg-base-200">
-      <div class="hero-content flex-col">
-        <div class="text-center flex flex-col gap-10">
+      <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
+        <div class="text-center flex flex-col-reverse">
           <ul class="steps">
             <li class="currentProgress step step-secondary">Registration</li>
             <li class="currentProgress step step-secondary">Role Selection</li>

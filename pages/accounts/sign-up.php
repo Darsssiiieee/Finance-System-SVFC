@@ -39,15 +39,12 @@
     </div>
   </div>
   <main>
-    <nav class="bg-base-200 p-5 flex flex-row justify-between">
-      <a href="../index.html"><img class="w-1/6" src="../res/images/logo.png" alt=""></a>
-    </nav>
     <div class="hero w-full min-h-screen bg-base-200">
-      <div class="hero-content flex-col">
-        <div class="text-center flex flex-col gap-10">
+      <div class="hero-content flex-col lg:flex-row w-11/12 lg:w-3/4 lg:justify-between">
+        <div class="text-center flex flex-col-reverse gap-20">
           <ul class="steps">
-            <li class="currentProgress step step-secondary">Registration</li>
-            <li class="step">Role Selection</li>
+            <li class="currentProgress step step-secondary">Register</li>
+            <li class="step">Select Role</li>
             <li class="step">Personal Info</li>
             <li class="step">Review Info</li>
           </ul>
