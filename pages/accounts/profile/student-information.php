@@ -68,7 +68,7 @@
         </div>
 
         <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl bg-base-100">
-          <form action="./review-info.php" method="post" class="card-body">
+          <form action="./review-information-student.php" method="post" class="card-body">
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Student Number</span>

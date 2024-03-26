@@ -2,14 +2,29 @@
   session_start();
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $role = $_POST['role'];
+    function generateRandomNumber($role) {
+      if ($role === "Admin") {
+        return 'A-' . str_pad(mt_rand(0, 9999999), 7, '0', STR_PAD_LEFT);
+      }
+      return 'S-' . str_pad(mt_rand(0, 9999999), 7, '0', STR_PAD_LEFT);
+    }
 
     $valid_roles = array("Admin", "Student");
     if (!in_array($role, $valid_roles)) {
       echo "<script>alert('Invalid role selected') window.location.href='./role-selection.php'</script>";
       exit();
-    } else {
+    }
+    
+    else if ($role === "Admin") {
       $_SESSION['role'] = $role;
-      header('Location: ./personal-information.php');
+      $_SESSION['admin_id'] = generateRandomNumber($role);
+      header('Location: ./admin-information.php');
+    }
+
+    else if ($role === "Student"){
+      $_SESSION['role'] = $role;
+      $_SESSION['student_id'] = generateRandomNumber($role);
+      header('Location: ./student-information.php');
     }
   }
 ?>

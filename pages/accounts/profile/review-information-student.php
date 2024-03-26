@@ -245,7 +245,7 @@
     $(document).ready(() => {
       $("#backButton").click(e => {
         e.preventDefault()
-        window.location.href = "./personal-information.php"
+        window.location.href = "./student-information.php"
       })
     })
   </script>
