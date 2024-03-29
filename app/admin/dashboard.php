@@ -3,6 +3,9 @@
   // if (!isset($_SESSION['admin'])) {
   //   header('Location: ./../accounts/login.php');
   // }
+  $admin_dashboard_url = '/finance-system-svfc/app/admin/dashboard.php';
+  $current_url = $_SERVER['REQUEST_URI'];
+  $is_admin_dashboard_page = ($current_url === $admin_dashboard_url);
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +36,10 @@
       font-family: 'San Francisco Rounded Regular';
       src: url('../font/SF-Pro-Rounded-Regular.otf');
     }
-    h1, h2, h3, h4, h5, h6, p, a, li {
+    h1, h2, h3, h4, h5, h6, p, a, li, button {
       font-family: 'San Francisco Rounded Regular';
     }
-    .count, .stat-value, .title-overview {
+    .count, .stat-value, .title-overview, .menuButton {
       font-family: 'San Francisco Rounded Heavy';
     }
     .overview-title, .stat-title {
@@ -47,7 +50,17 @@
     }
   </style>
 </head>
-<body class="flex flex-col justify-center items-center">
+<body class="bg-[#F7EFD8] flex flex-col justify-center items-center">
+  <dialog id="logout_modal" class="modal backdrop-blur">
+    <div class="modal-box">
+      <h3 style="font-family: 'San Francisco Rounded Bold';" class="font-bold text-2xl">Logout</h3>
+      <p style="font-family: 'San Francisco Rounded Regular';;" class="py-4">Are you sure you want to logout?</p>
+      <div class="modal-action">
+        <button class="menuButton btn btn-yes btn-error text-white font-bold" onclick="logout()">YES</button>
+        <button class="menuButton btn btn-cancel" onclick="closeLogoutModal()">CANCEL</button>
+      </div>
+    </div>
+  </dialog>
 
   <div class="border border-slate-900/10 z-50 navbar backdrop-blur justify-between">
     <div class="navbar-start w-auto lg:hidden">
@@ -123,7 +136,7 @@
   <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
     <aside class="min-h-screen w-1/4 hidden lg:block">
       <ul tabindex="0" class="menu rounded-lg justify-center border border-slate-900/10 flex flex-col bg-base-100 shadow-xl rounded-xl min-h-96 justify-evenly mt-3 z-[1] p-3">
-        <li>
+        <li class="<?php echo ($is_admin_dashboard_page ? 'border-l-2 border-l-[#FF6BB3] text-[#FF6BB3]' : ''); ?>">
           <a href="./dashboard.php" class="text-lg gap-7 flex flex-row items-center">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
               <path fill-rule="evenodd" d="M3 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 5.25Zm0 4.5A.75.75 0 0 1 3.75 9h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 9.75Zm0 4.5a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Zm0 4.5a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
@@ -140,20 +153,16 @@
           </a>
         </li>
         <li>
-          <a href="./settings.php" class="text-lg gap-7 flex flex-row items-center link link-warning no-underline">
+          <a href="./settings.php" class="text-lg gap-7 flex flex-row items-center no-underline">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
               <path d="M17.004 10.407c.138.435-.216.842-.672.842h-3.465a.75.75 0 0 1-.65-.375l-1.732-3c-.229-.396-.053-.907.393-1.004a5.252 5.252 0 0 1 6.126 3.537ZM8.12 8.464c.307-.338.838-.235 1.066.16l1.732 3a.75.75 0 0 1 0 .75l-1.732 3c-.229.397-.76.5-1.067.161A5.23 5.23 0 0 1 6.75 12a5.23 5.23 0 0 1 1.37-3.536ZM10.878 17.13c-.447-.098-.623-.608-.394-1.004l1.733-3.002a.75.75 0 0 1 .65-.375h3.465c.457 0 .81.407.672.842a5.252 5.252 0 0 1-6.126 3.539Z" />
               <path fill-rule="evenodd" d="M21 12.75a.75.75 0 1 0 0-1.5h-.783a8.22 8.22 0 0 0-.237-1.357l.734-.267a.75.75 0 1 0-.513-1.41l-.735.268a8.24 8.24 0 0 0-.689-1.192l.6-.503a.75.75 0 1 0-.964-1.149l-.6.504a8.3 8.3 0 0 0-1.054-.885l.391-.678a.75.75 0 1 0-1.299-.75l-.39.676a8.188 8.188 0 0 0-1.295-.47l.136-.77a.75.75 0 0 0-1.477-.26l-.136.77a8.36 8.36 0 0 0-1.377 0l-.136-.77a.75.75 0 1 0-1.477.26l.136.77c-.448.121-.88.28-1.294.47l-.39-.676a.75.75 0 0 0-1.3.75l.392.678a8.29 8.29 0 0 0-1.054.885l-.6-.504a.75.75 0 1 0-.965 1.149l.6.503a8.243 8.243 0 0 0-.689 1.192L3.8 8.216a.75.75 0 1 0-.513 1.41l.735.267a8.222 8.222 0 0 0-.238 1.356h-.783a.75.75 0 0 0 0 1.5h.783c.042.464.122.917.238 1.356l-.735.268a.75.75 0 0 0 .513 1.41l.735-.268c.197.417.428.816.69 1.191l-.6.504a.75.75 0 0 0 .963 1.15l.601-.505c.326.323.679.62 1.054.885l-.392.68a.75.75 0 0 0 1.3.75l.39-.679c.414.192.847.35 1.294.471l-.136.77a.75.75 0 0 0 1.477.261l.137-.772a8.332 8.332 0 0 0 1.376 0l.136.772a.75.75 0 1 0 1.477-.26l-.136-.771a8.19 8.19 0 0 0 1.294-.47l.391.677a.75.75 0 0 0 1.3-.75l-.393-.679a8.29 8.29 0 0 0 1.054-.885l.601.504a.75.75 0 0 0 .964-1.15l-.6-.503c.261-.375.492-.774.69-1.191l.735.267a.75.75 0 1 0 .512-1.41l-.734-.267c.115-.439.195-.892.237-1.356h.784Zm-2.657-3.06a6.744 6.744 0 0 0-1.19-2.053 6.784 6.784 0 0 0-1.82-1.51A6.705 6.705 0 0 0 12 5.25a6.8 6.8 0 0 0-1.225.11 6.7 6.7 0 0 0-2.15.793 6.784 6.784 0 0 0-2.952 3.489.76.76 0 0 1-.036.098A6.74 6.74 0 0 0 5.251 12a6.74 6.74 0 0 0 3.366 5.842l.009.005a6.704 6.704 0 0 0 2.18.798l.022.003a6.792 6.792 0 0 0 2.368-.004 6.704 6.704 0 0 0 2.205-.811 6.785 6.785 0 0 0 1.762-1.484l.009-.01.009-.01a6.743 6.743 0 0 0 1.18-2.066c.253-.707.39-1.469.39-2.263a6.74 6.74 0 0 0-.408-2.309Z" clip-rule="evenodd" />
             </svg>
-            Setting
+            Settings
           </a>
         </li>
         <li>
-          <a class="text-lg gap-7 flex flex-row items-center link-error link no-underline">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-              <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-            </svg>
-            Log Out</a>
+          <button class="btn btn-error text-white" onclick="openLogoutModal()">LOGOUT</button>
         </li>
 
         <div>
@@ -166,7 +175,7 @@
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
       <div class="flex flex-col w-full gap-5 justify-center">
         <h1 class="text-xl lg:text-2xl xl:text-4xl text-left title-overview">Student Overview</h1>
-        <div class="flex flex-col justify-center items-center w-full gap-5 lg:grid lg:grid-cols-3">
+        <div class="flex flex-col justify-center items-center w-full gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
           <div class="bg-green-400 p-5 w-full rounded-xl flex flex-col">
             <h1 class="overview-title flex font-bold gap-5">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -244,7 +253,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             </div>
             <div class="stat-title">Page Views</div>
-            <div class="stat-value text-secondary">2.6M</div>
+            <div class="stat-value  text-[#FF6BB3]">2.6M</div>
             <div class="stat-desc">21% more than last month</div>
           </div>
           
@@ -252,9 +261,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
             </svg>
-            <div class="stat-value">86%</div>
+            <div class="stat-value text-[#FF6BB3]">86%</div>
             <div class="stat-title">Tasks done</div>
-            <div class="stat-desc text-secondary">31 tasks remaining</div>
+            <div class="stat-desc text-[#FF6BB3]">31 tasks remaining</div>
           </div>
           
         </div>
@@ -369,5 +378,20 @@
     </section>
 
   </main>
+
+  <script>
+    function openLogoutModal() {
+      document.getElementById("logout_modal").showModal();
+    }
+
+    function closeLogoutModal() {
+      document.getElementById("logout_modal").close();
+    }
+
+    function logout() {
+      // Redirect to logout.php
+      window.location.href = "./../utils/logout.php";
+    }
+  </script>
 </body>
 </html>

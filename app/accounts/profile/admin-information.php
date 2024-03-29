@@ -24,7 +24,9 @@
   </style>
   <title>EPAY | Admin Account Information</title>
 </head>
-<body>
+<body class="bg-[#F7EFD8] flex justify-center min-h-screen overflow-hidden relative w-full">
+  <img src="./../../../res/images/logo.png" class="w-1/4 bottom-5 absolute self-center" alt="">
+
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">

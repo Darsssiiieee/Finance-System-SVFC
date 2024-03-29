@@ -41,12 +41,25 @@
   <link rel="stylesheet" href="./../../../styles/global.css">
   <title>EPAY | Role Select</title>
   <style>
+
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
+    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
+      background-color: #FF6BB3;
+    }
+    *, *::after, *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
   </style>
 </head>
-<body class="relative">
+<body class="bg-[#F7EFD8] min-h-screen overflow-hidden w-full relative flex justify-center">
+  <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+  </div>
+  <img src="./../../../res/images/logo.png" class="w-16 absolute bottom-5" alt="">
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
@@ -66,39 +79,39 @@
       <a class="btn btn-ghost text-xl">EPAY</a>
     </div>
     <div class="navbar-end">
-      <a href="./login.php" class="link hover:cursor link-secondary">Log In Instead?</a>
+      <a href="./login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
     </div>
   </div>
 
   <main>
-    <div class="hero min-h-screen bg-base-200">
+    <div class="hero min-h-screen">
       <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
-        <div class="text-center gap-20 flex flex-col-reverse">
+        <div class="text-center gap:10 lg:gap-20 flex flex-col-reverse">
           <ul class="steps">
             <li class="currentProgress step step-secondary">Register</li>
-            <li class="currentProgress step step-secondary">Select Role</li>
-            <li class="step">Personal Info</li>
-            <li class="step">Your Info</li>
+            <li class="currentProgress step step-secondary">Role</li>
+            <li class="step">Information</li>
+            <li class="step">Info</li>
           </ul>
           <div>
-            <h1 class="text-3xl text-center font-bold">Select Appropriate Role</h1>
+            <h1 class="text-3xl currentProgress text-center font-bold">Select Appropriate Role</h1>
             <p class="py-6 text-center">Select a Role to continue.</p>
           </div>
         </div>
-        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100/50 backdrop-blur">
           <form id="roleForm" method="post" class="card-body">
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Select a Role</span>
               </label>
-              <select id="roleSelect" name="role" required aria-required="true" class="select select-bordered w-full max-w-xs">
+              <select id="roleSelect" name="role" required aria-required="true" class="select border-[#FF6BB3] w-full max-w-xs">
                 <option disabled selected>Your Role</option>
                 <option value="Admin">Admin</option>
                 <option value="Student">Student</option>
               </select>
             </div>
             <div class="form-control gap-5 mt-6">
-              <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
+              <button type="submit" class="text-white btn bg-[#FF6BB3] hover:scale-105">
                 CONTINUE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />

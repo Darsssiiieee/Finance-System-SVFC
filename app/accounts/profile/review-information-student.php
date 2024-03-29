@@ -1,23 +1,22 @@
 <?php
   session_start();
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $student_number = $_SESSION['student_number'];
-    $role = $_SESSION['role'];
-    $firstname = $_POST['firstname'];
-    $middlename = $_POST['middlename'];
-    $lastname = $_POST['lastname'];
-    $birthdate = $_POST['birthdate'];
-    $gender = $_POST['gender'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $academicprogram = $_POST['academicprogram'];
-    $yearlevel = $_POST['yearlevel'];
-    $homeaddress = $_POST['homeaddress'];
-    $barangay = $_POST['barangay'];
-    $city = $_POST['city'];
-
+  // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //   $student_number = $_SESSION['student_number'];
+  //   $role = $_SESSION['role'];
+  //   $firstname = $_POST['firstname'];
+  //   $middlename = $_POST['middlename'];
+  //   $lastname = $_POST['lastname'];
+  //   $birthdate = $_POST['birthdate'];
+  //   $gender = $_POST['gender'];
+  //   $email = $_POST['email'];
+  //   $phone = $_POST['phone'];
+  //   $academicprogram = $_POST['academicprogram'];
+  //   $yearlevel = $_POST['yearlevel'];
+  //   $homeaddress = $_POST['homeaddress'];
+  //   $barangay = $_POST['barangay'];
+  //   $city = $_POST['city'];
     
-  }
+  // }
 ?>
 
 <!DOCTYPE html>
@@ -32,17 +31,29 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../../../styles/global.css">
   <style>
+    *, *::after, *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
+    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
+      background-color: #536F16;
+    }
     #personalInformationForm {
-      scrollbar-color: #ff00d3 transparent;
+      scrollbar-color: #FF6BB3 transparent;
       scrollbar-width: thin;
       scrollbar-arrow-color: transparent;
     }
   </style>
 </head>
-<body class="relative">
+<body class="bg-[#F7EFD8] flex justify-center min-h-screen overflow-hidden relative w-full">
+  <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+  </div>
+  <img src="./../../../res/images/logo.png" class="w-1/4 bottom-5 absolute self-center" alt="">
   <div id="navBar" class="z-50 navbar border absolute top-0 border-slate-900/10 backdrop-blur">
     <div class="navbar-start">
       <div class="dropdown">
@@ -62,14 +73,14 @@
       <a class="btn btn-ghost text-xl">EPAY</a>
     </div>
     <div class="navbar-end">
-      <a href="./login.php" class="link hover:cursor link-secondary">Log In Instead?</a>
+      <a href="./login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
     </div>
   </div>
 
   <main>
-    <div class="hero w-full min-h-screen   bg-base-200">
-      <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
-        <div class="text-center flex flex-col-reverse gap-20">
+    <div class="hero w-full min-h-screen">
+      <div class="hero-content flex-col w-11/12 gap-10 lg:gap-20 lg:justify-between lg:flex-row">
+        <div class="text-center flex flex-col-reverse">
           <ul class="steps">
             <li class="currentProgress step step-secondary">Register</li>
             <li class="currentProgress step step-secondary">Select Role</li>
@@ -77,12 +88,12 @@
             <li class="currentProgress step step-secondary">Review Info</li>
           </ul>
           <div>
-            <h1 class="text-3xl text-center font-bold">Review Your Information</h1>
+            <h1 class="text-3xl text-center font-bold currentProgress">Review Your Information</h1>
             <p class="py-6 text-center">Please double check before continuing.</p>
           </div>
         </div>
 
-        <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl bg-base-100">
+        <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl backdrop-blur">
           <form action="./review-info.php" method="post" class="card-body">
             <label class="form-control w-full max-w-xs">
               <div class="label">
@@ -223,7 +234,7 @@
             </label>
 
             <div class="form-control gap-5 mt-6">
-              <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
+              <button type="submit" class="btn btn-secondary border-[#FF6BB3] bg-[#FF6BB3] hover:scale-105">
                 FINALIZE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />

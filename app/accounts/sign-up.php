@@ -29,12 +29,20 @@
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
+    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
+      background-color: #FF6BB3;
+    }
+    *, *::after, *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
   </style>
 </head>
-<body class="relative w-full">
-  <svg class="w-1/2 absolute right-20 top-50 z-0" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#ff00d3" d="M40,-66.6C51.6,-62.7,60.5,-51.4,64.2,-39C67.8,-26.7,66.3,-13.3,64.6,-1C62.9,11.4,61,22.8,56.2,33C51.3,43.3,43.5,52.5,33.6,60.8C23.7,69.2,11.9,76.7,-1.6,79.4C-15,82.2,-30,80.1,-38.9,71.2C-47.8,62.3,-50.4,46.5,-58.6,33.5C-66.7,20.4,-80.3,10.2,-81.3,-0.6C-82.3,-11.4,-70.7,-22.7,-60.9,-33C-51.2,-43.2,-43.3,-52.2,-33.4,-57.1C-23.6,-61.9,-11.8,-62.6,1.2,-64.7C14.2,-66.8,28.5,-70.4,40,-66.6Z" transform="translate(100 100)" />
-  </svg>
+<body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full">
+  <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
+    <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+  </div>
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
@@ -54,31 +62,31 @@
       <a class="btn btn-ghost text-xl">EPAY</a>
     </div>
     <div class="navbar-end">
-      <a href="./login.php" class="link hover:cursor link-secondary">Log In Instead?</a>
+      <a href="./login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
     </div>
   </div>
   <main>
-    <div class="hero w-full min-h-screen bg-base-200">
+    <div class="hero w-full min-h-screen">
       <div class="hero-content flex-col lg:flex-row w-11/12 lg:w-3/4 lg:justify-between">
-        <div class="text-center flex flex-col-reverse gap-20">
+        <div class="text-center flex flex-col-reverse gap-5 lg:gap-20">
           <ul class="steps">
             <li class="currentProgress step step-secondary">Register</li>
-            <li class="step">Select Role</li>
-            <li class="step">Your Info</li>
-            <li class="step">Review Info</li>
+            <li class="step">Role</li>
+            <li class="step">Information</li>
+            <li class="step">Review</li>
           </ul>
           <div>
-            <h1 class="text-3xl text-center font-bold">Sign Up</h1>
+            <h1 class="text-3xl text-center font-bold currentProgress">Sign Up</h1>
             <p class="py-6 text-center">Sign Up to continue.</p>
           </div>
         </div>
-        <div class="card backdrop-blur shrink-0 w-full max-w-sm shadow-2xl bg-base-100/90">
+        <div class="card backdrop-blur shrink-0 w-full max-w-sm shadow-2xl">
           <form method="post" class="card-body">
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Username</span>
               </div>
-              <input name="username" minlength="4" id="username" type="text" placeholder="Username" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="username" minlength="4" id="username" type="text" placeholder="Username" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true/>
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -88,7 +96,7 @@
               <div class="label">
                 <span class="label-text">Password</span>
               </div>
-              <input name="password" minlength="8" id="password" type="password" placeholder="Password" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="password" minlength="8" id="password" type="password" placeholder="Password" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true/>
               <div class="label">
                 <span id="errorLabelPassword" class="label-text-alt"></span>
               </div>
@@ -98,7 +106,7 @@
               <div class="label">
                 <span class="label-text">Confirm Password</span>
               </div>
-              <input name="confirmPassword" id="confirmPassword" type="password" placeholder="Password" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="confirmPassword" id="confirmPassword" type="password" placeholder="Password" class="input input-bordered border-[#FF6BB3] input-secondary w-full max-w-xs" required aria-required=true/>
               <div class="label">
                 <span id="errorLabelConfirm" class="label-text-alt"></span>
               </div>
@@ -107,11 +115,11 @@
             <div class="form-control">
               <label class="cursor-pointer label">
                 <span class="label-text">Show Password</span>
-                <input type="checkbox" class="checkbox checkbox-secondary" />
+                <input type="checkbox" class="checkbox checkbox-secondary border-[#FF6BB3]" />
               </label>
             </div>
             <div class="form-control gap-5 mt-6">
-              <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
+              <button type="submit" class="btn btn-secondary border-[#FF6BB3] bg-[#FF6BB3] hover:scale-105">
                 CONTINUE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />
