@@ -73,7 +73,7 @@
       <a class="btn btn-ghost text-xl">EPAY</a>
     </div>
     <div class="navbar-end">
-      <a href="./login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
+      <a href="./../login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
     </div>
   </div>
 

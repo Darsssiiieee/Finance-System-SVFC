@@ -6,9 +6,24 @@
   <title>EPAY | Log In</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="./../../styles/global.css">
+    <style>
+      *, *::after, *::before {
+        font-family: 'San Francisco Rounded Regular';
+      }
+      .titlePage {
+        font-family: 'San Francisco Rounded Heavy';
+      }
+
+    </style>
 </head>
-<body>
+<body class="bg-[#F7EFD8] min-h-screen overflow-hidden w-full relative flex justify-center">
+  <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
+    <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+  </div>
+  <img src="./../../res/images/Logologo.png" class="w-16 absolute bottom-5" alt="">
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
@@ -28,36 +43,23 @@
       <a class="btn btn-ghost text-xl">EPAY</a>
     </div>
     <div class="navbar-end">
-      <a href="./login.php" class="link hover:cursor link-secondary">Log In Instead?</a>
+      <a href="./sign-up.php" class="link hover:cursor text-[#FF6BB3]">Sign Up Instead?</a>
     </div>
   </div>
-  <main>
-    <div class="hero min-h-screen w-full bg-base-200">
-      <div class="hero-content flex-col w-full lg:flex-row justify-between items-center">
-        <div class="text-center lg:text-left">
-          <h1 class="text-3xl font-bold">Login now!</h1>
+  <main class="w-full">
+    <div class="hero min-h-screen w-full">
+      <div class="hero-content flex-col w-11/12 gap-5 lg:justify-between lg:flex-row">
+        <div class="text-center">
+          <h1 class="text-3xl titlePage">LOGIN</h1>
           <p class="py-6">Log In to continue.</p>
         </div>
         <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form class="card-body">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Admin or Student number:</span>
-              </label>
-              <input name="loginCode" type="email" placeholder="User Number" class="input input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Password</span>
-              </label>
-              <input type="password" placeholder="Password" class="input input-bordered" required />
-            </div>
-
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Login As:</span>
               </div>
-              <select class="select select-bordered">
+              <select class="select border-[#FF6BB3] select-bordered">
                 <option disabled selected>Select Login Role:</option>
                 <option>Admin</option>
                 <option>Student</option>
@@ -65,8 +67,25 @@
               <div class="label">
               </div>
             </label>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Admin or Student number:</span>
+              </label>
+              <input name="loginCode" type="email" placeholder="User Number" class="input input-bordered border-[#FF6BB3]" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Password</span>
+              </label>
+              <input type="password" placeholder="Password" class="input input-bordered border-[#FF6BB3]" required />
+            </div>
             <div class="form-control mt-6">
-              <button class="btn btn-secondary">Login</button>
+              <button class="btn text-white bg-[#FF6BB3]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                LOGIN
+              </button>
             </div>
           </form>
         </div>
