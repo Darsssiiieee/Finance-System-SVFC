@@ -38,7 +38,7 @@
     <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
     <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
   </div>
-  <img src="./../../../res/images/logo.png" class="w-16 absolute bottom-5" alt="">
+  <img src="./../../../res/images/Logologo.png" class="w-16 absolute bottom-5" alt="">
   <div id="navBar" class="z-50 navbar border absolute top-0 border-slate-900/10 backdrop-blur">
     <div class="navbar-start">
       <div class="dropdown">
@@ -62,7 +62,7 @@
     </div>
   </div>
 
-  <main>
+  <main class="w-full">
     <div class="hero w-full min-h-screen">
       <div class="hero-content flex-col w-11/12 gap-5 lg:gap-20 lg:justify-between lg:flex-row">
         <div class="text-center flex flex-col-reverse">
@@ -70,7 +70,7 @@
             <li class="currentProgress step step-secondary">Register</li>
             <li class="currentProgress step step-secondary">Role</li>
             <li class="currentProgress step step-secondary">Information</li>
-            <li class="step">Info</li>
+            <li class="step">Review</li>
           </ul>
           <div>
             <h1 class="text-3xl text-center font-bold currentProgress">Student Personal Information</h1>

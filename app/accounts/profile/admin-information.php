@@ -14,18 +14,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./../../../styles/global.css">
   <style>
+    *, *::after, *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
+    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
+      background-color: #FF6BB3;
+    }
     #personalInformationForm {
-      scrollbar-color: #ff00d3 transparent;
+      scrollbar-color: #FF6BB3 transparent;
       scrollbar-width: thin;
+      scrollbar-arrow-color: transparent;
     }
   </style>
   <title>EPAY | Admin Account Information</title>
 </head>
 <body class="bg-[#F7EFD8] flex justify-center min-h-screen overflow-hidden relative w-full">
-  <img src="./../../../res/images/logo.png" class="w-1/4 bottom-5 absolute self-center" alt="">
+  <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+  </div>
+  <img src="./../../../res/images/Logologo.png" class="w-16 bottom-5 absolute self-center" alt="">
 
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
@@ -50,18 +62,18 @@
     </div>
   </div>
 
-  <main>
-    <div class="hero min-h-screen bg-base-200">
-      <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
-        <div class="text-center flex flex-col-reverse gap-20">
+  <main class="w-full">
+    <div class="hero min-h-screen">
+      <div class="hero-content flex-col w-11/12 lg:justify-between lg:flex-row">
+        <div class="text-center flex flex-col-reverse gap-5">
           <ul class="steps">
             <li class="currentProgress step step-secondary">Register</li>
-            <li class="currentProgress step step-secondary">Select Role</li>
-            <li class="currentProgress step step-secondary">Your Info</li>
-            <li class="step">Review Info</li>
+            <li class="currentProgress step step-secondary">Role</li>
+            <li class="currentProgress step step-secondary">Info</li>
+            <li class="step">Review</li>
           </ul>
           <div>
-            <h1 class="text-3xl text-center font-bold">Admin's Personal Information</h1>
+            <h1 class="text-3xl currentProgress text-center font-bold">Admin's Personal Information</h1>
             <p class="py-6 text-center">Please fill up all the fields to continue.</p>
           </div>
         </div>
@@ -69,44 +81,56 @@
           <form method="post" action="./review-information-admin.php" class="card-body">
             <div class="form-control">
               <label class="label">
+                <span class="label-text">Admin Number</span>
+              </label>
+              <input type="text" disabled aria-disabled="true" name="adminnumber" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Role:</span>
+              </label>
+              <input type="text" disabled aria-disabled="true" name="role" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
                 <span class="label-text">First Name</span>
               </label>
-              <input type="text" name="firstname" placeholder="First Name" class="input input-bordered" required />
+              <input type="text" name="firstname" placeholder="First Name" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Middle Name</span>
               </label>
-              <input type="text" name="middlename" placeholder="Middle Name" class="input input-bordered" required />
+              <input type="text" name="middlename" placeholder="Middle Name" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Last Name</span>
               </label>
-              <input type="text" name="lastname" placeholder="Last Name" class="input input-bordered" required />
+              <input type="text" name="lastname" placeholder="Last Name" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Email</span>
               </label>
-              <input type="email" placeholder="Email" class="input input-bordered" required />
+              <input type="email" placeholder="Email" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Phone Number</span>
               </label>
-              <input name="phone_number" type="tel" placeholder="Phone Number" class="input input-bordered" required />
+              <input name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
             </div>
 
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Birth Date</span>
               </div>
-              <input name="birthdate" id="birthdate" type="date" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="birthdate" id="birthdate" type="date" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required=true/>
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -116,7 +140,7 @@
               <div class="label">
                 <span class="label-text">Gender</span>
               </div>
-              <select name="gender" required aria-required="true" class="select select-secondary w-full max-w-xs">
+              <select name="gender" required aria-required="true" class="select border-[#FF6BB3] w-full max-w-xs">
                 <option disabled selected>Your Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -132,7 +156,7 @@
               <div class="label">
                 <span class="label-text">Home Address</span>
               </div>
-              <input name="homeaddress" id="homeaddress" type="text" class="input input-bordered input-secondary w-full max-w-xs" placeholder="123 Main Street" required aria-required=true/>
+              <input name="homeaddress" id="homeaddress" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="123 Main Street" required aria-required=true/>
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -142,7 +166,7 @@
               <div class="label">
                 <span class="label-text">Barangay</span>
               </div>
-              <input name="barangay" id="barangay" type="text" class="input input-bordered input-secondary w-full max-w-xs" placeholder="Barangay 176" required aria-required=true/>
+              <input name="barangay" id="barangay" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="Barangay 176" required aria-required=true/>
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -152,14 +176,14 @@
               <div class="label">
                 <span class="label-text">City</span>
               </div>
-              <input name="city" id="city" type="text" class="input input-bordered input-secondary w-full max-w-xs" placeholder="New York City" required aria-required=true/>
+              <input name="city" id="city" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="New York City" required aria-required=true/>
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
             </label>
 
             <div class="form-control gap-5 mt-6">
-              <button type="submit" class="btn btn-secondary bg-[#ff00d3] hover:scale-105">
+              <button type="submit" class="btn bg-[#FF6BB3] hover:scale-105">
                 FINALIZE
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z" />

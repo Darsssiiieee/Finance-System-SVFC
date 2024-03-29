@@ -59,7 +59,7 @@
     <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
     <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
   </div>
-  <img src="./../../../res/images/logo.png" class="w-16 absolute bottom-5" alt="">
+  <img src="./../../../res/images/Logologo.png" class="w-16 absolute bottom-5" alt="">
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
@@ -83,8 +83,8 @@
     </div>
   </div>
 
-  <main>
-    <div class="hero min-h-screen">
+  <main class="w-full">
+    <div class="hero min-h-screen w-full">
       <div class="hero-content flex-col w-11/12 gap-20 lg:justify-between lg:flex-row">
         <div class="text-center gap:10 lg:gap-20 flex flex-col-reverse">
           <ul class="steps">

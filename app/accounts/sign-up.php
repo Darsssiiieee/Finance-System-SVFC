@@ -26,23 +26,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./../../styles/global.css">
   <style>
+    *, *::after, *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
     .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
       background-color: #FF6BB3;
     }
-    *, *::after, *::before {
-      font-family: 'San Francisco Rounded Regular';
-    }
   </style>
 </head>
-<body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full">
+<body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full flex justify-center">
   <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
     <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
     <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
     <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
   </div>
+  <img src="./../../res/images/Logologo.png" class="w-16 bottom-5 absolute self-center" alt="">
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
@@ -65,7 +66,7 @@
       <a href="./login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
     </div>
   </div>
-  <main>
+  <main class="w-full">
     <div class="hero w-full min-h-screen">
       <div class="hero-content flex-col lg:flex-row w-11/12 lg:w-3/4 lg:justify-between">
         <div class="text-center flex flex-col-reverse gap-5 lg:gap-20">

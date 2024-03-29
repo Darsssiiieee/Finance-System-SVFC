@@ -11,6 +11,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./../../../styles/global.css">
   <style>
+    *, *::after, *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
@@ -18,9 +21,18 @@
       scrollbar-color: #ff00d3 transparent;
       scrollbar-width: thin;
     }
+    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
+      background-color: #536F16;
+    }
   </style>
 </head>
-<body>
+<body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full flex justify-center">
+  <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+    <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
+  </div>
+  <img src="./../../../res/images/Logologo.png" class="w-16 bottom-5 absolute self-center" alt="">
   <div id="navBar" class="z-50 navbar border absolute top-0 border-slate-900/10 backdrop-blur">
     <div class="navbar-start">
       <div class="dropdown">
@@ -40,9 +52,150 @@
       <a class="btn btn-ghost text-xl">EPAY</a>
     </div>
     <div class="navbar-end">
-      <a href="./login.php" class="link hover:cursor link-secondary">Log In Instead?</a>
+      <a href="./login.php" class="link hover:cursor text-[#FF6BB3]">Log In Instead?</a>
     </div>
   </div>
+
+  <main class="w-full">
+    <div class="hero min-h-screen">
+      <div class="hero-content flex-col w-11/12 lg:justify-between lg:flex-row">
+        <div class="text-center flex flex-col-reverse gap-5">
+          <ul class="steps">
+            <li class="currentProgress step step-secondary">Register</li>
+            <li class="currentProgress step step-secondary">Role</li>
+            <li class="currentProgress step step-secondary">Info</li>
+            <li class="currentProgress step step-secondary">Review</li>
+          </ul>
+          <div>
+            <h1 class="text-3xl currentProgress text-center font-bold">Admin's Personal Information</h1>
+            <p class="py-6 text-center">Please fill up all the fields to continue.</p>
+          </div>
+        </div>
+        <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl bg-base-100">
+          <form method="post" action="./review-information-admin.php" class="card-body">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Admin Number</span>
+              </label>
+              <input type="text" disabled aria-disabled="true" name="adminnumber" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Role:</span>
+              </label>
+              <input type="text" disabled aria-disabled="true" name="role" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">First Name</span>
+              </label>
+              <input type="text" name="firstname" placeholder="First Name" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text
+                ">Middle Name</span>
+              </label>
+              <input type="text" name="middlename" placeholder="Middle Name" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text
+                ">Last Name</span>
+              </label>
+              <input type="text" name="lastname" placeholder="Last Name" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text
+                ">Email</span>
+              </label>
+              <input type="email" placeholder="Email" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text
+                ">Phone Number</span>
+              </label>
+              <input name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
+            </div>
+
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Birth Date</span>
+              </div>
+              <input name="birthdate" id="birthdate" type="date" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required=true/>
+              <div class="label">
+                <span id="errorLabel" class="label-text-alt"></span>
+              </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Gender</span>
+              </div>
+              <select name="gender" required aria-required="true" class="select border-[#FF6BB3] w-full max-w-xs">
+                <option disabled selected>Your Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Non-Binary">Non-Binary</option>
+                <option value="Others">Others</option>
+              </select>
+              <div class="label">
+                <span id="errorLabel" class="label-text-alt"></span>
+              </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Home Address</span>
+              </div>
+              <input name="homeaddress" id="homeaddress" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="123 Main Street" required aria-required=true/>
+              <div class="label">
+                <span id="errorLabel" class="label-text-alt"></span>
+              </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">Barangay</span>
+              </div>
+              <input name="barangay" id="barangay" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="Barangay 176" required aria-required=true/>
+              <div class="label">
+                <span id="errorLabel" class="label-text-alt"></span>
+              </div>
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text">City</span>
+              </div>
+              <input name="city" id="city" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="New York City" required aria-required=true/>
+              <div class="label">
+                <span id="errorLabel" class="label-text-alt"></span>
+              </div>
+            </label>
+
+            <div class="form-control gap-5 mt-6">
+              <button type="submit" class="btn bg-[#FF6BB3] hover:scale-105">
+                SUBMIT
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                </svg>
+
+              </button>
+              <button type="button" id="backButton" class="btn btn-ghost bg-zinc-300 hover:scale-105">
+                BACK
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
 
 </body>
 </html>
