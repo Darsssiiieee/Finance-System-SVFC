@@ -31,7 +31,10 @@
     }
   </style>
 </head>
-<body class="relative">
+<body class="relative w-full">
+  <svg class="w-1/2 absolute right-20 top-50 z-0" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#ff00d3" d="M40,-66.6C51.6,-62.7,60.5,-51.4,64.2,-39C67.8,-26.7,66.3,-13.3,64.6,-1C62.9,11.4,61,22.8,56.2,33C51.3,43.3,43.5,52.5,33.6,60.8C23.7,69.2,11.9,76.7,-1.6,79.4C-15,82.2,-30,80.1,-38.9,71.2C-47.8,62.3,-50.4,46.5,-58.6,33.5C-66.7,20.4,-80.3,10.2,-81.3,-0.6C-82.3,-11.4,-70.7,-22.7,-60.9,-33C-51.2,-43.2,-43.3,-52.2,-33.4,-57.1C-23.6,-61.9,-11.8,-62.6,1.2,-64.7C14.2,-66.8,28.5,-70.4,40,-66.6Z" transform="translate(100 100)" />
+  </svg>
   <div id="navBar" class="z-50 navbar border border-slate-900/10 backdrop-blur top-0 absolute">
     <div class="navbar-start">
       <div class="dropdown">
@@ -69,7 +72,7 @@
             <p class="py-6 text-center">Sign Up to continue.</p>
           </div>
         </div>
-        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card backdrop-blur shrink-0 w-full max-w-sm shadow-2xl bg-base-100/90">
           <form method="post" class="card-body">
             <label class="form-control w-full max-w-xs">
               <div class="label">

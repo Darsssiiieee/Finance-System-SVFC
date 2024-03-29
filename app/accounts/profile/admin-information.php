@@ -69,14 +69,21 @@
               <label class="label">
                 <span class="label-text">First Name</span>
               </label>
-              <input type="text" placeholder="First Name" class="input input-bordered" required />
+              <input type="text" name="firstname" placeholder="First Name" class="input input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text
+                ">Middle Name</span>
+              </label>
+              <input type="text" name="middlename" placeholder="Middle Name" class="input input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Last Name</span>
               </label>
-              <input type="text" placeholder="Last Name" class="input input-bordered" required />
+              <input type="text" name="lastname" placeholder="Last Name" class="input input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
@@ -90,7 +97,7 @@
                 <span class="label-text
                 ">Phone Number</span>
               </label>
-              <input type="tel" placeholder="Phone Number" class="input input-bordered" required />
+              <input name="phone_number" type="tel" placeholder="Phone Number" class="input input-bordered" required />
             </div>
 
             <label class="form-control w-full max-w-xs">
