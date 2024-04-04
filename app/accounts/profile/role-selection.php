@@ -17,13 +17,13 @@
     
     else if ($role === "Admin") {
       $_SESSION['role'] = $role;
-      $_SESSION['admin_id'] = generateRandomNumber($role);
+      $_SESSION['admin_number'] = generateRandomNumber($role);
       header('Location: ./admin-information.php');
     }
 
     else if ($role === "Student"){
       $_SESSION['role'] = $role;
-      $_SESSION['student_id'] = generateRandomNumber($role);
+      $_SESSION['student_number'] = generateRandomNumber($role);
       header('Location: ./student-information.php');
     }
   }

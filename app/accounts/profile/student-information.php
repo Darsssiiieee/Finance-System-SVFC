@@ -1,9 +1,10 @@
 <?php
   session_start();
-  // $role = $_SESSION['role'];
-  // $student_number = $_SESSION['student_number'];
+  $role = $_SESSION['role'];
+  $student_number = $_SESSION['student_number'];
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,22 +81,10 @@
 
         <div id="personalInformationForm" class="card backdrop-blur shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden p-3 max-w-sm shadow-2xl">
           <form action="./review-information-student.php" method="post" class="card-body">
-            <label class="form-control w-full max-w-xs">
-              <div class="label">
-                <span class="label-text">Student Number</span>
-              </div>
-              <input disabled name="student_number" value="<?php echo $student_number; ?>" id="firstname" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
-
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Your Role</span>
-              </label>
-              <input disabled name="role" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required="true" value="" type="text">
-            </div>
+            <input name="student_number" value="<?php echo $student_number; ?>" type="hidden" required aria-required="true" />
+            <input name="role" required aria-required="true" value="<?php echo $role ?>" type="hidden">
+            <input type="hidden" value="<?php echo $username ?>" name="username" />
+            <input type="hidden" value="<?php echo $password ?>" name="password" />
 
             <label class="form-control w-full max-w-xs">
               <div class="label">

@@ -1,7 +1,7 @@
 <?php
   session_start();
   $role = $_SESSION['role'];
-  $admin_number = $_SESSION['admin_id'];
+  $admin_number = $_SESSION['admin_number'];
   $firstname = $_SESSION['firstname'];
   $middlename = $_SESSION['middlename'];
   $lastname = $_SESSION['lastname'];

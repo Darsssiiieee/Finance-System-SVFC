@@ -1,22 +1,21 @@
 <?php
   session_start();
-  // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  //   $student_number = $_SESSION['student_number'];
-  //   $role = $_SESSION['role'];
-  //   $firstname = $_POST['firstname'];
-  //   $middlename = $_POST['middlename'];
-  //   $lastname = $_POST['lastname'];
-  //   $birthdate = $_POST['birthdate'];
-  //   $gender = $_POST['gender'];
-  //   $email = $_POST['email'];
-  //   $phone = $_POST['phone'];
-  //   $academicprogram = $_POST['academicprogram'];
-  //   $yearlevel = $_POST['yearlevel'];
-  //   $homeaddress = $_POST['homeaddress'];
-  //   $barangay = $_POST['barangay'];
-  //   $city = $_POST['city'];
-    
-  // }
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
+  $student_number = $_SESSION['student_number'];
+  $role = $_SESSION['role'];
+  $firstname = $_SESSION['firstname'];
+  $middlename = $_SESSION['middlename'];
+  $lastname = $_SESSION['lastname'];
+  $birthdate = $_SESSION['birthdate'];
+  $gender = $_SESSION['gender'];
+  $email = $_SESSION['email'];
+  $phone = $_SESSION['phone'];
+  $academicprogram = $_SESSION['academicprogram'];
+  $yearlevel = $_SESSION['yearlevel'];
+  $homeaddress = $_SESSION['homeaddress'];
+  $barangay = $_SESSION['barangay'];
+  $city = $_SESSION['city'];
 ?>
 
 <!DOCTYPE html>
@@ -95,22 +94,10 @@
 
         <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl backdrop-blur">
           <form action="./../../utils/addNewUser.php" method="post" class="card-body">
-            <label class="form-control w-full max-w-xs">
-              <div class="label">
-                <span class="label-text">Student Number</span>
-              </div>
-              <input name="student_number" value="<?php echo $student_number; ?>" id="firstname" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
-
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Your Role</span>
-              </label>
-              <input class="input input-bordered input-secondary w-full max-w-xs" value="<?php echo $role; ?>" required aria-required="true" value="<?php echo $role?>" type="text">
-            </div>
+            <input type="hidden" value="<?php echo $student_number; ?>" name="studentnumber" required aria-required="true"/>
+            <input type="hidden" value="<?php echo $role; ?>" name="role" required aria-required="true" >
+            <input type="hidden" value="<?php echo $username ?>" name="username" required aria-required="true" />
+            <input type="hidden" value="<?php echo $password ?>" name="password" required aria-required="true" />
 
             <label class="form-control w-full max-w-xs">
               <div class="label">

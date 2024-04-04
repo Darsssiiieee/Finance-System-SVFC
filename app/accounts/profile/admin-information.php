@@ -1,10 +1,12 @@
 <?php
   session_start();
   $role = $_SESSION['role'];
-  $admin_number = $_SESSION['admin_id'];
+  $admin_number = $_SESSION['admin_number'];
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['role'] = $_POST['role'];
-    $_SESSION['admin_id'] = $_POST['adminnumber'];
+    $_SESSION['admin_number'] = $_POST['adminnumber'];
     $_SESSION['username'] = $_POST['username'];
     $_SESSION['password'] = $_POST['password'];
     $_SESSION['firstname'] = $_POST['firstname'];
