@@ -1,3 +1,30 @@
+<?php
+  session_start();
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require_once './../../res/database/database_connection.php';
+    $role = $_POST['role'];
+    $usernumber = $_POST['usernumber'];
+    $password = hash('sha256', $_POST['password']);
+    $stmt = $conn->prepare("CALL fetch_user(?, ?, ?)");
+    $stmt->bind_param("sss", $usernumber, $role, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['role'] = $row['role'];
+      if ($row['role'] === 'Admin') {
+        header('Location: ./../admin/dashboard.php');
+      } else {
+        header('Location: ./../student/dashboard.php');
+      }
+    } else {
+      echo '<script>alert("Invalid Credentials")</script>';
+    }
+    $stmt->close();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,15 +82,15 @@
           <p class="py-6">Log In to continue.</p>
         </div>
         <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form class="card-body">
+          <form method="post" class="card-body">
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Login As:</span>
               </div>
-              <select class="mode select border-[#FF6BB3] select-bordered">
+              <select name="role" aria-required="true" required class="mode select border-[#FF6BB3] select-bordered">
                 <option disabled selected>Select Login Role:</option>
-                <option>Admin</option>
-                <option>Student</option>
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
               </select>
               <div class="label">
               </div>
@@ -72,16 +99,16 @@
               <label class="label">
                 <span class="label-text">Admin or Student number:</span>
               </label>
-              <input name="loginCode" type="email" placeholder="User Number" class="input input-bordered border-[#FF6BB3]" required />
+              <input aria-required="true" name="usernumber" type="text" placeholder="User Number" class="input input-bordered border-[#FF6BB3]" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Password</span>
               </label>
-              <input type="password" placeholder="Password" class="input input-bordered border-[#FF6BB3]" required />
+              <input name="password" type="password" placeholder="Password" class="input input-bordered border-[#FF6BB3]" required aria-required="true" />
             </div>
             <div class="form-control mt-6">
-              <button class="btn text-white bg-[#FF6BB3]">
+              <button type="submit" class="btn text-white bg-[#FF6BB3]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
