@@ -1,3 +1,21 @@
+<?php
+  session_start();
+  $role = $_SESSION['role'];
+  $admin_number = $_SESSION['admin_id'];
+  $firstname = $_SESSION['firstname'];
+  $middlename = $_SESSION['middlename'];
+  $lastname = $_SESSION['lastname'];
+  $email = $_SESSION['email'];
+  $phonenumber = $_SESSION['phonenumber'];
+  $birthdate = $_SESSION['birthdate'];
+  $gender = $_SESSION['gender'];
+  $homeaddress = $_SESSION['homeaddress'];
+  $barangay = $_SESSION['barangay'];
+  $city = $_SESSION['city'];
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,64 +85,57 @@
             <li class="currentProgress step step-secondary">Review</li>
           </ul>
           <div>
-            <h1 class="text-3xl currentProgress text-center font-bold">Admin's Personal Information</h1>
-            <p class="py-6 text-center">Please fill up all the fields to continue.</p>
+            <h1 class="text-3xl currentProgress text-center font-bold">Review Admin's Personal Information</h1>
+            <p class="py-6 text-center">Review All Information.</p>
           </div>
         </div>
         <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl bg-base-100">
-          <form method="post" action="./review-information-admin.php" class="card-body">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Admin Number</span>
-              </label>
-              <input type="text" disabled aria-disabled="true" name="adminnumber" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Role:</span>
-              </label>
-              <input type="text" disabled aria-disabled="true" name="role" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
+          <form method="post" action="./../../utils/addNewUser.php" class="card-body">
+            <input type="hidden" name="adminnumber" value="<?php echo $admin_number ?>" />
+            <input type="hidden" value="<?php echo $role ?>" name="role" />
+            <input type="hidden" value="<?php echo $username ?>" name="username" />
+            <input type="hidden" value="<?php echo $password ?>" name="password" />
+            
             <div class="form-control">
               <label class="label">
                 <span class="label-text">First Name</span>
               </label>
-              <input type="text" name="firstname" placeholder="First Name" class="input border-[#FF6BB3] input-bordered" required />
+              <input type="text" name="firstname" value="<?php echo $firstname ?>" class="input border-[#FF6BB3] input-bordered" required aria-required="true"  />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Middle Name</span>
               </label>
-              <input type="text" name="middlename" placeholder="Middle Name" class="input border-[#FF6BB3] input-bordered" required />
+              <input type="text" name="middlename" value="<?php echo $middlename ?>" class="input border-[#FF6BB3] input-bordered" required aria-required="true"  />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Last Name</span>
               </label>
-              <input type="text" name="lastname" placeholder="Last Name" class="input border-[#FF6BB3] input-bordered" required />
+              <input type="text" name="lastname" value="<?php echo $lastname?>" class="input border-[#FF6BB3] input-bordered" required aria-required="true"  />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Email</span>
               </label>
-              <input type="email" placeholder="Email" class="input border-[#FF6BB3] input-bordered" required />
+              <input type="email" name="email" value="<?php echo $email ?>" class="input border-[#FF6BB3] input-bordered" required aria-required="true"  />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Phone Number</span>
               </label>
-              <input name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
+              <input name="phonenumber" value="<?php echo $phonenumber ?>" type="tel" class="input border-[#FF6BB3] input-bordered" required aria-required="true"  />
             </div>
 
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Birth Date</span>
               </div>
-              <input name="birthdate" id="birthdate" type="date" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required=true/>
+              <input name="birthdate" value="<?php echo $birthdate ?>" id="birthdate" type="date" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required="true"  />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -134,13 +145,7 @@
               <div class="label">
                 <span class="label-text">Gender</span>
               </div>
-              <select name="gender" required aria-required="true" class="select border-[#FF6BB3] w-full max-w-xs">
-                <option disabled selected>Your Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Non-Binary">Non-Binary</option>
-                <option value="Others">Others</option>
-              </select>
+              <input name="gender" value="<?php echo $gender ?>" id="birthdate" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required="true"  />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -150,7 +155,7 @@
               <div class="label">
                 <span class="label-text">Home Address</span>
               </div>
-              <input name="homeaddress" id="homeaddress" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="123 Main Street" required aria-required=true/>
+              <input name="homeaddress" value="<?php echo $homeaddress ?>" id="homeaddress" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs"  required aria-required="true" />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -160,7 +165,7 @@
               <div class="label">
                 <span class="label-text">Barangay</span>
               </div>
-              <input name="barangay" id="barangay" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="Barangay 176" required aria-required=true/>
+              <input name="barangay" value="<?php echo $barangay ?>" id="barangay" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required="true" />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -170,7 +175,7 @@
               <div class="label">
                 <span class="label-text">City</span>
               </div>
-              <input name="city" id="city" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" placeholder="New York City" required aria-required=true/>
+              <input name="city" id="city" value="<?php echo $city ?>" type="text" class="input input-bordered border-[#FF6BB3] w-full max-w-xs" required aria-required="true" />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -196,6 +201,13 @@
       </div>
     </div>
   </main>
-
+  <script>
+    $(document).ready(() => {
+      $("#backButton").click(e => {
+        e.preventDefault()
+        window.location.href = "./admin-information.php"
+      })
+    })
+  </script>
 </body>
 </html>

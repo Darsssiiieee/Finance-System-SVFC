@@ -1,6 +1,24 @@
 <?php
   session_start();
-  
+  $role = $_SESSION['role'];
+  $admin_number = $_SESSION['admin_id'];
+  if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_SESSION['role'] = $_POST['role'];
+    $_SESSION['admin_id'] = $_POST['adminnumber'];
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['password'] = $_POST['password'];
+    $_SESSION['firstname'] = $_POST['firstname'];
+    $_SESSION['middlename'] = $_POST['middlename'];
+    $_SESSION['lastname'] = $_POST['lastname'];
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['phonenumber'] = $_POST['phonenumber'];
+    $_SESSION['birthdate'] = $_POST['birthdate'];
+    $_SESSION['gender'] = $_POST['gender'];
+    $_SESSION['homeaddress'] = $_POST['homeaddress'];
+    $_SESSION['barangay'] = $_POST['barangay'];
+    $_SESSION['city'] = $_POST['city'];
+    header('Location: ./review-information-admin.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -78,19 +96,11 @@
           </div>
         </div>
         <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl bg-base-100">
-          <form method="post" action="./review-information-admin.php" class="card-body">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Admin Number</span>
-              </label>
-              <input type="text" disabled aria-disabled="true" name="adminnumber" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Role:</span>
-              </label>
-              <input type="text" disabled aria-disabled="true" name="role" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
+          <form method="post" class="card-body">
+            <input type="hidden" name="adminnumber" value="<?php echo $admin_number ?>" />
+            <input type="hidden" value="<?php echo $role ?>" name="role" />
+            <input type="hidden" value="<?php echo $username ?>" name="username" />
+            <input type="hidden" value="<?php echo $password ?>" name="password" />
             <div class="form-control">
               <label class="label">
                 <span class="label-text">First Name</span>
@@ -116,14 +126,14 @@
                 <span class="label-text
                 ">Email</span>
               </label>
-              <input type="email" placeholder="Email" class="input border-[#FF6BB3] input-bordered" required />
+              <input type="email" name="email" placeholder="Email" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Phone Number</span>
               </label>
-              <input name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
+              <input name="phonenumber" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
             </div>
 
             <label class="form-control w-full max-w-xs">
@@ -201,5 +211,13 @@
       </div>
     </div>
   </main>
+  <script>
+    $(document).ready(() => {
+      $("#backButton").click(e => {
+        e.preventDefault()
+        window.location.href = "./role-selection.php"
+      })
+    })
+  </script>
 </body>
 </html>

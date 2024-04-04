@@ -5,10 +5,8 @@
       echo "<script>alert('Passwords do not match')</script>";
       exit();
     } else {
-      $username = $_POST['username'];
-      $password = $_POST['password'];
-      $_SESSION['username'] = $username;
-      $_SESSION['password'] = $password;
+      $_SESSION['username'] =  $_POST['username'];
+      $_SESSION['password'] = $_POST['password'];
       header('Location: ./profile/role-selection.php');
     }
   }
@@ -87,7 +85,7 @@
               <div class="label">
                 <span class="label-text">Username</span>
               </div>
-              <input name="username" minlength="4" id="username" type="text" placeholder="Username" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true/>
+              <input name="username" minlength="4" maxlength="50" id="username" type="text" placeholder="Username" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true/>
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>

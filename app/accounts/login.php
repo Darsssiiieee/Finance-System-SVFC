@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EPAY | Log In</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./../../styles/global.css">
     <style>
@@ -14,10 +15,10 @@
       .titlePage {
         font-family: 'San Francisco Rounded Heavy';
       }
-
+      
     </style>
 </head>
-<body class="bg-[#F7EFD8] min-h-screen overflow-hidden w-full relative flex justify-center">
+<div class="bg-[#F7EFD8] min-h-screen overflow-hidden w-full relative flex justify-center">
   <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
     <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
     <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
@@ -59,7 +60,7 @@
               <div class="label">
                 <span class="label-text">Login As:</span>
               </div>
-              <select class="select border-[#FF6BB3] select-bordered">
+              <select class="mode select border-[#FF6BB3] select-bordered">
                 <option disabled selected>Select Login Role:</option>
                 <option>Admin</option>
                 <option>Student</option>
@@ -92,5 +93,19 @@
       </div>
     </div>
   </main>
+
+  <script>
+    $(document).ready(function() {
+      console.log('ready');
+      $('.mode').on('mouseover', 'option', function() {
+        $(this).css('background-color', 'pink');
+        console.log('hovered');
+      });
+      $('.mode').on('mouseout', 'option', function() {
+        $(this).css('background-color', '');
+        console.log('hovered');
+      });
+    });
+  </script>
 </body>
 </html>
