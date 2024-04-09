@@ -1,11 +1,70 @@
 <?php
   session_start();
-  // if (!isset($_SESSION['admin'])) {
-  //   header('Location: ./../accounts/login.php');
-  // }
+  if ($_SESSION['role'] !== 'Admin') {
+    header('Location: ./../accounts/login.php');
+    exit();
+  }
   $admin_dashboard_url = '/finance-system-svfc/app/admin/dashboard.php';
   $current_url = $_SERVER['REQUEST_URI'];
   $is_admin_dashboard_page = ($current_url === $admin_dashboard_url);
+
+  include './../utils/databaseConnection.php';
+
+  $all = 0;
+  $program_bsit_count = 0;
+  $program_beed_count = 0;
+  $program_bsa_count = 0;
+  $program_bshm_count = 0;
+  $program_bsed_count = 0;
+
+  $programs = [
+      'all' => 'All Programs',
+      'Bachelor of Science in Information Technology' => 'BSIT',
+      'Bachelor of Elementary Education' => 'BEED',
+      'Bachelor of Science in Accountancy' => 'BSA',
+      'Bachelor of Science in Hotel and Restaurant Management' => 'BSHM',
+      'Bachelor of Secondary Education' => 'BSE'
+  ];
+
+  $results = [];
+
+  foreach ($programs as $programName => $alias) {
+    $stmt = $conn->prepare("CALL get_student_by_program(?, @count)");
+    $stmt->bind_param("s", $programName);
+    $stmt->execute();
+
+    $conn->next_result();
+    $selectCount = $conn->query("SELECT @count AS student_count");
+    $rowCount = $selectCount->fetch_assoc()['student_count'];
+
+    $results[$alias] = $rowCount;
+
+    $stmt->close();
+  }
+
+  foreach ($results as $alias => $count) {
+    switch ($alias) {
+      case 'all':
+        $all = $count;
+        break;
+      case 'BSIT':
+        $program_bsit_count = $count;
+        break;
+      case 'BEED':
+        $program_beed_count = $count;
+        break;
+      case 'BSA':
+        $program_bsa_count = $count;
+        break;
+      case 'BSHM':
+        $program_bshm_count = $count;
+        break;
+      case 'BSE':
+        $program_bsed_count = $count;
+        break;
+    }
+  }
+  $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -182,7 +241,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
               </svg>
               Total Students Enrolled</h1>
-            <span class="count font-bold text-2xl text-right">1000</span>
+            <span class="count font-bold text-2xl text-right"><?php echo $all ?></span>
           </div>
   
           <div class="bg-red-400 p-5 w-full rounded-xl flex flex-col">
@@ -191,7 +250,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
             </svg>
               Total BSIT Students Enrolled</h1>
-            <span class="count font-bold text-2xl text-right">50</span>
+            <span class="count font-bold text-2xl text-right"><?php echo $program_bsit_count ?></span>
           </div>
   
           <div class="bg-orange-400 p-5 w-full rounded-xl flex flex-col">
@@ -199,8 +258,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
             </svg>
-              Total BSHRM Students Enrolled</h1>
-            <span class="count font-bold text-2xl text-right">250</span>
+              Total BSHM Students Enrolled</h1>
+            <span class="count font-bold text-2xl text-right"><?php echo $program_bshm_count?></span>
           </div>
   
           <div class="bg-gray-400 p-5 w-full rounded-xl flex flex-col">
@@ -209,7 +268,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
             </svg>
               Total BECED Students Enrolled</h1>
-            <span class="count font-bold text-2xl text-right">150</span>
+            <span class="count font-bold text-2xl text-right"><?php echo $program_beed_count?></span>
           </div>
   
           <div class="bg-amber-400 p-5 w-full rounded-xl flex flex-col">
@@ -219,7 +278,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
             </svg>
               Total BSA Students Enrolled</h1>
-            <span class="count font-bold text-2xl text-right">150</span>
+            <span class="count font-bold text-2xl text-right"><?php echo $program_bsa_count ?></span>
           </div>
   
           <div class="bg-emerald-400 p-5 w-full rounded-xl flex flex-col">
@@ -229,7 +288,7 @@
             </svg>
   
               Total BSED Students Enrolled</h1>
-            <span class="count font-bold text-2xl text-right">150</span>
+            <span class="count font-bold text-2xl text-right"><?php echo $program_bsed_count?></span>
           </div>
         </div>
       </div>
