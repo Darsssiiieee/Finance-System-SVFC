@@ -1,25 +1,26 @@
 <?php
-  session_start();
-  $username = $_SESSION['username'];
-  $password = $_SESSION['password'];
-  $student_number = $_SESSION['student_number'];
-  $role = $_SESSION['role'];
-  $firstname = $_SESSION['firstname'];
-  $middlename = $_SESSION['middlename'];
-  $lastname = $_SESSION['lastname'];
-  $birthdate = $_SESSION['birthdate'];
-  $gender = $_SESSION['gender'];
-  $email = $_SESSION['email'];
-  $phone = $_SESSION['phone'];
-  $academicprogram = $_SESSION['academicprogram'];
-  $yearlevel = $_SESSION['yearlevel'];
-  $homeaddress = $_SESSION['homeaddress'];
-  $barangay = $_SESSION['barangay'];
-  $city = $_SESSION['city'];
+session_start();
+$username = $_SESSION['username'];
+$password = $_SESSION['password'];
+$student_number = $_SESSION['student_number'];
+$role = $_SESSION['role'];
+$firstname = $_SESSION['firstname'];
+$middlename = $_SESSION['middlename'];
+$lastname = $_SESSION['lastname'];
+$birthdate = $_SESSION['birthdate'];
+$gender = $_SESSION['gender'];
+$email = $_SESSION['email'];
+$phone = $_SESSION['phone'];
+$academicprogram = $_SESSION['academicprogram'];
+$yearlevel = $_SESSION['yearlevel'];
+$homeaddress = $_SESSION['homeaddress'];
+$barangay = $_SESSION['barangay'];
+$city = $_SESSION['city'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,15 +31,21 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../../../styles/global.css">
   <style>
-    *, *::after, *::before {
+    *,
+    *::after,
+    *::before {
       font-family: 'San Francisco Rounded Regular';
     }
+
     .currentProgress {
       font-family: 'San Francisco Rounded Heavy';
     }
-    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
+
+    .steps .step-secondary+.step-secondary:before,
+    .steps .step-secondary:after {
       background-color: #536F16;
     }
+
     #personalInformationForm {
       scrollbar-color: #FF6BB3 transparent;
       scrollbar-width: thin;
@@ -46,6 +53,7 @@
     }
   </style>
 </head>
+
 <body class="bg-[#F7EFD8] flex justify-center min-h-screen overflow-hidden relative w-full">
   <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
     <img src="./../../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
@@ -57,7 +65,9 @@
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a href="./pages/accounts/sign-up.php">Get Started</a></li>
@@ -94,16 +104,16 @@
 
         <div id="personalInformationForm" class="card shrink-0 w-full max-h-96 overflow-scroll overflow-x-hidden max-w-sm shadow-2xl backdrop-blur">
           <form action="./../../utils/addNewUser.php" method="post" class="card-body">
-            <input type="hidden" value="<?php echo $student_number; ?>" name="studentnumber" required aria-required="true"/>
-            <input type="hidden" value="<?php echo $role; ?>" name="role" required aria-required="true" >
-            <input type="hidden" value="<?php echo $username ?>" name="username" required aria-required="true" />
-            <input type="hidden" value="<?php echo $password ?>" name="password" required aria-required="true" />
+            <input type="hidden" value="<?php echo $student_number; ?>" name="studentnumber" />
+            <input type="hidden" value="<?php echo $role; ?>" name="role" />
+            <input type="hidden" value="<?php echo $username ?>" name="username" />
+            <input type="hidden" value="<?php echo $password ?>" name="password" />
 
             <label class="form-control w-full max-w-xs">
               <div class="label">
                 <span class="label-text">Firstname</span>
               </div>
-              <input name="firstname" id="firstname" value="<?php echo $firstname; ?>" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="firstname" id="firstname" value="<?php echo $firstname; ?>" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -114,7 +124,7 @@
               <div class="label">
                 <span class="label-text">Middle Name</span>
               </div>
-              <input name="middlename" id="middlename" value="<?php echo $middlename; ?>" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="middlename" id="middlename" value="<?php echo $middlename; ?>" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -124,7 +134,7 @@
               <div class="label">
                 <span class="label-text">Last Name</span>
               </div>
-              <input name="lastname" id="lastname" type="text" value="<?php echo $lastname; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="lastname" id="lastname" type="text" value="<?php echo $lastname; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -134,7 +144,7 @@
               <div class="label">
                 <span class="label-text">Birth Date</span>
               </div>
-              <input name="birthdate" id="birthdate" type="date" value="<?php echo $birthdate; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="birthdate" id="birthdate" type="date" value="<?php echo $birthdate; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -144,7 +154,7 @@
               <div class="label">
                 <span class="label-text">Gender</span>
               </div>
-              <input name="gender" id="gender" type="text" value="<?php echo $gender; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="gender" id="gender" type="text" value="<?php echo $gender; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -154,7 +164,7 @@
               <div class="label">
                 <span class="label-text">Email</span>
               </div>
-              <input name="email" id="email" value="<?php echo $email; ?>" type="email" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="email" id="email" value="<?php echo $email; ?>" type="email" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -164,7 +174,7 @@
               <div class="label">
                 <span class="label-text">Phone</span>
               </div>
-              <input value="<?php echo $phone?>" name="phone" id="phone" type="tel" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input value="<?php echo $phone ?>" name="phone" id="phone" type="tel" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -194,7 +204,7 @@
               <div class="label">
                 <span class="label-text">Home Address</span>
               </div>
-              <input value="<?php echo $homeaddress; ?>" name="homeaddress" id="homeaddress" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input value="<?php echo $homeaddress; ?>" name="homeaddress" id="homeaddress" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -204,7 +214,7 @@
               <div class="label">
                 <span class="label-text">Barangay</span>
               </div>
-              <input name="barangay" value="<?php echo $barangay; ?>" id="barangay" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="barangay" value="<?php echo $barangay; ?>" id="barangay" type="text" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -214,7 +224,7 @@
               <div class="label">
                 <span class="label-text">City</span>
               </div>
-              <input name="city" id="city" type="text" value="<?php echo $city; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="city" id="city" type="text" value="<?php echo $city; ?>" class="input input-bordered input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -248,4 +258,5 @@
     })
   </script>
 </body>
+
 </html>
