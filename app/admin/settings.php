@@ -1,15 +1,16 @@
 <?php
-  session_start();
-  // if(!isset($_SESSION['admin'])){
-  //   header('location:login.php');
-  // }
-  $admin_settings_url = '/finance-system-svfc/app/admin/settings.php';
-  $current_url = $_SERVER['REQUEST_URI'];
-  $is_admin_settings_page = ($current_url === $admin_settings_url);
+session_start();
+if (!isset($_SESSION['admin_number'])) {
+  header('location:login.php');
+}
+$admin_settings_url = '/finance-system-svfc/app/admin/settings.php';
+$current_url = $_SERVER['REQUEST_URI'];
+$is_admin_settings_page = ($current_url === $admin_settings_url);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,32 +23,53 @@
       font-family: 'San Francisco Rounded Bold';
       src: url('./../../font/SF-Pro-Rounded-Bold.otf');
     }
+
     @font-face {
       font-family: 'San Francisco Rounded Heavy';
       src: url('./../../font/SF-Pro-Rounded-Heavy.otf');
     }
+
     @font-face {
       font-family: 'San Francisco Rounded Medium';
       src: url('./../../font/SF-Pro-Rounded-Medium.otf');
     }
-    
+
     @font-face {
       font-family: 'San Francisco Rounded Regular';
       src: url('../font/SF-Pro-Rounded-Regular.otf');
     }
-    h1, h2, h3, h4, h5, h6, p, a, li, button, label, input, select, option, textarea {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    a,
+    li,
+    button,
+    label,
+    input,
+    select,
+    option,
+    textarea {
       font-family: 'San Francisco Rounded Regular';
     }
-    .labelTitle, .menuButton, .saveChanges {
+
+    .labelTitle,
+    .menuButton,
+    .saveChanges {
       font-family: 'San Francisco Rounded Heavy';
     }
   </style>
 </head>
+
 <body class="bg-[#F7EFD8] flex flex-col justify-center items-center">
   <dialog id="logout_modal" class="modal backdrop-blur">
     <div class="modal-box">
       <h3 style="font-family: 'San Francisco Rounded Bold';" class="font-bold text-2xl">Logout</h3>
-      <p style="font-family: 'San Francisco Rounded Regular';;" class="py-4">Are you sure you want to logout?</p>
+      <p style="font-family: 'San Francisco Rounded Regular';" class="py-4">Are you sure you want to logout?</p>
       <div class="modal-action">
         <button class="menuButton btn btn-yes btn-error text-white font-bold" onclick="logout()">YES</button>
         <button class="menuButton btn btn-cancel" onclick="closeLogoutModal()">CANCEL</button>
@@ -58,39 +80,41 @@
     <div class="navbar-start w-auto lg:hidden">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li>
-            <a class="flex flex-row items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
-              <path fill-rule="evenodd" d="M2 2.75A.75.75 0 0 1 2.75 2h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 2.75Zm0 10.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75ZM2 6.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 6.25Zm0 3.5A.75.75 0 0 1 2.75 9h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 9.75Z" clip-rule="evenodd" />
-            </svg>
+            <a href="./dashboard.php" class="flex flex-row items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                <path fill-rule="evenodd" d="M2 2.75A.75.75 0 0 1 2.75 2h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 2.75Zm0 10.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75ZM2 6.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 6.25Zm0 3.5A.75.75 0 0 1 2.75 9h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 9.75Z" clip-rule="evenodd" />
+              </svg>
               Dashboard
             </a>
           </li>
           <li>
             <a class="flex flex-row items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
-              <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5v.401a2.986 2.986 0 0 0-1.5-.401h-9c-.546 0-1.059.146-1.5.401V3.5ZM3.5 5A1.5 1.5 0 0 0 2 6.5v.401A2.986 2.986 0 0 1 3.5 6.5h9c.546 0 1.059.146 1.5.401V6.5A1.5 1.5 0 0 0 12.5 5h-9ZM8 10a2 2 0 0 0 1.938-1.505c.068-.268.286-.495.562-.495h2A1.5 1.5 0 0 1 14 9.5v3a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 12.5v-3A1.5 1.5 0 0 1 3.5 8h2c.276 0 .494.227.562.495A2 2 0 0 0 8 10Z" />
-            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5v.401a2.986 2.986 0 0 0-1.5-.401h-9c-.546 0-1.059.146-1.5.401V3.5ZM3.5 5A1.5 1.5 0 0 0 2 6.5v.401A2.986 2.986 0 0 1 3.5 6.5h9c.546 0 1.059.146 1.5.401V6.5A1.5 1.5 0 0 0 12.5 5h-9ZM8 10a2 2 0 0 0 1.938-1.505c.068-.268.286-.495.562-.495h2A1.5 1.5 0 0 1 14 9.5v3a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 12.5v-3A1.5 1.5 0 0 1 3.5 8h2c.276 0 .494.227.562.495A2 2 0 0 0 8 10Z" />
+              </svg>
               Payments
             </a>
           </li>
           <li>
-            <a class="link link-warning no-underline">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
-              <path fill-rule="evenodd" d="M4.5 1.938a.75.75 0 0 1 1.025.274l.652 1.131c.351-.138.71-.233 1.073-.288V1.75a.75.75 0 0 1 1.5 0v1.306a5.03 5.03 0 0 1 1.072.288l.654-1.132a.75.75 0 1 1 1.298.75l-.652 1.13c.286.23.55.492.785.786l1.13-.653a.75.75 0 1 1 .75 1.3l-1.13.652c.137.351.233.71.288 1.073h1.305a.75.75 0 0 1 0 1.5h-1.306a5.032 5.032 0 0 1-.288 1.072l1.132.654a.75.75 0 0 1-.75 1.298l-1.13-.652c-.23.286-.492.55-.786.785l.652 1.13a.75.75 0 0 1-1.298.75l-.653-1.13c-.351.137-.71.233-1.073.288v1.305a.75.75 0 0 1-1.5 0v-1.306a5.032 5.032 0 0 1-1.072-.288l-.653 1.132a.75.75 0 0 1-1.3-.75l.653-1.13a4.966 4.966 0 0 1-.785-.786l-1.13.652a.75.75 0 0 1-.75-1.298l1.13-.653a4.965 4.965 0 0 1-.288-1.073H1.75a.75.75 0 0 1 0-1.5h1.306a5.03 5.03 0 0 1 .288-1.072l-1.132-.653a.75.75 0 0 1 .75-1.3l1.13.653c.23-.286.492-.55.786-.785l-.653-1.13A.75.75 0 0 1 4.5 1.937Zm1.14 3.476a3.501 3.501 0 0 0 0 5.172L7.135 8 5.641 5.414ZM8.434 8.75 6.94 11.336a3.491 3.491 0 0 0 2.81-.305 3.49 3.49 0 0 0 1.669-2.281H8.433Zm2.987-1.5H8.433L6.94 4.664a3.501 3.501 0 0 1 4.48 2.586Z" clip-rule="evenodd" />
-            </svg>
+            <a href="./settings.php" class="link link-warning no-underline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                <path fill-rule="evenodd" d="M4.5 1.938a.75.75 0 0 1 1.025.274l.652 1.131c.351-.138.71-.233 1.073-.288V1.75a.75.75 0 0 1 1.5 0v1.306a5.03 5.03 0 0 1 1.072.288l.654-1.132a.75.75 0 1 1 1.298.75l-.652 1.13c.286.23.55.492.785.786l1.13-.653a.75.75 0 1 1 .75 1.3l-1.13.652c.137.351.233.71.288 1.073h1.305a.75.75 0 0 1 0 1.5h-1.306a5.032 5.032 0 0 1-.288 1.072l1.132.654a.75.75 0 0 1-.75 1.298l-1.13-.652c-.23.286-.492.55-.786.785l.652 1.13a.75.75 0 0 1-1.298.75l-.653-1.13c-.351.137-.71.233-1.073.288v1.305a.75.75 0 0 1-1.5 0v-1.306a5.032 5.032 0 0 1-1.072-.288l-.653 1.132a.75.75 0 0 1-1.3-.75l.653-1.13a4.966 4.966 0 0 1-.785-.786l-1.13.652a.75.75 0 0 1-.75-1.298l1.13-.653a4.965 4.965 0 0 1-.288-1.073H1.75a.75.75 0 0 1 0-1.5h1.306a5.03 5.03 0 0 1 .288-1.072l-1.132-.653a.75.75 0 0 1 .75-1.3l1.13.653c.23-.286.492-.55.786-.785l-.653-1.13A.75.75 0 0 1 4.5 1.937Zm1.14 3.476a3.501 3.501 0 0 0 0 5.172L7.135 8 5.641 5.414ZM8.434 8.75 6.94 11.336a3.491 3.491 0 0 0 2.81-.305 3.49 3.49 0 0 0 1.669-2.281H8.433Zm2.987-1.5H8.433L6.94 4.664a3.501 3.501 0 0 1 4.48 2.586Z" clip-rule="evenodd" />
+              </svg>
               Account Settings
             </a>
           </li>
           <li>
-            <a class="link-error link no-underline">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
-              <path fill-rule="evenodd" d="M6.701 2.25c.577-1 2.02-1 2.598 0l5.196 9a1.5 1.5 0 0 1-1.299 2.25H2.804a1.5 1.5 0 0 1-1.3-2.25l5.197-9ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 1 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
-            </svg>
-              Log Out</a>
+            <button onclick="openLogoutModal()" href="./../utils/logout.php" class="link-error link no-underline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                <path fill-rule="evenodd" d="M6.701 2.25c.577-1 2.02-1 2.598 0l5.196 9a1.5 1.5 0 0 1-1.299 2.25H2.804a1.5 1.5 0 0 1-1.3-2.25l5.197-9ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 1 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+              </svg>
+              Log Out</button>
           </li>
         </ul>
       </div>
@@ -106,7 +130,7 @@
       </div>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
         <li>
-          <a class="link link-warning no-underline">
+          <a href="./settings.php" class="link link-warning no-underline">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
               <path fill-rule="evenodd" d="M4.5 1.938a.75.75 0 0 1 1.025.274l.652 1.131c.351-.138.71-.233 1.073-.288V1.75a.75.75 0 0 1 1.5 0v1.306a5.03 5.03 0 0 1 1.072.288l.654-1.132a.75.75 0 1 1 1.298.75l-.652 1.13c.286.23.55.492.785.786l1.13-.653a.75.75 0 1 1 .75 1.3l-1.13.652c.137.351.233.71.288 1.073h1.305a.75.75 0 0 1 0 1.5h-1.306a5.032 5.032 0 0 1-.288 1.072l1.132.654a.75.75 0 0 1-.75 1.298l-1.13-.652c-.23.286-.492.55-.786.785l.652 1.13a.75.75 0 0 1-1.298.75l-.653-1.13c-.351.137-.71.233-1.073.288v1.305a.75.75 0 0 1-1.5 0v-1.306a5.032 5.032 0 0 1-1.072-.288l-.653 1.132a.75.75 0 0 1-1.3-.75l.653-1.13a4.966 4.966 0 0 1-.785-.786l-1.13.652a.75.75 0 0 1-.75-1.298l1.13-.653a4.965 4.965 0 0 1-.288-1.073H1.75a.75.75 0 0 1 0-1.5h1.306a5.03 5.03 0 0 1 .288-1.072l-1.132-.653a.75.75 0 0 1 .75-1.3l1.13.653c.23-.286.492-.55.786-.785l-.653-1.13A.75.75 0 0 1 4.5 1.937Zm1.14 3.476a3.501 3.501 0 0 0 0 5.172L7.135 8 5.641 5.414ZM8.434 8.75 6.94 11.336a3.491 3.491 0 0 0 2.81-.305 3.49 3.49 0 0 0 1.669-2.281H8.433Zm2.987-1.5H8.433L6.94 4.664a3.501 3.501 0 0 1 4.48 2.586Z" clip-rule="evenodd" />
             </svg>
@@ -114,19 +138,19 @@
           </a>
         </li>
         <li>
-          <a class="link-error link no-underline">
+          <button onclick="openLogoutModal()" class="link-error no-underline link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
               <path fill-rule="evenodd" d="M6.701 2.25c.577-1 2.02-1 2.598 0l5.196 9a1.5 1.5 0 0 1-1.299 2.25H2.804a1.5 1.5 0 0 1-1.3-2.25l5.197-9ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 1 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
             </svg>
             Log Out
-          </a>
+          </button>
         </li>
       </ul>
     </div>
   </div>
 
   <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
-  <aside class="min-h-screen w-1/4 hidden lg:block">
+    <aside class="min-h-screen w-1/4 hidden lg:block">
       <ul tabindex="0" class="menu rounded-lg justify-center border border-slate-900/10 flex flex-col bg-base-100 shadow-xl rounded-xl min-h-96 justify-evenly mt-3 z-[1] p-3">
         <li>
           <a href="./dashboard.php" class="text-lg gap-7 flex flex-row items-center">
@@ -165,8 +189,8 @@
     </aside>
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
-      
-    
+
+
       <div id="personalInformationForm" class="card shrink-0 w-full h-auto w-full shadow-2xl bg-base-100 mb-6 p-5 lg:p-10">
         <h1 class="labelTitle text-3xl text-center">Admin Personal Information</h1>
         <form method="post" action="./review-information-admin.php" class="card-body flex flex-col justify-center gap-10 items-end">
@@ -175,42 +199,42 @@
               <label class="label">
                 <span class="label-text">First Name</span>
               </label>
-              <input type="text" name="firstname" placeholder="First Name" class="input border-[#FF6BB3] input-bordered" required />
+              <input value="<?php echo $_SESSION['first_name'] ?>" type="text" name="firstname" placeholder="First Name" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Middle Name</span>
               </label>
-              <input type="text" name="middlename" placeholder="Middle Name" class="input border-[#FF6BB3] input-bordered" required />
+              <input value="<?php echo $_SESSION['middle_name'] ?>" type="text" name="middlename" placeholder="Middle Name" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Last Name</span>
               </label>
-              <input type="text" name="lastname" placeholder="Last Name" class="input border-[#FF6BB3] input-bordered" required />
+              <input value="<?php echo $_SESSION['last_name'] ?>" type="text" name="lastname" placeholder="Last Name" class="input border-[#FF6BB3] input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Email</span>
               </label>
-              <input type="email" class="input border-[#FF6BB3] input-bordered" placeholder="Email" class="input input-bordered" required />
+              <input value="<?php echo $_SESSION['email'] ?>" type="email" class="input border-[#FF6BB3] input-bordered" placeholder="Email" class="input input-bordered" required />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text
                 ">Phone Number</span>
               </label>
-              <input name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
+              <input value="<?php echo $_SESSION['phone_number'] ?>" name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
             </div>
 
             <label class="form-control w-full">
               <div class="label">
                 <span class="label-text">Birth Date</span>
               </div>
-              <input disabled aria-disabled="true" name="birthdate" id="birthdate" type="date" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true/>
+              <input value="<?php echo $_SESSION['birthdate'] ?>" disabled aria-disabled="true" name="birthdate" id="birthdate" type="date" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -220,7 +244,7 @@
               <div class="label">
                 <span class="label-text">Gender</span>
               </div>
-              <input disabled aria-disabled="true" name="gender" id="gender" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true/>
+              <input value="<?php echo $_SESSION['gender'] ?>" disabled aria-disabled="true" name="gender" id="gender" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -230,7 +254,7 @@
               <div class="label">
                 <span class="label-text">Home Address</span>
               </div>
-              <input name="homeaddress" id="homeaddress" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" placeholder="123 Main Street" required aria-required=true/>
+              <input value="<?php echo $_SESSION['home_address'] ?>" name="homeaddress" id="homeaddress" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" placeholder="123 Main Street" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -240,7 +264,7 @@
               <div class="label">
                 <span class="label-text">Barangay</span>
               </div>
-              <input name="barangay" id="barangay" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" placeholder="Barangay 176" required aria-required=true/>
+              <input value="<?php echo $_SESSION['barangay'] ?>" name="barangay" id="barangay" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" placeholder="Barangay 176" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -250,7 +274,7 @@
               <div class="label">
                 <span class="label-text">City</span>
               </div>
-              <input name="city" id="city" type="text" class="input border-[#FF6BB3] input-bordered input-secondary w-full" placeholder="New York City" required aria-required=true/>
+              <input value="<?php echo $_SESSION['city'] ?>" name="city" id="city" type="text" class="input border-[#FF6BB3] input-bordered input-secondary w-full" placeholder="New York City" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -282,8 +306,9 @@
 
     function logout() {
       // Redirect to logout.php
-      window.location.href = "logout.php";
+      window.location.href = "../utils/logout.php";
     }
   </script>
 </body>
+
 </html>

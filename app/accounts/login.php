@@ -1,49 +1,90 @@
 <?php
-  session_start();
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once './../../res/database/database_connection.php';
-    $role = $_POST['role'];
-    $usernumber = $_POST['usernumber'];
-    $password = hash('sha256', $_POST['password']);
-    $stmt = $conn->prepare("CALL fetch_user(?, ?, ?)");
-    $stmt->bind_param("sss", $usernumber, $role, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $_SESSION['username'] = $row['username'];
-      $_SESSION['role'] = $row['role'];
-      if ($row['role'] === 'Admin') {
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  require_once './../../res/database/database_connection.php';
+
+  $role = $_POST['role'];
+  $usernumber = $_POST['usernumber'];
+  $password = hash('sha256', $_POST['password']);
+
+  $stmt = $conn->prepare("CALL login_user(?, ?, ?, @result, @user_number_out, @role_out)");
+  $stmt->bind_param("sss", $usernumber, $password, $role);
+  $stmt->execute();
+
+  $result = $conn->query("SELECT @result AS result, @user_number_out AS user_number_out, @role_out AS role_out");
+  $row = $result->fetch_assoc();
+
+  if ($row['result'] === 'Login successful') {
+    $user_number_out = $row['user_number_out'];
+    $role_out = $row['role_out'];
+
+    $_SESSION['user_number'] = $usernumber;
+    $_SESSION['role'] = $role_out;
+
+    if ($role_out === 'Admin') {
+
+      $stmt = $conn->prepare("CALL fetch_user_info(?, ?)");
+      $stmt->bind_param("ss", $user_number_out, $role_out);
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+      if ($result->num_rows > 0) {
+        $admin_info = $result->fetch_assoc();
+
+        $_SESSION['admin_id'] = $admin_info['admin_id'];
+        $_SESSION['admin_number'] = $admin_info['admin_number'];
+        $_SESSION['first_name'] = $admin_info['first_name'];
+        $_SESSION['middle_name'] = $admin_info['middle_name'];
+        $_SESSION['last_name'] = $admin_info['last_name'];
+        $_SESSION['email'] = $admin_info['email'];
+        $_SESSION['phone_number'] = $admin_info['phone_number'];
+        $_SESSION['birthdate'] = $admin_info['birthdate'];
+        $_SESSION['gender'] = $admin_info['gender'];
+        $_SESSION['home_address'] = $admin_info['home_address'];
+        $_SESSION['barangay'] = $admin_info['barangay'];
+        $_SESSION['city'] = $admin_info['city'];
+
         header('Location: ./../admin/dashboard.php');
+        exit;
       } else {
-        header('Location: ./../student/dashboard.php');
+        echo "Admin profile not found.";
       }
+      $stmt->close();
     } else {
-      echo '<script>alert("Invalid Credentials")</script>';
+      echo "Admin profile not found.";
     }
-    $stmt->close();
+  } else {
+    echo $role_out;
   }
+}
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EPAY | Log In</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./../../styles/global.css">
-    <style>
-      *, *::after, *::before {
-        font-family: 'San Francisco Rounded Regular';
-      }
-      .titlePage {
-        font-family: 'San Francisco Rounded Heavy';
-      }
-      
-    </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./../../styles/global.css">
+  <style>
+    *,
+    *::after,
+    *::before {
+      font-family: 'San Francisco Rounded Regular';
+    }
+
+    .titlePage {
+      font-family: 'San Francisco Rounded Heavy';
+    }
+  </style>
 </head>
 <div class="bg-[#F7EFD8] min-h-screen overflow-hidden w-full relative flex justify-center">
   <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
@@ -56,7 +97,9 @@
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a href="./pages/accounts/sign-up.php">Get Started</a></li>
@@ -89,8 +132,8 @@
               </div>
               <select name="role" aria-required="true" required class="mode select border-[#FF6BB3] select-bordered">
                 <option disabled selected>Select Login Role:</option>
-                <option value="admin">Admin</option>
-                <option value="student">Student</option>
+                <option value="Admin">Admin</option>
+                <option value="Student">Student</option>
               </select>
               <div class="label">
               </div>
@@ -134,5 +177,6 @@
       });
     });
   </script>
-</body>
+  </body>
+
 </html>
