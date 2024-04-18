@@ -14,16 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $result = $conn->query("SELECT @result AS result, @user_number_out AS user_number_out, @role_out AS role_out");
   $row = $result->fetch_assoc();
-
   if ($row['result'] === 'Login successful') {
     $user_number_out = $row['user_number_out'];
     $role_out = $row['role_out'];
 
     $_SESSION['user_number'] = $usernumber;
     $_SESSION['role'] = $role_out;
-
     if ($role_out === 'Admin') {
-
       $stmt = $conn->prepare("CALL fetch_user_info(?, ?)");
       $stmt->bind_param("ss", $user_number_out, $role_out);
       $stmt->execute();
@@ -48,18 +45,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ./../admin/dashboard.php');
         exit;
       } else {
-        echo "Admin profile not found.";
+        echo "<script>alert('Admin profile not found.'); window.location.href='./login.php'</script>";
       }
       $stmt->close();
-    } else {
-      echo "Admin profile not found.";
+    } else if ($role_out == 'Student') {
+      $stmt = $conn->prepare("CALL fetch_user_info(?, ?)");
+      $stmt->bind_param("ss", $user_number_out, $role_out);
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+      if ($result->num_rows > 0) {
+        $student_info = $result->fetch_assoc();
+
+        $_SESSION['student_id'] = $student_info['student_id'];
+        $_SESSION['student_number'] = $student_info['student_number'];
+        $_SESSION['first_name'] = $student_info['firstname'];
+        $_SESSION['middle_name'] = $student_info['middlename'];
+        $_SESSION['last_name'] = $student_info['lastname'];
+        $_SESSION['email'] = $student_info['email'];
+        $_SESSION['phone_number'] = $student_info['phone'];
+        $_SESSION['birthdate'] = $student_info['birthdate'];
+        $_SESSION['gender'] = $student_info['gender'];
+        $_SESSION['home_address'] = $student_info['home_address'];
+        $_SESSION['barangay'] = $student_info['barangay'];
+        $_SESSION['city'] = $student_info['city'];
+        header('Location: ./../student/dashboard.php');
+      } else {
+        echo "<script>alert('Student profile not found.'); window.location.href='./login.php'</script>";
+      }
     }
   } else {
-    echo $role_out;
+    echo "<script>alert('Invalid login credentials.'); window.location.href='./login.php'</script>";
   }
+
+  $stmt->close();
+  $conn->close();
 }
-
-
 ?>
 
 
