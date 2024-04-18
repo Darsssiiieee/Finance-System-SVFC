@@ -284,7 +284,7 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
       </ul>
     </div>
   </div>
-  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
+  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-between gap-5">
     <aside class="min-h-screen w-1/4 hidden lg:block">
       <ul tabindex="0" class="menu rounded-lg justify-center border border-slate-900/10 flex flex-col bg-base-100 shadow-xl rounded-xl min-h-96 justify-evenly mt-3 z-[1] p-3">
         <li class="<?php echo ($is_student_dashboard_page ? 'border-l-2 border-l-[#FF6BB3] text-[#FF6BB3]' : ''); ?>">
@@ -367,14 +367,15 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
       </ul>
     </aside>
 
-    <div class="">
+    <div class="w-3/4 flex flex-col items-center">
       <div class="hero-content flex-col">
         <div class="text-center">
           <h1 class="text-5xl font-bold">Feedback</h1>
           <p class="py-6">Have something to say about this system? Feel free to send a feedback to admins.</p>
         </div>
-        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="card shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
           <form method="post" class="card-body">
+            <input type="hidden" name="student_number" value="<?php echo $_SESSION['student_number'] ?>">
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Your Message</span>
@@ -395,19 +396,27 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
       $('#submit-feedback').click((e) => {
         e.preventDefault();
         const feedback = $('textarea[name="feeback_content"]').val();
+        const student_number = $('input[name="student_number"]').val();
         if (feedback.length < 10) {
           alert('Feedback must be at least 10 characters long');
           return;
         }
         $.ajax({
-          url: 'http://127.0.0.1:5000/svfc/api/feedback',
+          url: 'http://127.0.0.1:5000/api-svfc-send-feedback',
           method: 'POST',
-          data: {
-            feedback
-          },
+          contentType: 'application/json',
+          data: JSON.stringify({
+            student_number: student_number,
+            content: feedback
+          }),
           success: (data) => {
             alert(data);
+          },
+          error: (err) => {
+            console.log(err);
+            alert('An error occured while sending feedback');
           }
+
         })
       })
     })

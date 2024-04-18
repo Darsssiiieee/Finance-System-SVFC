@@ -157,7 +157,7 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
   </style>
 </head>
 
-<body class="bg-[#F7EFD8] flex flex-col justify-center items-center">
+<body class="bg-[#F7EFD8] w-full flex flex-col justify-center items-center">
   <dialog id="logout_modal" class="modal backdrop-blur">
     <div class="modal-box">
       <h3 style="font-family: 'San Francisco Rounded Bold';" class="font-bold text-2xl">Logout</h3>

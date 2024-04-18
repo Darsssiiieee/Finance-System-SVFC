@@ -45,6 +45,10 @@ $is_student_settings_page = ($current_url === $student_settings_url);
       src: url('./../../font/SF-Pro-Rounded-Regular.otf');
     }
 
+    .labelTitle {
+      font-family: 'San Francisco Rounded Bold';
+    }
+
     h1,
     h2,
     h3,
@@ -284,7 +288,7 @@ $is_student_settings_page = ($current_url === $student_settings_url);
 
 
       <div id="personalInformationForm" class="card shrink-0 w-full h-auto w-full shadow-2xl bg-base-100 mb-6 p-5 lg:p-10">
-        <h1 class="labelTitle text-3xl text-center">Admin Personal Information</h1>
+        <h1 class="labelTitle text-3xl text-center">Student Personal Information</h1>
         <form method="post" action="./review-information-admin.php" class="card-body flex flex-col justify-center gap-10 items-end">
           <div class="grid-cols-1 lg:grid-cols-3 grid gap-10 w-full">
             <div class="form-control">
