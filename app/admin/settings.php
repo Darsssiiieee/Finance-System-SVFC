@@ -16,55 +16,9 @@ if (!isset($_SESSION['admin_number'])) {
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <link rel="icon" type="image/x-icon" href="./../../res/images/logo.ico">
-  <style>
-    @font-face {
-      font-family: 'San Francisco Rounded Bold';
-      src: url('./../../font/SF-Pro-Rounded-Bold.otf');
-    }
-
-    @font-face {
-      font-family: 'San Francisco Rounded Heavy';
-      src: url('./../../font/SF-Pro-Rounded-Heavy.otf');
-    }
-
-    @font-face {
-      font-family: 'San Francisco Rounded Medium';
-      src: url('./../../font/SF-Pro-Rounded-Medium.otf');
-    }
-
-    @font-face {
-      font-family: 'San Francisco Rounded Regular';
-      src: url('./../../font/SF-Pro-Rounded-Regular.otf');
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    a,
-    li,
-    button,
-    label,
-    input,
-    select,
-    option,
-    textarea {
-      font-family: 'San Francisco Rounded Regular';
-    }
-
-    .nav-link {
-      font-family: 'San Francisco Rounded Heavy';
-    }
-
-    .labelTitle,
-    .menuButton,
-    .saveChanges {
-      font-family: 'San Francisco Rounded Heavy';
-    }
-  </style>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="./../../styles/global.css">
 </head>
 
 <body class="bg-[#F7EFD8] flex flex-col justify-center items-center">
@@ -82,93 +36,40 @@ if (!isset($_SESSION['admin_number'])) {
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
       <div id="personalInformationForm" class="card shrink-0 w-full h-auto w-full shadow-2xl bg-base-100 mb-6 p-5 lg:p-10">
-        <h1 class="labelTitle text-3xl text-center">Admin Personal Information</h1>
+        <h1 class="labelTitle text-3xl text-center font-extrabold">Admin Personal Information</h1>
         <form method="post" action="./review-information-admin.php" class="card-body flex flex-col justify-center gap-10 items-end">
           <div class="grid-cols-1 lg:grid-cols-3 grid gap-10 w-full">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">First Name</span>
-              </label>
-              <input value="<?php echo $_SESSION['first_name'] ?>" type="text" name="firstname" placeholder="First Name" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text
-                ">Middle Name</span>
-              </label>
-              <input value="<?php echo $_SESSION['middle_name'] ?>" type="text" name="middlename" placeholder="Middle Name" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text
-                ">Last Name</span>
-              </label>
-              <input value="<?php echo $_SESSION['last_name'] ?>" type="text" name="lastname" placeholder="Last Name" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text
-                ">Email</span>
-              </label>
-              <input value="<?php echo $_SESSION['email'] ?>" type="email" class="input border-[#FF6BB3] input-bordered" placeholder="Email" class="input input-bordered" required />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text
-                ">Phone Number</span>
-              </label>
-              <input value="<?php echo $_SESSION['phone_number'] ?>" name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
-            </div>
+            <?php
+            $fields = [
+              ['name' => 'First Name', 'value' => $_SESSION['first_name'], 'type' => 'text', 'placeholder' => 'First Name'],
+              ['name' => 'Middle Name', 'value' => $_SESSION['middle_name'], 'type' => 'text', 'placeholder' => 'Middle Name'],
+              ['name' => 'Last Name', 'value' => $_SESSION['last_name'], 'type' => 'text', 'placeholder' => 'Last Name'],
+              ['name' => 'Email', 'value' => $_SESSION['email'], 'type' => 'email', 'placeholder' => 'Email'],
+              ['name' => 'Phone Number', 'value' => $_SESSION['phone_number'], 'type' => 'tel', 'placeholder' => 'Phone Number'],
+              ['name' => 'Birth Date', 'value' => $_SESSION['birthdate'], 'type' => 'date', 'placeholder' => 'Birth Date', 'disabled' => true],
+              ['name' => 'Gender', 'value' => $_SESSION['gender'], 'type' => 'text', 'placeholder' => 'Gender', 'disabled' => true],
+              ['name' => 'Home Address', 'value' => $_SESSION['home_address'], 'type' => 'text', 'placeholder' => 'Home Address'],
+              ['name' => 'Barangay', 'value' => $_SESSION['barangay'], 'type' => 'text', 'placeholder' => 'Barangay'],
+              ['name' => 'City', 'value' => $_SESSION['city'], 'type' => 'text', 'placeholder' => 'City'],
+            ];
 
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">Birth Date</span>
-              </div>
-              <input value="<?php echo $_SESSION['birthdate'] ?>" disabled aria-disabled="true" name="birthdate" id="birthdate" type="date" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
+            foreach ($fields as $field) {
+              $labelText = $field['name'];
+              $inputValue = $field['value'];
+              $inputType = $field['type'];
+              $inputPlaceholder = $field['placeholder'];
+              $isDisabled = isset($field['disabled']) && $field['disabled'] ? 'disabled aria-disabled="true"' : '';
 
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">Gender</span>
+              echo <<<HTML
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">$labelText</span>
+                </label>
+                <input value="$inputValue" type="$inputType" name="$labelText" placeholder="$inputPlaceholder" class="input border-[#FF6BB3] input-bordered" required $isDisabled />
               </div>
-              <input value="<?php echo $_SESSION['gender'] ?>" disabled aria-disabled="true" name="gender" id="gender" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
-
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">Home Address</span>
-              </div>
-              <input value="<?php echo $_SESSION['home_address'] ?>" name="homeaddress" id="homeaddress" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" placeholder="123 Main Street" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
-
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">Barangay</span>
-              </div>
-              <input value="<?php echo $_SESSION['barangay'] ?>" name="barangay" id="barangay" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" placeholder="Barangay 176" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
-
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">City</span>
-              </div>
-              <input value="<?php echo $_SESSION['city'] ?>" name="city" id="city" type="text" class="input border-[#FF6BB3] input-bordered input-secondary w-full" placeholder="New York City" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
+            HTML;
+            }
+            ?>
 
           </div>
 

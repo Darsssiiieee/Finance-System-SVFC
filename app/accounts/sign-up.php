@@ -1,40 +1,34 @@
 <?php
-  session_start();
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($password !== $confirmPassword) {
-      echo "<script>alert('Passwords do not match')</script>";
-      exit();
-    } else {
-      $_SESSION['username'] =  $_POST['username'];
-      $_SESSION['password'] = $_POST['password'];
-      header('Location: ./profile/role-selection.php');
-    }
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($password !== $confirmPassword) {
+    echo "<script>alert('Passwords do not match')</script>";
+    exit();
+  } else {
+    $_SESSION['username'] =  $_POST['username'];
+    $_SESSION['password'] = $_POST['password'];
+    header('Location: ./profile/role-selection.php');
   }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="imahe/x-icon" href="../../res/images/logo.ico">
+  <link rel="icon" type="image/x-icon" href="../../res/images/logo.ico">
   <title>EPAY | Sign Up</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="stylesheet" href="./../../styles/global.css">
-  <style>
-    *, *::after, *::before {
-      font-family: 'San Francisco Rounded Regular';
-    }
-    .currentProgress {
-      font-family: 'San Francisco Rounded Heavy';
-    }
-    .steps .step-secondary+.step-secondary:before, .steps .step-secondary:after {
-      background-color: #FF6BB3;
-    }
-  </style>
+
 </head>
+
 <body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full flex justify-center">
   <div class="absolute w-full h-screen flex flex-col gap-1 overflow-hidden">
     <img src="./../../res/images/7848733_8241.png" class="bg-cover bg-repeat" alt="">
@@ -46,7 +40,9 @@
     <div class="navbar-start">
       <div class="dropdown">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a href="./pages/accounts/sign-up.php">Get Started</a></li>
@@ -85,7 +81,7 @@
               <div class="label">
                 <span class="label-text">Username</span>
               </div>
-              <input name="username" minlength="4" maxlength="50" id="username" type="text" placeholder="Username" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true/>
+              <input name="username" minlength="4" maxlength="50" id="username" type="text" placeholder="Username" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true />
               <div class="label">
                 <span id="errorLabel" class="label-text-alt"></span>
               </div>
@@ -95,7 +91,7 @@
               <div class="label">
                 <span class="label-text">Password</span>
               </div>
-              <input name="password" minlength="8" id="password" type="password" placeholder="Password" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true/>
+              <input name="password" minlength="8" id="password" type="password" placeholder="Password" class="input input-bordered input-secondary w-full max-w-xs border-[#FF6BB3]" required aria-required=true />
               <div class="label">
                 <span id="errorLabelPassword" class="label-text-alt"></span>
               </div>
@@ -105,7 +101,7 @@
               <div class="label">
                 <span class="label-text">Confirm Password</span>
               </div>
-              <input name="confirmPassword" id="confirmPassword" type="password" placeholder="Password" class="input input-bordered border-[#FF6BB3] input-secondary w-full max-w-xs" required aria-required=true/>
+              <input name="confirmPassword" id="confirmPassword" type="password" placeholder="Password" class="input input-bordered border-[#FF6BB3] input-secondary w-full max-w-xs" required aria-required=true />
               <div class="label">
                 <span id="errorLabelConfirm" class="label-text-alt"></span>
               </div>
@@ -138,7 +134,7 @@
       const passwordInput = document.getElementById('password')
       const confirmPasswordInput = document.getElementById('confirmPassword')
       const storedPassword = sessionStorage.getItem('password')
-      if (storedPassword) { 
+      if (storedPassword) {
         passwordInput.value = storedPassword
         confirmPasswordInput.value = storedPassword
       }
@@ -153,8 +149,7 @@
         if (password.length < 8) {
           alert("Password must be at least 8 characters long")
           e.preventDefault()
-        }
-        else if (password !== confirmPassword) {
+        } else if (password !== confirmPassword) {
           alert("Passwords do not match")
           e.preventDefault()
         }
@@ -213,7 +208,7 @@
         }
       })
     })
-    
   </script>
 </body>
+
 </html>

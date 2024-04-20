@@ -18,47 +18,44 @@ include './../utils/databaseConnection.php';
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <link rel="icon" type="image/x-icon" href="./../../res/images/logo.ico">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   <style>
-    @font-face {
-      font-family: 'San Francisco Rounded Bold';
-      src: url('./../../font/SF-Pro-Rounded-Bold.otf');
+    .select2-container .select2-selection--single {
+      border: 1px solid #d9d9d9;
+      border-radius: 20px;
     }
 
-    @font-face {
-      font-family: 'San Francisco Rounded Heavy';
-      src: url('./../../font/SF-Pro-Rounded-Heavy.otf');
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      color: #444;
+      line-height: 28px;
     }
 
-    @font-face {
-      font-family: 'San Francisco Rounded Medium';
-      src: url('./../../font/SF-Pro-Rounded-Medium.otf');
+    .select2-container .select2-selection--single .select2-selection__arrow {
+      height: 26px;
     }
 
-    @font-face {
-      font-family: 'San Francisco Rounded Regular';
-      src: url('./../../font/SF-Pro-Rounded-Regular.otf');
+    .select2-dropdown {
+      border: 1px solid #d9d9d9;
+      border-radius: 20px;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    a,
-    li,
-    button,
-    label,
-    input,
-    select,
-    option,
-    textarea {
-      font-family: 'San Francisco Rounded Regular';
+    .select2-results__option {
+      padding: 6px;
+      user-select: none;
+      -webkit-user-select: none;
+      background-color: #fff;
+      color: #444;
+      cursor: pointer;
     }
 
-    .nav-link {
-      font-family: 'San Francisco Rounded Heavy';
+    .select2-results__option[aria-selected="true"] {
+      background-color: #f2f2f2;
+    }
+
+    .select2-results__option--highlighted[aria-selected] {
+      background-color: #3875d7;
+      color: #fff;
     }
 
     input::-webkit-outer-spin-button,
@@ -108,7 +105,7 @@ include './../utils/databaseConnection.php';
           </div>
 
           <div class="card shrink-0 w-full max-w-7xl shadow-2xl bg-base-100">
-            <form class="card-body w-full grid place-content-center gap-5">
+            <form id="bill-form" class="card-body w-full grid place-content-center gap-5">
               <div class="w-full flex flex-col md:flex-row justify-around gap-5 items-center">
                 <label class="form-control w-full max-w-full">
                   <div class="label">
@@ -121,7 +118,7 @@ include './../utils/databaseConnection.php';
                     $result = $conn->query($query);
 
                     while ($row = mysqli_fetch_assoc($result)) {
-                      echo "<option value='" . $row['student_id'] . "'>" . $row['user_number'] . ': ' . $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . "</option>";
+                      echo "<option value='" . $row['student_number'] . "'>" . $row['user_number'] . ': ' . $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . "</option>";
                     }
                     ?>
                   </select>
@@ -129,9 +126,20 @@ include './../utils/databaseConnection.php';
 
                 <label class="form-control w-full max-w-full">
                   <div class="label">
+                    <span class="label-text">Select Semester</span>
+                  </div>
+                  <select id="semester_select" class="select select-primary w-full" disabled>
+                    <option disabled selected>Select Semester</option>
+                  </select>
+                </label>
+
+
+
+                <label class="form-control w-full max-w-full">
+                  <div class="label">
                     <span class="label-text">Number of Units</span>
                   </div>
-                  <input type="number" placeholder="Number of Units" class="input input-bordered w-full" />
+                  <input type="number" name="units" placeholder="Number of Units" class="input input-bordered w-full" />
                 </label>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -186,6 +194,7 @@ include './../utils/databaseConnection.php';
   </main>
   <script>
     $(document).ready(function() {
+      $('#student_id').select2();
       $('#add_misc').click(function() {
         $('#misc_fees').append('<div class="misc-fee border-2 rounded-xl p-5">' +
           '<label class="form-control w-full max-w-xs">' +
@@ -207,6 +216,90 @@ include './../utils/databaseConnection.php';
           $(this).parent('.misc-fee').remove();
         });
       });
+
+      $('#student_id').change(function() {
+        var studentNumber = $(this).val();
+        $.ajax({
+          url: 'http://127.0.0.1:5000/api-svfc-fetch_semesters',
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            student_number: studentNumber
+          }),
+          success: function(response) {
+            $('#semester_select').prop('disabled', false);
+            $('#semester_select').empty();
+            response.forEach(function(semester) {
+              $('#semester_select').append('<option value="' + semester.semester + '">' + semester.semester + '</option>');
+            });
+          },
+          error: function(xhr, status, error) {
+            console.log(error);
+          }
+        });
+      });
+
+      $('#bill-form').submit(e => {
+        e.preventDefault();
+        var allDisabledBills = document.querySelectorAll('input[disabled]');
+        var units = document.querySelector('input[name="units"]').value;
+
+        $.ajax({
+          url: 'http://127.0.0.1:5000/api-svfc-post-student-bill',
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({
+            student_number: $('#student_id').val(),
+            semester: $('#semester_select').val(),
+            number_of_units: $('input[name="units"]').val(),
+            internet_connectivity: $('input[name="internet_connectivity"]').val(),
+            modules_ebook: $('input[name="modules_ebook"]').val(),
+            portal: $('input[name="portal"]').val(),
+            e_library: $('input[name="e_library"]').val(),
+            admission_registration: $('input[name="admission_registration"]').val(),
+            library: $('input[name="library"]').val(),
+            student_org: $('input[name="student_org"]').val(),
+            medical_dental: $('input[name="medical_dental"]').val(),
+            guidance: $('input[name="guidance"]').val(),
+            student_affairs: $('input[name="student_affairs"]').val(),
+            org_t_shirt: $('input[name="org_t_shirt"]').val(),
+            school_uniform_1_set: $('input[name="school_uniform_1_set"]').val(),
+            pe_activity_uniform_1_set: $('input[name="pe_activity_uniform_1_set"]').val(),
+            major_uniform_1_set: $('input[name="major_uniform_1_set"]').val(),
+            major_laboratory: $('input[name="major_laboratory"]').val(),
+            insurance: $('input[name="insurance"]').val(),
+            students_development_programs_activities: $('input[name="students_development_programs_activities"]').val(),
+            misc_fees: (function() {
+              var miscFees = [];
+              var allMiscFees = document.querySelectorAll('.misc-fee');
+              allMiscFees.forEach(function(miscFee) {
+                var miscFeeAmount = miscFee.querySelector('input[type="number"]').value;
+                var miscFeeRemarks = miscFee.querySelector('input[type="text"]').value;
+                miscFees.push({
+                  amount: miscFeeAmount,
+                  remarks: miscFeeRemarks
+                });
+              });
+              return miscFees;
+            })()
+
+          }),
+          success: function(response) {
+            // Handle success response
+            console.log(response);
+          },
+          error: function(xhr, status, error) {
+            console.error(error);
+            console.error(status);
+            console.error(xhr);
+            var errorMessage = "An error occurred";
+            if (xhr.responseJSON && xhr.responseJSON.error) {
+              errorMessage = xhr.responseJSON.error;
+            }
+            console.error(errorMessage);
+          }
+        });
+      })
     });
   </script>
 </body>

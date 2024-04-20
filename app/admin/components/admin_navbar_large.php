@@ -34,14 +34,14 @@ function navbarLargeScreen($currentLink)
   foreach ($navLinks as $item) {
     $isActive = ($item['url'] == $currentLink) ? 'text-black' : 'text-gray-400';
     echo '<li class="' . $isActive . '">';
-    echo '<a href="' . $item['url'] . '" class="text-lg gap-7 nav-link flex flex-row items-center">';
+    echo '<a href="' . $item['url'] . '" class="text-lg font-bold gap-7 nav-link flex flex-row items-center">';
     echo $item['icon'];
     echo $item['label'];
     echo '</a>';
     echo '</li>';
   }
   echo '<li>';
-  echo '<button class="btn btn-error text-white" onclick="openLogoutModal()">LOGOUT</button>';
+  echo '<button class="btn btn-error font-bold text-white" onclick="openLogoutModal()">LOGOUT</button>';
   echo '</li>';
   echo '</ul>';
   echo '</aside>';

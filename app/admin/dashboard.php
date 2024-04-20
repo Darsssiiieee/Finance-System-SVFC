@@ -82,59 +82,19 @@ $conn->close();
   <title>EPAY | Admin Dashboard</title>
   <link rel="icon" type="image/x-icon" href="./../../res/images/logo.ico">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="./../../styles/global.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
-    @font-face {
-      font-family: 'San Francisco Rounded Bold';
-      src: url('./../../font/SF-Pro-Rounded-Bold.otf');
-    }
-
-    @font-face {
-      font-family: 'San Francisco Rounded Heavy';
-      src: url('./../../font/SF-Pro-Rounded-Heavy.otf');
-    }
-
-    @font-face {
-      font-family: 'San Francisco Rounded Medium';
-      src: url('./../../font/SF-Pro-Rounded-Medium.otf');
-    }
-
-    @font-face {
-      font-family: 'San Francisco Rounded Regular';
-      src: url('./../../font/SF-Pro-Rounded-Regular.otf');
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    button {
-      font-family: 'San Francisco Rounded Regular';
-    }
-
-    .nav-link {
-      font-family: 'San Francisco Rounded Heavy';
-    }
-
-    .count,
-    .stat-value,
-    .title-overview,
-    .empty-message,
-    .menuButton {
-      font-family: 'San Francisco Rounded Heavy';
-    }
-
-    .overview-title,
-    .stat-title {
-      font-family: 'San Francisco Rounded Bold';
-    }
-
-    .stat-desc {
-      font-family: 'San Francisco Rounded Medium';
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: "InterVariable";
     }
   </style>
 </head>
