@@ -2,10 +2,8 @@
 session_start();
 if (!isset($_SESSION['admin_number'])) {
   header('location:login.php');
+  exit();
 }
-$admin_settings_url = '/finance-system-svfc/app/admin/settings.php';
-$current_url = $_SERVER['REQUEST_URI'];
-$is_admin_settings_page = ($current_url === $admin_settings_url);
 ?>
 
 <!DOCTYPE html>

@@ -146,7 +146,7 @@ $conn->close();
   navbar($currentPage);
   ?>
 
-  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
+  <main class="w-11/12 xl:w-10/12 h-full max-w-screen-2xl flex mt-10 flex-row justify-center gap-5">
     <?php
     include './components/admin_navbar_large.php';
     navbarLargeScreen($currentPage);
