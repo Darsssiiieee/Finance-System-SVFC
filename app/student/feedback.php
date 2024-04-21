@@ -36,23 +36,6 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
       font-family: "InterVariable";
     }
 
-    .count,
-    .stat-value,
-    .title-overview,
-    .empty-message,
-    .menuButton {
-      font-family: 'San Francisco Rounded Heavy';
-    }
-
-    .overview-title,
-    .stat-title {
-      font-family: 'San Francisco Rounded Bold';
-    }
-
-    .stat-desc {
-      font-family: 'San Francisco Rounded Medium';
-    }
-
     .main-course {
       margin-top: 20px;
       text-transform: capitalize;

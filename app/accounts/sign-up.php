@@ -25,8 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://rsms.me/">
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-  <link rel="stylesheet" href="./../../styles/global.css">
-
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: "InterVariable";
+    }
+  </style>
 </head>
 
 <body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full flex justify-center">

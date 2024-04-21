@@ -118,13 +118,11 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
   student_navbar_sm($currentPage);
   ?>
 
-  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
+  <main class="w-11/12 max-w-screen-2xl xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
     <?php
     include './components/student_navbar_lg.php';
     student_navbar_lg($currentPage);
     ?>
-
-    </aside>
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
       <div class="flex flex-col w-full gap-5 justify-center">

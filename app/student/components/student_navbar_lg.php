@@ -47,8 +47,8 @@ function student_navbar_lg($currentPage)
     ]
   ];
 
-  echo '<aside class="min-h-screen w-1/4 hidden lg:block">';
-  echo '<ul tabindex="0" class="menu rounded-lg justify-center border border-slate-900/10 flex flex-col bg-base-100 shadow-xl rounded-xl min-h-96 justify-evenly mt-3 z-[1] p-3">';
+  echo '<aside class="min-h-screen w-2/5 hidden lg:block">';
+  echo '<ul tabindex="0" class="menu rounded-lg justify-center border border-slate-900/10 flex flex-col bg-base-100 shadow-xl rounded-xl min-h-96 justify-evenly z-[1] p-3">';
   foreach ($student_navbar_sm_items as $item) {
     $isActive = ($item['url'] == $currentPage) ? 'text-black' : 'text-gray-400';
     echo '<li>';

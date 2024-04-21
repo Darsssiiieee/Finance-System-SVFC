@@ -30,7 +30,7 @@
   student_navbar_sm($currentPage);
   ?>
 
-  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
+  <main class="w-11/12 max-w-screen-2xl xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
     <?php
     include './components/student_navbar_lg.php';
     student_navbar_lg($currentPage);
