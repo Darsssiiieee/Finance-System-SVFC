@@ -128,16 +128,17 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
       <div class="flex flex-col w-full gap-5 justify-center">
-        <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl text-left title-overview">Student Overview</h1>
+        <div class="flex flex-col md:flex-row justify-between md:items-center">
+          <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl text-left title-overview">Student Overview</h1>
+          <h1 class="text-xs text-black text-left title-overview" id="date-time"></h1>
+        </div>
 
         <div class="bg-red-400 p-5 w-full rounded-xl flex flex-row justify-between items-center">
           <div class="w-1/2 flex-col flex">
-            <div id="clock"></div>
             <h1 class="text-xl font-bold text-white xl:text-4xl text-left title-overview">
               Hello, <?php echo $_SESSION['first_name'] . ' ' . $_SESSION['last_name'] ?>!
             </h1>
-            <h1 class="text-xs text-white text-left title-overview" id="date-time">PST:</h1>
-            <h1 id="totalBill">
+            <h1 class="text-lg font-bold  xl:text-4xl text-white" id="totalBill">
               <div class="skeleton w-32 h-10"></div>
             </h1>
           </div>
@@ -370,9 +371,9 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
           "December"
         ];
         const date = monthList[month] + " " + day + ", " + year;
-        const time = hourTime + ":" + minute + ":" + second + ampm;
+        const time = hourTime + ":" + minute + ":" + second + ' ' + ampm;
         const dateTime = date + " - " + time;
-        document.getElementById("date-time").innerHTML = 'PST:' + dateTime;
+        document.getElementById("date-time").innerHTML = dateTime;
         setTimeout(clock, 1000);
       }
       clock();
@@ -385,7 +386,7 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
           student_number: student_number
         }),
         success: (response) => {
-          $('#totalBill').text(response.total_bill);
+          $('#totalBill').text('PHP: ' + response.total_bill.toLocaleString());
           $('.skeleton').addClass('hidden');
           console.log(response);
         },

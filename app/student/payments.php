@@ -51,9 +51,68 @@ $is_student_payments_page = ($current_url === $student_payments_url);
     student_navbar_lg($currentPage);
     ?>
 
-    <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
-      
+    <section class="flex flex-col w-11/12 gap-5 items-center">
+      <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl text-left">Your Payment Transactions</h1>
+      <div class="card w-full min-h-96 p-5 bg-base-100 shadow-xl">
+        <div class="overflow-x-auto">
+          <div id="skeleton_container" class="skeleton w-full min-h-96"></div>
+          <table id="payments_table" class="hidden table">
+            <thead>
+              <tr class="text-center font-bold text-sm">
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Semester</th>
+                <th>Payment Method</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
+  </main>
+
+  <script>
+    $(document).ready(function() {
+      // Assuming $_SESSION['student_number'] is properly set in your PHP code
+      const student_number = '<?php echo $_SESSION['student_number']; ?>';
+
+      // Make the AJAX request
+      $.ajax({
+        url: 'http://127.0.0.1:5000/api-svfc-get-student-transactions',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          student_number: student_number
+        }),
+        beforeSend: () => {
+          // Show loading spinner
+          $('#payments_table').addClass('hidden');
+        },
+        success: function(response) {
+          $('#skeleton_container').addClass('hidden');
+          $('#payments_table tbody').empty();
+          $('#payments_table').removeClass('hidden');
+          response.transactions.forEach(transaction => {
+            $('#payments_table tbody').append(`
+              <tr class='text-center'>
+                <td>${transaction.payment_date}</td>
+                <td>${transaction.amount}</td>
+                <td>${transaction.semester}</td>
+                <td>${transaction.payment_method}</td>
+              </tr>
+            `);
+          });
+        },
+        error: function(error) {
+          console.log(error)
+        }
+      });
+
+    });
+  </script>
 </body>
 
 </html>

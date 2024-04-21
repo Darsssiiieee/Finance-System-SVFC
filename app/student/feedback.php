@@ -185,7 +185,8 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
             content: feedback
           }),
           success: (data) => {
-            alert(data);
+            alert('Feedback sent successfully');
+            feedback.val('');
           },
           error: (err) => {
             console.log(err);
