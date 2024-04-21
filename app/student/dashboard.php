@@ -582,23 +582,12 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
     </section>
 
   </main>
-
   <script>
-    function openLogoutModal() {
-      document.getElementById("logout_modal").showModal();
-    }
-
-    function closeLogoutModal() {
-      document.getElementById("logout_modal").close();
-    }
-
-    function logout() {
-      window.location.href = "./../utils/logout.php";
-    }
-  </script>
-  <script>
+    const openLogoutModal = () => document.getElementById("logout_modal").showModal();
+    const closeLogoutModal = () => document.getElementById("logout_modal").close();
+    const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
-      clock();
+      const student_number = '<?php echo $_SESSION['student_number'] ?>';
 
       function clock() {
         const today = new Date();
@@ -633,14 +622,14 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
         document.getElementById("date-time").innerHTML = 'PST:' + dateTime;
         setTimeout(clock, 1000);
       }
+      clock();
 
       $.ajax({
         url: 'http://127.0.0.1:5000/api-svfc-get-student-bills',
         method: 'POST',
         contentType: 'application/json',
-
         data: JSON.stringify({
-          student_number: <?php $_SESSION['student_number'] ?>
+          student_number: student_number
         }),
         success: (response) => {
           console.log(response);
@@ -648,9 +637,7 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
         error: (error) => {
           console.log(error);
         }
-
       })
-
     })
   </script>
 </body>
