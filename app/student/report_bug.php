@@ -1,25 +1,10 @@
-<?php
-session_start();
-if ($_SESSION['role'] !== 'Student') {
-  header('Location: ./../accounts/login.php');
-  exit();
-}
-$student_number = $_SESSION['student_number'];
-$firstname_initial = substr($_SESSION['first_name'], 0, 1);
-$lastname_initial = substr($_SESSION['last_name'], 0, 1);
-$user_initial = $firstname_initial . $lastname_initial;
-$student_payments_url = '/finance-system-svfc/app/student/payments.php';
-$current_url = $_SERVER['REQUEST_URI'];
-$is_student_payments_page = ($current_url === $student_payments_url);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student | Payments</title>
+  <title>EPAY | Report a Bug</title>
   <link rel="icon" type="image/x-icon" href="./../../res/images/logo.ico">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <link rel="preconnect" href="https://rsms.me/">
@@ -52,7 +37,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
     ?>
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
-      
+
     </section>
 </body>
 
