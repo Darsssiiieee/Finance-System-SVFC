@@ -193,6 +193,9 @@ include './../utils/databaseConnection.php';
     </section>
   </main>
   <script>
+    const openLogoutModal = () => document.getElementById("logout_modal").showModal();
+    const closeLogoutModal = () => document.getElementById("logout_modal").close();
+    const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(function() {
       $('#student_id').select2();
       $('#add_misc').click(function() {

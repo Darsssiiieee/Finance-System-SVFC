@@ -31,8 +31,8 @@ function navbar($currentPage)
 
 	echo '<dialog id="logout_modal" class="modal backdrop-blur">';
 	echo '<div class="modal-box">';
-	echo '<h3 style="font-family: \'San Francisco Rounded Bold\';" class="font-bold text-2xl">Logout</h3>';
-	echo '<p style="font-family: \'San Francisco Rounded Regular\';" class="py-4">Are you sure you want to logout?</p>';
+	echo '<h3 class="font-bold text-2xl">Logout</h3>';
+	echo '<p class="py-4">Are you sure you want to logout?</p>';
 	echo '<div class="modal-action">';
 	echo '<button class="menuButton btn btn-yes btn-error text-white font-bold" onclick="logout()">YES</button>';
 	echo '<button class="menuButton btn btn-cancel" onclick="closeLogoutModal()">CANCEL</button>';
