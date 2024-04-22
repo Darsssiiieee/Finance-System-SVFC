@@ -87,29 +87,6 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
         }),
         success: (data) => {
           console.log(data);
-          /* sample response
-          {bills: Array(1), list_of_bills: Array(1)}
-bills
-: 
-[{…}]
-list_of_bills
-: 
-Array(1)
-0
-: 
-amount
-: 
-25700
-bill_date
-: 
-"2024-04-21T11:32:07"
-bills_id
-: 
-5
-semester
-: 
-"4th year 1st sem"
-          */
           $('#skeleton_container').addClass('hidden');
           $('#payments_table tbody').empty();
           $('#payments_table').removeClass('hidden');
@@ -119,7 +96,7 @@ semester
                 <td>PHP ${bill.amount.toLocaleString()}</td>
                 <td>${bill.bill_date}</td>
                 <td>${bill.semester}</td>
-                <td><button class="btn btn-primary">Pay</button></td>
+                <td><a href='./pay_tuition.php?bill_id=${bill.bills_id}&bill_amount=${bill.amount}&bill_semester=${bill.semester}' class="btn btn-primary">Pay Now</a></td>
               </tr>
             `);
           });
