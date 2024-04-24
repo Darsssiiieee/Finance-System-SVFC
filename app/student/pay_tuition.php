@@ -162,11 +162,8 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
 
         switch ($('input[name="payment_method"]:checked').val()) {
           case 'bank':
-            // Open a new tab
             var newTab = window.open('', '_blank');
-            $newTab = window.open('', '_blank');
 
-            // call the flask endpoint via ajax and open the flask in a new tab
             $.ajax({
               url: 'http://127.0.0.1:5000/payment/bank',
               type: 'POST',
@@ -190,63 +187,52 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
             });
             break;
           case 'creditcard':
-            // Open a new tab
-            var newTab = window.open('', '_blank');
-            $newTab = window.open('', '_blank');
-
-            // call the flask endpoint via ajax and open the flask in a new tab
-            $.ajax({
-              url: 'http://127.0.0.1:5000/payment/creditcard',
-              type: 'POST',
-              target: '_blank',
-              contentType: 'application/json',
-              data: {
-                bill_id: $('input[name="bill_id"]').val(),
-                amount_to_be_paid: $('input[name="amount_to_be_paid"]').val(),
-                payment_method: $('input[name="payment_method"]:checked').val()
-              },
-              beforeSend: function() {
-                alert('Processing payment...');
-              },
-              success: function(response) {
-                alert(response);
-                dialog.close();
-                redirect();
-              },
-              error: function(error) {
-                alert('An error occurred');
-                console.log(error);
-              }
-            });
-            break;
-          case 'gcash':
-            alert('Processing payment...');
-            // Open a new tab
-            var newTab = window.open('about:blank', '_blank');
-
-            // Get form data
             var formData = {
               bill_id: $('input[name="bill_id"]').val(),
               amount_to_be_paid: $('input[name="amount_to_be_paid"]').val(),
               payment_method: $('input[name="payment_method"]:checked').val()
             };
-
+            var newTab = window.open('', '_blank');
             $.ajax({
-              url: 'http://127.0.0.1:5000/payment/gcash',
+              url: 'http://127.0.0.1:5000/payment/card',
               type: 'POST',
               contentType: 'application/json',
-              data: JSON.stringify(formData), // Send form data as JSON
+              data: JSON.stringify(formData),
               success: function(response) {
                 newTab.document.open();
                 newTab.document.write(response);
                 newTab.document.close();
               },
               error: function(xhr, status, error) {
-                // Handle AJAX error
                 newTab.document.write('<p>An error occurred while processing payment</p>');
                 console.log('AJAX Error:', error);
               }
             });
+            alert('Processing payment...');
+            break;
+          case 'gcash':
+            var newTab = window.open('about:blank', '_blank');
+            var formData = {
+              bill_id: $('input[name="bill_id"]').val(),
+              amount_to_be_paid: $('input[name="amount_to_be_paid"]').val(),
+              payment_method: $('input[name="payment_method"]:checked').val()
+            };
+            $.ajax({
+              url: 'http://127.0.0.1:5000/payment/gcash',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(formData),
+              success: function(response) {
+                newTab.document.open();
+                newTab.document.write(response);
+                newTab.document.close();
+              },
+              error: function(xhr, status, error) {
+                newTab.document.write('<p>An error occurred while processing payment</p>');
+                console.log('AJAX Error:', error);
+              }
+            });
+            alert('Processing payment...');
             break;
           default:
             alert('Please select a payment method');
