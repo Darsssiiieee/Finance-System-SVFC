@@ -59,6 +59,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
           <table id="payments_table" class="hidden table">
             <thead>
               <tr class="text-center font-bold text-sm">
+                <th>Payment ID</th>
                 <th>Payment Date</th>
                 <th>Amount</th>
                 <th>Semester</th>
@@ -76,10 +77,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
 
   <script>
     $(document).ready(function() {
-      // Assuming $_SESSION['student_number'] is properly set in your PHP code
       const student_number = '<?php echo $_SESSION['student_number']; ?>';
-
-      // Make the AJAX request
       $.ajax({
         url: 'http://127.0.0.1:5000/api-svfc-get-student-transactions',
         method: 'POST',
@@ -98,6 +96,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
           response.transactions.forEach(transaction => {
             $('#payments_table tbody').append(`
               <tr class='text-center'>
+                <td>${transaction.payment_id}</td>
                 <td>${transaction.payment_date}</td>
                 <td>${transaction.amount}</td>
                 <td>${transaction.semester}</td>
