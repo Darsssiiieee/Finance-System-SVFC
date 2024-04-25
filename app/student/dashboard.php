@@ -339,6 +339,7 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
+      s
       const student_number = '<?php echo $_SESSION['student_number'] ?>';
 
       function clock() {

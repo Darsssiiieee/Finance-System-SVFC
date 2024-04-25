@@ -56,14 +56,14 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
 </head>
 
 <body class="relative">
-  <svg id="blob" class="absolute left-[-48%] top-[-15rem]" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="flowerIconTitle" stroke="#000000" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" color="#000000">
-    <path d="M12 22C13.5819 22 14.8778 20.7757 14.9918 19.223C16.1704 20.2403 17.9525 20.1896 19.0711 19.0711C20.1896 17.9525 20.2402 16.1705 19.2229 14.9918C20.7757 14.8778 22 13.5819 22 12C22 10.4181 20.7757 9.12224 19.223 9.00816C20.2403 7.82955 20.1896 6.04748 19.0711 4.92894C17.9525 3.81038 16.1705 3.75976 14.9918 4.77708C14.8778 3.22433 13.5819 2 12 2C10.4181 2 9.12224 3.22431 9.00816 4.77704C7.82955 3.75974 6.04749 3.81036 4.92894 4.92891C3.81038 6.04747 3.75977 7.82955 4.77708 9.00816C3.22433 9.12221 2 10.4181 2 12C2 13.5819 3.2243 14.8778 4.77703 14.9918C3.75974 16.1704 3.81037 17.9525 4.92891 19.0711C6.04747 20.1896 7.82955 20.2402 9.00816 19.2229C9.12221 20.7757 10.4181 22 12 22Z" />
-    <path d="M12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14Z" />
+  <svg id="blob" class="absolute left-[-48%] top-[-15rem]" fill="#000000" width="800px" height="800px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+    <path d="M606.867 527.324c0-52.874-42.86-95.734-95.734-95.734-52.865 0-95.724 42.862-95.724 95.734s42.859 95.734 95.724 95.734c52.874 0 95.734-42.86 95.734-95.734zm40.96 0c0 75.495-61.199 136.694-136.694 136.694-75.487 0-136.684-61.201-136.684-136.694S435.646 390.63 511.133 390.63c75.495 0 136.694 61.199 136.694 136.694z" />
+    <path d="M735.472 265.659c118.81 0 215.122 96.312 215.122 215.122 0 72.662-36.376 138.927-94.997 178.411 9.689 24.717 14.767 51.002 14.767 77.937 0 118.81-96.312 215.122-215.122 215.122-54.129 0-105.007-20.233-144.106-55.678-39.091 35.444-89.969 55.678-144.099 55.678-118.81 0-215.122-96.312-215.122-215.122 0-26.935 5.078-53.22 14.767-77.937-58.621-39.484-94.997-105.749-94.997-178.411 0-118.809 96.31-215.122 215.112-215.122 3.384 0 6.778.097 10.214.29C307.5 156.928 399.367 71.683 511.135 71.683c111.774 0 203.636 85.242 214.124 194.266a182.75 182.75 0 0110.214-.29zm-422.006 43.239c-9.78-1.512-18.398-2.279-26.67-2.279-96.18 0-174.152 77.975-174.152 174.162 0 64.026 34.865 121.891 89.921 152.398 9.568 5.302 13.281 17.186 8.432 26.991-11.862 23.988-18.123 50.069-18.123 76.959 0 96.189 77.973 174.162 174.162 174.162 49.727 0 96.007-21.074 128.92-57.403 8.128-8.972 22.224-8.973 30.354-.002 32.925 36.333 79.206 57.405 128.932 57.405 96.189 0 174.162-77.973 174.162-174.162 0-26.89-6.261-52.971-18.123-76.959-4.848-9.805-1.136-21.69 8.432-26.991 55.056-30.507 89.921-88.372 89.921-152.398 0-96.189-77.973-174.162-174.162-174.162-8.269 0-16.875.766-26.66 2.279-12.545 1.939-23.814-7.883-23.606-20.575-.123-97.918-78.015-175.68-174.073-175.68-96.022 0-173.903 77.718-174.161 173.682.307 14.689-10.962 24.512-23.507 22.573z" />
   </svg>
   <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle backdrop-blur">
     <div class="modal-box">
       <h3 class="font-bold text-lg">Checkout</h3>
-      <p class="py-4">You're about to pay the tuition for <?php echo $bill_semester ?></p>
+      <p class="py-4">You're about to pay the tuition for <span class="font-extrabold"><?php echo $bill_semester ?></span>. This will open a new tab for payment processing.</p>
       <div class="modal-action">
         <form class="w-full flex flex-col gap-5" method="post">
           <input type="hidden" name="bill_id" value="<?php echo $bill_id ?>">
@@ -105,7 +105,7 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
 
           <div class="flex flex-col gap-3 justify-center w-full ">
             <button type="button" id="confirm" class="btn btn-success">Confirm</button>
-            <button type="button" id="close_modal" class="btn btn-ghost">Cancel</button>
+            <button type="button" id="close_modal" class="btn btn-ghost">Close</button>
           </div>
         </form>
       </div>
@@ -113,38 +113,36 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
   </dialog>
   <script>
     const redirect = () => window.location.href = './pay_now.php';
-    $(document).ready(function() {
+    $(document).ready(() => {
       var dialog = document.getElementById('my_modal_5');
       var close_modal = document.getElementById('close_modal');
       const spinSvg = document.getElementById('blob');
       let angle = 0;
-      let speed = 10; // Initial angular velocity
+      let speed = 10;
       dialog.showModal();
 
-      function animateSpin(timestamp) {
+      const animateSpin = (timestamp) => {
         angle += speed;
         spinSvg.style.transform = `rotate(${angle}deg)`;
-
-        speed *= 0.99;
-
+        speed *= 0.98;
         if (speed > 0.1) {
           requestAnimationFrame(animateSpin);
         }
       }
       requestAnimationFrame(animateSpin);
 
-      $(close_modal).on('click', function() {
+      $(close_modal).on('click', () => {
         dialog.close();
         redirect();
       });
-      $(window).on('keyup', function(e) {
+      $(window).on('keyup', e => {
         if (e.key === 'Escape') {
           dialog.close();
           redirect();
         }
       });
 
-      $('#confirm').on('click', function() {
+      $('#confirm').on('click', () => {
         if ($('input[name="amount_to_be_paid"]').val() === '') {
           alert('Please enter the amount you want to pay');
           return;
@@ -162,28 +160,26 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
 
         switch ($('input[name="payment_method"]:checked').val()) {
           case 'bank':
+            var formData = {
+              bill_id: $('input[name="bill_id"]').val(),
+              amount_to_be_paid: $('input[name="amount_to_be_paid"]').val(),
+              payment_method: $('input[name="payment_method"]:checked').val()
+            };
             var newTab = window.open('', '_blank');
-
             $.ajax({
               url: 'http://127.0.0.1:5000/payment/bank',
               type: 'POST',
-              target: '_blank',
               contentType: 'application/json',
-              data: {
-                bill_id: $('input[name="bill_id"]').val(),
-                amount_to_be_paid: $('input[name="amount_to_be_paid"]').val(),
-                payment_method: $('input[name="payment_method"]:checked').val()
+              data: JSON.stringify(formData),
+              success: (response) => {
+                newTab.document.open();
+                newTab.document.write(response);
+                newTab.document.close();
               },
-              beforeSend: function() {
-                alert('Processing payment...');
+              error: (xhr, status, error) => {
+                alert('An error occurred while processing payment');
+                console.log('AJAX Error:', error);
               },
-              success: function(response) {
-                $newTab.document.write(response.html);
-              },
-              error: function(error) {
-                alert('An error occurred');
-                console.log(error);
-              }
             });
             break;
           case 'creditcard':
@@ -198,41 +194,39 @@ if (isset($_GET['bill_id']) || !empty($_GET['bill_id']) || isset($_GET['bill_sem
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(formData),
-              success: function(response) {
+              success: (response) => {
                 newTab.document.open();
                 newTab.document.write(response);
                 newTab.document.close();
               },
-              error: function(xhr, status, error) {
-                newTab.document.write('<p>An error occurred while processing payment</p>');
+              error: (xhr, status, error) => {
+                alert('An error occurred while processing payment');
                 console.log('AJAX Error:', error);
               }
             });
-            alert('Processing payment...');
             break;
           case 'gcash':
-            var newTab = window.open('about:blank', '_blank');
             var formData = {
               bill_id: $('input[name="bill_id"]').val(),
               amount_to_be_paid: $('input[name="amount_to_be_paid"]').val(),
               payment_method: $('input[name="payment_method"]:checked').val()
             };
+            var newTab = window.open('', '_blank');
             $.ajax({
               url: 'http://127.0.0.1:5000/payment/gcash',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(formData),
-              success: function(response) {
+              success: (response) => {
                 newTab.document.open();
                 newTab.document.write(response);
                 newTab.document.close();
               },
-              error: function(xhr, status, error) {
-                newTab.document.write('<p>An error occurred while processing payment</p>');
+              error: (xhr, status, error) => {
+                alert('An error occurred while processing payment');
                 console.log('AJAX Error:', error);
               }
             });
-            alert('Processing payment...');
             break;
           default:
             alert('Please select a payment method');

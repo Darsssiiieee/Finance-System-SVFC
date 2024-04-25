@@ -76,6 +76,9 @@ $is_student_payments_page = ($current_url === $student_payments_url);
   </main>
 
   <script>
+    const openLogoutModal = () => document.getElementById("logout_modal").showModal();
+    const closeLogoutModal = () => document.getElementById("logout_modal").close();
+    const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(function() {
       const student_number = '<?php echo $_SESSION['student_number']; ?>';
       $.ajax({

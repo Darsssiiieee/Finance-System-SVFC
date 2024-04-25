@@ -54,6 +54,11 @@ $is_student_help_page = ($current_url === $student_help_url);
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
 
     </section>
+    <script>
+      const openLogoutModal = () => document.getElementById("logout_modal").showModal();
+      const closeLogoutModal = () => document.getElementById("logout_modal").close();
+      const logout = () => window.location.href = "./../utils/logout.php";
+    </script>
 </body>
 
 </html>
