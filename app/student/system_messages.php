@@ -134,7 +134,15 @@
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
 
-    $(document).ready(() => {});
+    $(document).ready(() => {
+      $.ajax({
+        url: 'http://127.0.0.1:5000/api/get_all_announcements',
+        method: 'GET',
+        success: (data) => {
+          console.log(data);
+        },
+      })
+    });
   </script>
 </body>
 
