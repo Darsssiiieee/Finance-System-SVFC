@@ -38,71 +38,14 @@
       <div class="w-full flex flex-col items-center">
         <div class="hero-content w-full flex-col">
           <div class="text-center">
-            <h1 class="text-xl font-bold">System Announcement</h1>
+            <h1 class="text-xl font-bold">System Announcements</h1>
           </div>
           <div id="announcement_container" class="card shrink-0 w-full gap-5">
-            <div class="loading-container w-full flex flex-col justify-center items-center gap-5"><span class="loading loading-spinner loading-lg"></span>
-              <h1 class="note">Getting Announcements, please wait...</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class=" w-full flex flex-col items-center">
-        <div class="hero-content w-full gap-5 flex-col">
-          <div class="text-center">
-            <h1 class="text-xl font-bold">Conversations</h1>
-          </div>
-          <div class="card shrink-0 w-full gap-5">
-            <div class="card w-full flex-row bg-base-100 shadow-xl p-1">
-              <div class="avatar flex items-center pl-4 justify-center">
-                <div class="w-8 h-8 md:w-10 md:h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                </div>
-              </div>
-              <div class="card-body p-3 flex flex-row w-full justify-between items-center text-center">
-                <div>
-                  <h2 class="card-title text-sm">Juan Dela Cruz</h2>
-                  <p class="text-xs text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, accusamus.</p>
-                </div>
-                <div class="card-actions">
-                  <button class="btn btn-primary">View</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card w-full flex-row bg-base-100 shadow-xl p-1">
-              <div class="avatar flex items-center pl-4 justify-center">
-                <div class="w-8 h-8 md:w-10 md:h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                </div>
-              </div>
-              <div class="card-body p-3 flex flex-row w-full justify-between items-center text-center">
-                <div>
-                  <h2 class="card-title text-sm">Juan Dela Cruz</h2>
-                  <p class="text-xs text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, accusamus.</p>
-                </div>
-                <div class="card-actions">
-                  <button class="btn btn-primary">View</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card w-full flex-row bg-base-100 shadow-xl p-1">
-              <div class="avatar flex items-center pl-4 justify-center">
-                <div class="w-8 h-8 md:w-10 md:h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                </div>
-              </div>
-              <div class="card-body p-3 flex flex-row w-full justify-between items-center text-center">
-                <div>
-                  <h2 class="card-title text-sm">Juan Dela Cruz</h2>
-                  <p class="text-xs text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, accusamus.</p>
-                </div>
-                <div class="card-actions">
-                  <button class="btn btn-primary">View</button>
-                </div>
-              </div>
+            <div class="loading-container w-full flex flex-col justify-center items-center gap-5">
+              <img id="error_icon" class="hidden w-3/4 lg:w-1/2" src="../../res/images/error.png" alt="">
+              <span id="loading-circle" class="loading loading-spinner loading-lg">
+              </span>
+              <h1 class="note text-center">Getting Announcements, please wait...</h1>
             </div>
           </div>
         </div>
@@ -115,9 +58,11 @@
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
       const socket = io('http://127.0.0.1:5000')
+      const error_icon = document.getElementById('error_icon');
       const note = document.querySelector('.note');
       const announcement_container = document.getElementById('announcement_container');
       const loadingSpinner = document.querySelector('.loading-container');
+      const loadingCircle = document.getElementById('loading-circle');
       const updateAnnouncementContainer = (announcements) => {
         announcement_container.innerHTML = '';
         if (announcements.length === 0) {
@@ -151,7 +96,11 @@
         },
         error: (error) => {
           console.log('Error:', error);
-          note.innerHTML = 'An error occurred while fetching announcements';
+          loadingCircle.classList.add('hidden');
+          loadingCircle.classList.remove('inline-block');
+          error_icon.classList.add('block');
+          error_icon.classList.remove('hidden');
+          note.innerHTML = 'An error occurred while fetching announcements. Please try again later.';
         }
       });
 

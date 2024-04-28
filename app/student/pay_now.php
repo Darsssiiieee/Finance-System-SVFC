@@ -52,8 +52,7 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
     <section class="flex flex-col w-11/12 gap-5 items-center">
       <div class="card w-full bg-base-100 shadow-xl">
         <div class="card-body items-center text-center">
-          <div class="overflow-x-auto w-full">
-            <div id="skeleton_container" class="skeleton w-full min-h-96"></div>
+          <div class="overflow-x-auto w-full flex flex-col gap-5">
             <table id="payments_table" class="table">
               <thead>
                 <tr class="text-center font-bold text-sm">
@@ -67,6 +66,12 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
 
               </tbody>
             </table>
+            <div class="loading-container w-full flex flex-col justify-center items-center gap-5">
+              <img id="error_icon" class="hidden w-3/4 lg:w-1/2" src="../../res/images/error.png" alt="">
+              <span id="loading-circle" class="loading loading-spinner loading-lg">
+              </span>
+              <h1 class="note text-center">Getting your bills, hang tight...</h1>
+            </div>
           </div>
         </div>
       </div>
@@ -77,6 +82,11 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
+      const error_icon = document.getElementById('error_icon');
+      const note = document.querySelector('.note');
+      const loadingCircle = document.getElementById('loading-circle');
+      const loadingContainer = document.getElementById('loading-container');
+      const table = document.getElementById('payments_table');
       $student_number = '<?php echo $student_number; ?>';
       $.ajax({
         url: 'http://127.0.0.1:5000/api-svfc-get-student-bills',
@@ -102,6 +112,10 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
           });
         },
         error: (error) => {
+          error_icon.classList.remove('hidden');
+          note.innerText = 'An error occurred while fetching your bills. Please try again later.';
+          loadingCircle.classList.add('hidden');
+          table.classList.add('hidden');
           console.error(error);
         }
       })

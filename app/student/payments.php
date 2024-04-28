@@ -54,9 +54,8 @@ $is_student_payments_page = ($current_url === $student_payments_url);
     <section class="flex flex-col w-11/12 gap-5 items-center">
       <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl text-left">Your Payment Transactions</h1>
       <div class="card w-full min-h-96 p-5 bg-base-100 shadow-xl">
-        <div class="overflow-x-auto">
-          <div id="skeleton_container" class="skeleton w-full min-h-96"></div>
-          <table id="payments_table" class="hidden table">
+        <div class="overflow-x-auto w-full flex flex-col gap-5">
+          <table id="payments_table" class="table">
             <thead>
               <tr class="text-center font-bold text-sm">
                 <th>Payment ID</th>
@@ -70,6 +69,12 @@ $is_student_payments_page = ($current_url === $student_payments_url);
 
             </tbody>
           </table>
+          <div class="loading-container w-full flex flex-col justify-center items-center gap-5">
+            <img id="error_icon" class="hidden w-3/4 lg:w-1/2" src="../../res/images/error.png" alt="">
+            <span id="loading-circle" class="loading loading-spinner loading-lg">
+            </span>
+            <h1 class="note text-center">Getting your payment transactions, hang tight...</h1>
+          </div>
         </div>
       </div>
     </section>
@@ -80,6 +85,12 @@ $is_student_payments_page = ($current_url === $student_payments_url);
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(function() {
+      const error_icon = document.getElementById('error_icon');
+      const note = document.querySelector('.note');
+      const announcement_container = document.getElementById('announcement_container');
+      const loadingSpinner = document.querySelector('.loading-container');
+      const loadingCircle = document.getElementById('loading-circle');
+      const table = document.getElementById('payments_table');
       const student_number = '<?php echo $_SESSION['student_number']; ?>';
       $.ajax({
         url: 'http://127.0.0.1:5000/api-svfc-get-student-transactions',
@@ -89,8 +100,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
           student_number: student_number
         }),
         beforeSend: () => {
-          // Show loading spinner
-          $('#payments_table').addClass('hidden');
+
         },
         success: function(response) {
           $('#skeleton_container').addClass('hidden');
@@ -109,7 +119,10 @@ $is_student_payments_page = ($current_url === $student_payments_url);
           });
         },
         error: function(error) {
-          console.log(error)
+          error_icon.classList.remove('hidden');
+          note.innerText = 'An error occurred while fetching your bills. Please try again later.';
+          loadingCircle.classList.add('hidden');
+          table.classList.add('hidden');
         }
       });
 
