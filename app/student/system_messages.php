@@ -39,30 +39,9 @@
           <div class="text-center">
             <h1 class="text-xl font-bold">System Announcement</h1>
           </div>
-          <div class="card shrink-0 w-full gap-5">
-            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
-              <h1 class="font-bold">Lorem, ipsum dolor.</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam exercitationem expedita eaque perspiciatis vel aliquid nihil praesentium deserunt iusto delectus iure modi saepe hic autem at reiciendis doloribus ipsum facilis, distinctio asperiores, est voluptatibus. Nemo exercitationem minus alias quos enim quo, autem vero quae? Aliquid doloribus vel ipsam perferendis repellat?</p>
-            </div>
-            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
-              <h1 class="font-bold">Lorem, ipsum dolor.</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam exercitationem expedita eaque perspiciatis vel aliquid nihil praesentium deserunt iusto delectus iure modi saepe hic autem at reiciendis doloribus ipsum facilis, distinctio asperiores, est voluptatibus. Nemo exercitationem minus alias quos enim quo, autem vero quae? Aliquid doloribus vel ipsam perferendis repellat?</p>
-            </div>
-            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
-              <h1 class="font-bold">Lorem, ipsum dolor.</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam exercitationem expedita eaque perspiciatis vel aliquid nihil praesentium deserunt iusto delectus iure modi saepe hic autem at reiciendis doloribus ipsum facilis, distinctio asperiores, est voluptatibus. Nemo exercitationem minus alias quos enim quo, autem vero quae? Aliquid doloribus vel ipsam perferendis repellat?</p>
-            </div>
-            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
-              <h1 class="font-bold">Lorem, ipsum dolor.</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam exercitationem expedita eaque perspiciatis vel aliquid nihil praesentium deserunt iusto delectus iure modi saepe hic autem at reiciendis doloribus ipsum facilis, distinctio asperiores, est voluptatibus. Nemo exercitationem minus alias quos enim quo, autem vero quae? Aliquid doloribus vel ipsam perferendis repellat?</p>
-            </div>
-            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
-              <h1 class="font-bold">Lorem, ipsum dolor.</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam exercitationem expedita eaque perspiciatis vel aliquid nihil praesentium deserunt iusto delectus iure modi saepe hic autem at reiciendis doloribus ipsum facilis, distinctio asperiores, est voluptatibus. Nemo exercitationem minus alias quos enim quo, autem vero quae? Aliquid doloribus vel ipsam perferendis repellat?</p>
-            </div>
-            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
-              <h1 class="font-bold">Lorem, ipsum dolor.</h1>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam exercitationem expedita eaque perspiciatis vel aliquid nihil praesentium deserunt iusto delectus iure modi saepe hic autem at reiciendis doloribus ipsum facilis, distinctio asperiores, est voluptatibus. Nemo exercitationem minus alias quos enim quo, autem vero quae? Aliquid doloribus vel ipsam perferendis repellat?</p>
+          <div id="announcement_container" class="card shrink-0 w-full gap-5">
+            <div class="loading-container w-full flex flex-col justify-center items-center gap-5"><span class="loading loading-spinner loading-lg"></span>
+              <h1 class="note">Getting Announcements, please wait...</h1>
             </div>
           </div>
         </div>
@@ -129,19 +108,67 @@
       </div>
     </section>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     const openLogoutModal = () => document.getElementById("logout_modal").showModal();
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
-
     $(document).ready(() => {
+      const socket = io('http://127.0.0.1:5000')
+      const note = document.querySelector('.note');
+      const announcement_container = document.getElementById('announcement_container');
+      const loadingSpinner = document.querySelector('.loading-container');
+      const updateAnnouncementContainer = (announcements) => {
+        announcement_container.innerHTML = '';
+        if (announcements.length === 0) {
+          announcement_container.innerHTML = `
+            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
+                <h1 class="font-bold">No Announcement Found</h1>
+                <p>There are no announcements at the moment.</p>
+            </div>
+        `;
+        } else {
+          announcements.forEach(announcement => {
+            const announcementCard = `
+                <div class="card shadow-xl bg-base-100 gap-5 p-5 md:p-8 lg:p-10 w-full">
+                    <h1 class="font-bold">${announcement.title}</h1>
+                    <p>${announcement.content}</p>
+                </div>
+            `;
+            announcement_container.innerHTML += announcementCard;
+          });
+        }
+        loadingSpinner.classList.add('hidden');
+        loadingSpinner.classList.remove('flex')
+      }
+
       $.ajax({
-        url: 'http://127.0.0.1:5000/api/get_all_announcements',
-        method: 'GET',
+        url: 'http://127.0.0.1:5000/handle_initial_announcements_on_connect',
+        type: 'GET',
         success: (data) => {
-          console.log(data);
+          console.log('Initial Announcements:', data.announcements);
+          updateAnnouncementContainer(data.announcements);
         },
-      })
+        error: (error) => {
+          console.log('Error:', error);
+          note.innerHTML = 'An error occurred while fetching announcements';
+        }
+      });
+
+      socket.on('new_announcement', (data) => {
+        console.log('New Announcement:', data.announcements);
+        updateAnnouncementContainer(data.announcements);
+      });
+
+      socket.emit('handle_initial_announcements_on_connect');
+
+      socket.on('connect', () => {
+        console.log('Connected to server');
+      });
+
+      socket.on('disconnect', () => {
+        console.log('Disconnected from server');
+      });
     });
   </script>
 </body>

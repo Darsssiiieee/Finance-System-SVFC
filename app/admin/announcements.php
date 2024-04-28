@@ -13,6 +13,7 @@ session_start();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js" integrity="sha512-luMnTJZ7oEchNDZAtQhgjomP1eZefnl82ruTH/3Oj/Yu5qYtwL7+dVRccACS/Snp1lFXq188XFipHKYE75IaQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     *,
     *::before,
@@ -94,34 +95,31 @@ session_start();
       const submit_announcement = document.getElementById('submit_announcement');
       const announcement_container = document.getElementById('announcement_container');
       const loadingSpinner = document.querySelector('.loading-container');
-      $.ajax({
-        url: 'http://127.0.0.1:5000/api/get_all_announcements',
-        method: 'GET',
-        beforeSend: () => {
-          $(loadingSpinner).addClass('flex')
-          $(loadingSpinner).removeClass('hidden')
-        },
-        success: (data) => {
-          $(loadingSpinner).removeClass('flex');
-          $(loadingSpinner).addClass('hidden');
-          if (data.announcements.length === 0) {
-            announcement_container.innerHTML = `<div class="card shadow-xl bg-base-100 gap-5 p-3  w-full">
-              <h1 class="font-bold">No Announcement Found</h1>
-              <p>There are no announcements at the moment.</p>
-            </div>`;
-            return;
-          }
-          data.announcements.forEach(announcement => {
-            announcement_container.innerHTML += `<div class="card shadow-xl bg-base-100 gap-5 p-5 md:p-8 lg:p-10 w-full">
-              <h1 class="font-bold">${announcement.title}</h1>
-              <p>${announcement.content}</p>
-            </div>`;
+      const socket = io('http://127.0.0.1:5000')
+      socket.on('new_announcements', (data) => {
+        const announcements = data.announcements;
+        loadingSpinner.classList.remove('hidden');
+        announcement_container.innerHTML = '';
+        if (announcements.length === 0) {
+          announcement_container.innerHTML = `
+            <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
+                <h1 class="font-bold">No Announcement Found</h1>
+                <p>There are no announcements at the moment.</p>
+            </div>
+        `;
+        } else {
+          announcements.forEach(announcement => {
+            const announcementCard = `
+                <div class="card shadow-xl bg-base-100 gap-5 p-5 md:p-8 lg:p-10 w-full">
+                    <h1 class="font-bold">${announcement.title}</h1>
+                    <p>${announcement.content}</p>
+                </div>
+            `;
+            announcement_container.innerHTML += announcementCard;
           });
-        },
-        error: (error) => {
-          console.log(error);
         }
-      })
+        loadingSpinner.classList.add('hidden');
+      });
 
       $(submit_announcement).on('click', (e) => {
         e.preventDefault();
