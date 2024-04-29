@@ -11,6 +11,41 @@
   <link rel="stylesheet" href="./styles/get-started.css">
   <script src="./js/get-started.js"></script>
 </head>
+<<<<<<< HEAD:index.html
+<body>
+  <div id="navBar" class="z-50 navbar border-b-[1px] border-black glass top-0 sticky">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a href="pages/sign-up.html">Get Started</a></li>
+          <li><a>Testimony</a></li>
+          <li><a>SVFC</a></li>
+          <li><a>Contact Us</a></li>
+          <li><a>About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="navbar-center">
+      <a class="btn btn-ghost text-xl">EPAY</a>
+    </div>
+    <div class="navbar-end">
+      <button class="btn btn-ghost btn-circle">
+        <div class="indicator">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+          <span class="badge badge-xs badge-secondary indicator-item"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+
+
+  <main class="w-full flex flex-col p-5 gap-7">
+    <div class="flex flex-col gap-5">
+=======
 
 <body class="flex flex-col items-center">
   <?php
@@ -22,22 +57,23 @@
 
   <main class="w-full max-w-screen-2xl lg:w-11/12 xl:w-3/4 flex flex-col p-5 gap-10">
     <div class="flex flex-col lg:flex-row lg:items-center gap-5">
+>>>>>>> 928c2c8a76c762d3fe7f03e4974b6b85679a1620:index.php
       <div>
         <img src="./res/images/svfc_logo.png" />
       </div>
       <div class="flex flex-col gap-3">
         <h1 class="font-bold text-3xl text-emerald-700"><span class="text-[#ff00ff]">Pay Digitally</span> - EPAY</h1>
-        <p class="lg:text-xl">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque in sapiente, voluptatem, assumenda minus quibusdam natus ex aliquid doloremque esse placeat, perspiciatis ipsa perferendis laborum?</p>
-        <a class="btn btn-secondary" href="./app/accounts/sign-up.php">Get Started</a>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque in sapiente, voluptatem, assumenda minus quibusdam natus ex aliquid doloremque esse placeat, perspiciatis ipsa perferendis laborum?</p>
+        <a class="btn btn-secondary" href="./pages/sign-up.html">Get Started</a>
       </div>
     </div>
 
     <div class="flex flex-col gap-4">
-      <h1 class="whyText text-3xl text-center lg:text-left lg:text-4xl text-emerald-700">Why EPAY?</h1>
+      <h1 class="whyText text-3xl text-center text-emerald-700">Why EPAY?</h1>
 
-      <div class="grid grid-rows- gap-3 xl:gap-10 grid-cols-2">
-        <div class="border border-[#ff00d3] flex flex-col gap-3 rounded-xl p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff00d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-aperture">
+      <div class="grid grid-rows- gap-3 grid-cols-2">
+        <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-aperture">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
             <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
@@ -50,8 +86,8 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
         </div>
 
-        <div class="border border-[#ff00d3] flex flex-col gap-3 rounded-xl p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff00d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome">
+        <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome">
             <circle cx="12" cy="12" r="10"></circle>
             <circle cx="12" cy="12" r="4"></circle>
             <line x1="21.17" y1="8" x2="12" y2="8"></line>
@@ -62,8 +98,8 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
         </div>
 
-        <div class="border border-[#ff00d3] flex flex-col gap-3 rounded-xl p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff00d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">
+        <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code">
             <polyline points="16 18 22 12 16 6"></polyline>
             <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
@@ -71,8 +107,8 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
         </div>
 
-        <div class="border border-[#ff00d3] flex flex-col gap-3 rounded-xl p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff00d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card">
+        <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card">
             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
             <line x1="1" y1="10" x2="23" y2="10"></line>
           </svg>
@@ -80,8 +116,8 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
         </div>
 
-        <div class="border border-[#ff00d3] flex flex-col gap-3 rounded-xl p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff00d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-database">
+        <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-database">
             <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
             <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
@@ -90,8 +126,8 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
         </div>
 
-        <div class="border border-[#ff00d3] flex flex-col gap-3 rounded-xl p-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff00d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
+        <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send">
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
@@ -102,9 +138,9 @@
     </div>
 
     <div class="flex flex-col gap-5">
-      <h1 class="testimonialHeading text-3xl text-center lg:text-left lg:text-4xl text-emerald-700">Testimonials</h1>
+      <h1 class="testimonialHeading text-3xl text-center text-emerald-700">Testimonials</h1>
 
-      <div class="grid grid-cols-1 xl:grid-cols-2 xl:gap-10 gap-5">
+      <div class="grid grid-cols-1 gap-5">
         <div class="flex flex-col border-2 rounded-lg border-black p-5">
           <img src="" alt="">
           <h1>Juan DeLa Cruz</h1>
@@ -157,19 +193,32 @@
     </div>
 
 
-    <div class="flex flex-col gap-5">
-      <h1 class="testimonialHeading text-3xl text-center lg:text-left lg:text-4xl text-emerald-700">Developers & Creators</h1>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 place-content-center">
-        <div class="flex items-center justify-center">
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-            <div class="card-body">
-              <h2 class="card-title">Froilan J. Aquino</h2>
-              <div class="badge badge-outline">Developer</div>
-            </div>
+    <div>
+      <h1>Developers & Creators</h1>
+
+      <div>
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+          <div class="card-body">
+            <h2 class="card-title">Froilan J. Aquino</h2>
+            <div class="badge badge-outline">Developer</div>
           </div>
         </div>
+      </div>
 
+<<<<<<< HEAD:index.html
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><div class="avatar">
+          <div class="w-32 rounded">
+            <img src="./res/images/Princess.png" alt="Tailwind-CSS-Avatar-component" />
+          </div>
+        </div> </figure>
+        <div class="card-body">
+          <h2 class="card-title"> Princess T. Villaester </h2>
+          <p> "Learn to rest not to quit!"</p>
+          <div class="card-actions justify-end">
+            <div class="badge badge-outline">Fashion</div> 
+=======
         <div class="flex items-center justify-center">
           <div class="card w-96 bg-base-100 shadow-xl">
             <figure>
@@ -186,9 +235,25 @@
                 <div class="badge badge-outline">Fashion</div>
               </div>
             </div>
+>>>>>>> 928c2c8a76c762d3fe7f03e4974b6b85679a1620:index.php
           </div>
         </div>
+      </div>
 
+<<<<<<< HEAD:index.html
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><div class="avatar">
+          <div class="w-32 rounded">
+            <img src="./res/images/Darsie.jpg" alt="Tailwind-CSS-Avatar-component" />
+          </div>
+        </div> </figure>
+        <div class="card-body">
+          <h2 class="card-title"> Darsie L. Lotino </h2>
+          <p>Don't be disappointed if people refuse to help you Remember the words of Einstein:
+             "I am thankful to all those who said no, Because of them, I did it Myself."</p>
+          <div class="card-actions justify-end">
+            <div class="badge badge-outline">Fashion</div> 
+=======
         <div class="flex items-center justify-center">
           <div class="card w-96 bg-base-100 shadow-xl">
             <figure>
@@ -206,9 +271,24 @@
                 <div class="badge badge-outline">Fashion</div>
               </div>
             </div>
+>>>>>>> 928c2c8a76c762d3fe7f03e4974b6b85679a1620:index.php
           </div>
         </div>
+      </div>
 
+<<<<<<< HEAD:index.html
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><div class="avatar">
+          <div class="w-32 rounded">
+            <img src="./res/images/KC.jpg" alt="Tailwind-CSS-Avatar-component" />
+          </div>
+        </div> </figure>
+        <div class="card-body">
+          <h2 class="card-title"> Kc Angelo B. Magabo </h2>
+          <p>"Life is like a rainbow, you need both sunshine and rain to see the beauty of it."</p>
+          <div class="card-actions justify-end">
+            <div class="badge badge-outline">Design</div> 
+=======
         <div class="flex items-center justify-center">
           <div class="card w-96 bg-base-100 shadow-xl">
             <figure>
@@ -225,9 +305,25 @@
                 <div class="badge badge-outline">Design</div>
               </div>
             </div>
+>>>>>>> 928c2c8a76c762d3fe7f03e4974b6b85679a1620:index.php
           </div>
         </div>
+      </div>
 
+<<<<<<< HEAD:index.html
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><div class="avatar">
+          <div class="w-32 rounded">
+            <img src="./res/images/Harvey.jpg" alt="Tailwind-CSS-Avatar-component" />
+          </div>
+        </div> </figure>
+        <div class="card-body">
+          <h2 class="card-title"> Mark Harvey D. Funda </h2>
+          <p>Don't limit yourself. Many people limit themselves to what they think they can do. 
+            You can go as far as your mind lets you. What you believe, remember, you can achieve.</p>
+          <div class="card-actions justify-end">
+            <div class="badge badge-outline">Fashion</div> 
+=======
         <div class="flex items-center justify-center">
           <div class="card w-96 bg-base-100 shadow-xl">
             <figure>
@@ -245,6 +341,7 @@
                 <div class="badge badge-outline">Fashion</div>
               </div>
             </div>
+>>>>>>> 928c2c8a76c762d3fe7f03e4974b6b85679a1620:index.php
           </div>
         </div>
       </div>
