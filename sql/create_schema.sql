@@ -123,3 +123,14 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+CREATE TABLE `bill_items_table` (
+  `item_id` int NOT NULL AUTO_INCREMENT,
+  `bill_id` int NOT NULL,
+  `item_name` enum('internet_connectivity','modules_ebook','portal','e_library','admission_registration','library','student_org','medical_dental','guidance','student_affairs','org_t_shirt','school_uniform_1_set','pe_activity_uniform_1_set','major_uniform_1_set','major_laboratory','insurance','energy_fee','','processing_fee','students_development_programs_activities') NOT NULL,
+  `amount` int NOT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `fk_bill_id_idx` (`bill_id`),
+  CONSTRAINT `fk_bill_id` FOREIGN KEY (`bill_id`) REFERENCES `bills_table` (`bills_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

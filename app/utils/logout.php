@@ -9,4 +9,4 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to the login page:
-header('Location: ./../../accounts/login.php');
+header('Location: ./../accounts/login.php');
