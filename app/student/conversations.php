@@ -36,6 +36,11 @@
     student_navbar_lg($currentPage);
     ?>
   </main>
+  <script>
+    const openLogoutModal = () => document.getElementById("logout_modal").showModal();
+    const closeLogoutModal = () => document.getElementById("logout_modal").close();
+    const logout = () => window.location.href = "./../utils/logout.php";
+  </script>
 </body>
 
 </html>
