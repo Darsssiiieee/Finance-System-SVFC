@@ -44,15 +44,16 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
   $currentPage = './' . basename(__FILE__);
   student_navbar_sm($currentPage);
   ?>
-  <main class="w-11/12 max-w-screen-2xl xl:w-10/12 h-full flex mt-10 flex-row justify-between gap-5">
+  <main class="w-11/12 max-w-screen-2xl xl:w-10/12 h-full flex mt-10 flex-col lg:flex-row lg:justify-center items-center lg:items-start  gap-5">
     <?php
     include './components/student_navbar_lg.php';
     student_navbar_lg($currentPage);
     ?>
     <section class="flex flex-col w-11/12 gap-5 items-center">
+      <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl self-start">Your Payable Bills</h1>
       <div class="card w-full bg-base-100 shadow-xl">
         <div class="card-body items-center text-center">
-          <div class="overflow-x-auto w-full flex flex-col gap-5">
+          <div class="overflow-x-auto w-full flex justify-center items-center flex-col gap-5">
             <table id="payments_table" class="table">
               <thead>
                 <tr class="text-center font-bold text-sm">
@@ -66,7 +67,7 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
 
               </tbody>
             </table>
-            <div class="loading-container w-full flex flex-col justify-center items-center gap-5">
+            <div id="loading-container" class="w-full flex flex-col justify-center items-center gap-5">
               <img id="error_icon" class="hidden w-3/4 lg:w-1/2" src="../../res/images/error.png" alt="">
               <span id="loading-circle" class="loading loading-spinner loading-lg">
               </span>
@@ -83,9 +84,9 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
       const error_icon = document.getElementById('error_icon');
+      const loading_container = document.getElementById('loading-container');
       const note = document.querySelector('.note');
       const loadingCircle = document.getElementById('loading-circle');
-      const loadingContainer = document.getElementById('loading-container');
       const table = document.getElementById('payments_table');
       $student_number = '<?php echo $student_number; ?>';
       $.ajax({
@@ -96,6 +97,8 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
           student_number: $student_number
         }),
         success: (data) => {
+          $(loading_container).addClass('hidden');
+          $(loading_container).removeClass('flex');
           console.log(data);
           $('#skeleton_container').addClass('hidden');
           $('#payments_table tbody').empty();

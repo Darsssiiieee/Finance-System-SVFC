@@ -69,7 +69,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
 
             </tbody>
           </table>
-          <div class="loading-container w-full flex flex-col justify-center items-center gap-5">
+          <div id="loading-container" class="w-full flex flex-col justify-center items-center gap-5">
             <img id="error_icon" class="hidden w-3/4 lg:w-1/2" src="../../res/images/error.png" alt="">
             <span id="loading-circle" class="loading loading-spinner loading-lg">
             </span>
@@ -88,7 +88,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
       const error_icon = document.getElementById('error_icon');
       const note = document.querySelector('.note');
       const announcement_container = document.getElementById('announcement_container');
-      const loadingSpinner = document.querySelector('.loading-container');
+      const loading_container = document.getElementById('loading-container');
       const loadingCircle = document.getElementById('loading-circle');
       const table = document.getElementById('payments_table');
       const student_number = '<?php echo $_SESSION['student_number']; ?>';
@@ -99,13 +99,12 @@ $is_student_payments_page = ($current_url === $student_payments_url);
         data: JSON.stringify({
           student_number: student_number
         }),
-        beforeSend: () => {
-
-        },
         success: function(response) {
           $('#skeleton_container').addClass('hidden');
           $('#payments_table tbody').empty();
           $('#payments_table').removeClass('hidden');
+          $(loading_container).addClass('hidden');
+          $(loading_container).removeClass('flex');
           response.transactions.forEach(transaction => {
             $('#payments_table tbody').append(`
               <tr class='text-center'>

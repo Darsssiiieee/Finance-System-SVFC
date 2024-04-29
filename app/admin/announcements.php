@@ -49,7 +49,7 @@ session_start();
             <textarea required aria-required="true" placeholder="Announcement message...." id="announcement_content" class="textarea textarea-bordered w-full"></textarea>
           </label>
           <button id="submit_announcement" type="button" class="mt-3 w-full btn btn-success">Submit</button>
-          <button type="button" class="mt-3 w-full btn">Close</button>
+          <button onclick='announcement_modal.close()' type="button" class="mt-3 w-full btn">Close</button>
         </form>
       </div>
     </div>
