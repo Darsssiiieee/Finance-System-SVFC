@@ -1,18 +1,3 @@
-<?php
-session_start();
-if ($_SESSION['role'] !== 'Student') {
-  header('Location: ./../accounts/login.php');
-  exit();
-}
-$student_number = $_SESSION['student_number'];
-$firstname_initial = substr($_SESSION['first_name'], 0, 1);
-$lastname_initial = substr($_SESSION['last_name'], 0, 1);
-$user_initial = $firstname_initial . $lastname_initial;
-$student_dashboard_url = '/finance-system-svfc/app/student/dashboard.php';
-$current_url = $_SERVER['REQUEST_URI'];
-$is_student_dashboard_page = ($current_url === $student_dashboard_url);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -138,7 +123,11 @@ $is_student_dashboard_page = ($current_url === $student_dashboard_url);
             </h1>
 
           </div>
-          <img src="./../../res/images/avatar/avatar_5.png" class="w-20 h-20 md:w-52 md:h-52 rounded-md shadow-xl" alt="">
+          <?php
+          $avatar = $_SESSION['avatar'];
+          echo $avatar;
+          echo "<img src=\"./../../res/images/avatar/$avatar\" class=\"w-20 h-20 md:w-52 md:h-52 rounded-md shadow-xl\" alt=\"\">";
+          ?>
         </div>
         <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl text-left">Finance</h1>
         <div class=" flex flex-col justify-center items-center w-full gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">

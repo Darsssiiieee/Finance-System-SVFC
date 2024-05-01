@@ -8,8 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles/global.css">
-  <link rel="stylesheet" href="./styles/get-started.css">
-  <script src="./js/get-started.js"></script>
 </head>
 
 <body class="flex flex-col items-center">
@@ -17,8 +15,6 @@
   include './public/component/landingNavBar.php';
   landingNavBar();
   ?>
-
-
 
   <main class="w-full max-w-screen-2xl lg:w-11/12 xl:w-3/4 flex flex-col p-5 gap-10">
     <div class="flex flex-col lg:flex-row lg:items-center gap-5">
@@ -28,7 +24,7 @@
       <div class="flex flex-col gap-3">
         <h1 class="font-bold text-3xl text-emerald-700"><span class="text-[#ff00ff]">Pay Digitally</span> - EPAY</h1>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque in sapiente, voluptatem, assumenda minus quibusdam natus ex aliquid doloremque esse placeat, perspiciatis ipsa perferendis laborum?</p>
-        <a class="btn btn-secondary" href="./pages/sign-up.html">Get Started</a>
+        <a class="btn btn-secondary" href="./app/accounts/sign-up.php">Get Started</a>
       </div>
     </div>
 

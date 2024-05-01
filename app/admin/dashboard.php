@@ -1,9 +1,5 @@
 <?php
 session_start();
-if ($_SESSION['role'] !== 'Admin') {
-  header('Location: ./../accounts/login.php');
-  exit();
-}
 $admin_number = $_SESSION['admin_number'];
 $firstname_initial = substr($_SESSION['first_name'], 0, 1);
 $lastname_initial = substr($_SESSION['last_name'], 0, 1);
