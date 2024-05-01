@@ -17,18 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $city = $_POST['city'];
     $username = $_POST['username'];
     $password = hash('sha256', $_POST['password']);
-    echo $username;
+    $avatar = $_POST['avatar'];
 
     try {
-      $stmt = $conn->prepare("CALL create_admin_profile(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-      $stmt->bind_param("ssssssssssssss", $adminnumber, $firstname, $middlename, $lastname, $email, $phonenumber, $birthdate, $gender, $homeaddress, $barangay, $city, $username, $password, $role);
+      $stmt = $conn->prepare("CALL insert_user_profile(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("ssssssssssssssss", $adminnumber, $password, $role, $avatar, $firstname, $middlename, $lastname, $email, $phonenumber, $birthdate, $gender, $homeaddress, $barangay, $city, $academicprogram, $yearlevel);
       $stmt->execute();
       if ($stmt->affected_rows === 1) {
-        echo "<script>alert('Admin added successfully') window.location.href='../accounts/login.php'</script>";
-        session_destroy();
-        unset($adminnumber, $firstname, $middlename, $lastname, $email, $phonenumber, $birthdate, $gender, $homeaddress, $barangay, $city, $username, $password, $role);
+        http_response_code(200);
+        echo "200";
       } else {
-        echo "<script>alert('Failed to add admin') window.location.href='./../../accounts/profile/role-selection.php'</script>";
+        http_response_code(500);
+        echo "500";
       }
     } catch (\Throwable $th) {
       error_log($th->getMessage());
@@ -49,21 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $homeaddress = $_POST['homeaddress'];
     $barangay = $_POST['barangay'];
     $city = $_POST['city'];
-    $username = $_POST['username'];
     $password = hash('sha256', $_POST['password']);
-    $profile_photo = null;
-    echo $studentnumber;
+    $avatar = $_POST['avatar'];
 
     try {
-      $stmt = $conn->prepare("CALL create_student_profile(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-      $stmt->bind_param("sssssssssssssssss", $studentnumber, $firstname, $middlename, $lastname, $birthdate, $gender, $email, $phone, $academicprogram, $yearlevel, $profile_photo, $homeaddress, $barangay, $city, $username, $password, $role);
+      $stmt = $conn->prepare("CALL insert_user_profile(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("ssssssssssssssss", $studentnumber, $password, $role, $avatar, $firstname, $middlename, $lastname, $email, $phone, $birthdate, $gender, $homeaddress, $barangay, $city, $academicprogram, $yearlevel);
       $stmt->execute();
       if ($stmt->affected_rows === 1) {
-        echo "<script>alert('Student added successfully') window.location.href='../accounts/login.php'</script>";
-        session_destroy();
-        unset($studentnumber, $firstname, $middlename, $lastname, $birthdate, $gender, $email, $phone, $academicprogram, $yearlevel, $homeaddress, $barangay, $city, $username, $password, $role);
+        http_response_code(200);
+        echo "200";
       } else {
-        echo "<script>alert('Failed to add student') window.location.href='./../../accounts/profile/role-selection.php'</script>";
+        http_response_code(500);
+        echo "500";
       }
     } catch (\Throwable $th) {
       error_log($th->getMessage());
