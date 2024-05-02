@@ -2,6 +2,18 @@ CREATE DATABASE `svfc_finance` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE ut
 
 USE `svfc_finance`;
 
+CREATE TABLE `users_table` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_number` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `student_number_UNIQUE` (`user_number`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `admin_announcement` (
   `announcement_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -43,17 +55,6 @@ CREATE TABLE `announcement_read_status` (
   CONSTRAINT `fk_user_number_status` FOREIGN KEY (`user_number`) REFERENCES `users_table` (`user_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `bill_items_table` (
-  `item_id` int NOT NULL AUTO_INCREMENT,
-  `bill_id` int NOT NULL,
-  `item_name` enum('internet_connectivity','modules_ebook','portal','e_library','admission_registration','library','student_org','medical_dental','guidance','student_affairs','org_t_shirt','school_uniform_1_set','pe_activity_uniform_1_set','major_uniform_1_set','major_laboratory','insurance','energy_fee','','processing_fee','students_development_programs_activities','misc') NOT NULL,
-  `amount` int NOT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`item_id`),
-  KEY `fk_bill_id_idx` (`bill_id`),
-  CONSTRAINT `fk_bill_id` FOREIGN KEY (`bill_id`) REFERENCES `bills_table` (`bills_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE `bills_table` (
   `bills_id` int NOT NULL AUTO_INCREMENT,
   `student_number` varchar(45) NOT NULL,
@@ -65,6 +66,17 @@ CREATE TABLE `bills_table` (
   KEY `fk_student_number_bills_idx` (`student_number`),
   CONSTRAINT `fk_student_number_bills` FOREIGN KEY (`student_number`) REFERENCES `users_table` (`user_number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `bill_items_table` (
+  `item_id` int NOT NULL AUTO_INCREMENT,
+  `bill_id` int NOT NULL,
+  `item_name` enum('internet_connectivity','modules_ebook','portal','e_library','admission_registration','library','student_org','medical_dental','guidance','student_affairs','org_t_shirt','school_uniform_1_set','pe_activity_uniform_1_set','major_uniform_1_set','major_laboratory','insurance','energy_fee','','processing_fee','students_development_programs_activities','misc') NOT NULL,
+  `amount` int NOT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `fk_bill_id_idx` (`bill_id`),
+  CONSTRAINT `fk_bill_id` FOREIGN KEY (`bill_id`) REFERENCES `bills_table` (`bills_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `conversations_table` (
   `conversation_id` int NOT NULL AUTO_INCREMENT,
@@ -110,11 +122,6 @@ CREATE TABLE `messages_table` (
   CONSTRAINT `fk_sender_number` FOREIGN KEY (`sender_number`) REFERENCES `users_table` (`user_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `payment_method` (
-  `payment_method_id` int NOT NULL AUTO_INCREMENT,
-  `payment_method_type` varchar(45) NOT NULL,
-  PRIMARY KEY (`payment_method_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `payments_table` (
   `payment_id` int NOT NULL AUTO_INCREMENT,
@@ -128,6 +135,12 @@ CREATE TABLE `payments_table` (
   CONSTRAINT `fk_bill_id_payments` FOREIGN KEY (`bill_id`) REFERENCES `bills_table` (`bills_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_payment_method_id` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`payment_method_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `payment_method` (
+  `payment_method_id` int NOT NULL AUTO_INCREMENT,
+  `payment_method_type` varchar(45) NOT NULL,
+  PRIMARY KEY (`payment_method_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `student_profile_table` (
   `student_id` int NOT NULL AUTO_INCREMENT,
@@ -165,17 +178,6 @@ CREATE TABLE `transaction_history` (
   CONSTRAINT `fk_student_number_transaction_history` FOREIGN KEY (`student_number`) REFERENCES `student_profile_table` (`student_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `users_table` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_number` varchar(45) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(25) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `student_number_UNIQUE` (`user_number`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 

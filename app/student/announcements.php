@@ -84,7 +84,7 @@ session_start();
       const announcement_container = document.getElementById('announcement_container');
       const loadingSpinner = document.querySelector('.loading-container');
       const loadingCircle = document.getElementById('loading-circle');
-      const studentNumber = '<?php echo $_SESSION['student_number']; ?>';
+      const studentNumber = '<?php echo $_SESSION['user_number']; ?>';
       const unread_container = document.getElementById('unread_container');
       const read_container = document.getElementById('read_container');
       const socket = io('http://127.0.0.1:5000')

@@ -98,6 +98,7 @@
 
 <body class="bg-[#F7EFD8] w-full flex flex-col justify-center items-center">
   <?php
+  session_start();
   include './components/student_navbar_sm.php';
   $currentPage = './' . basename(__FILE__);
   student_navbar_sm($currentPage);
