@@ -165,22 +165,25 @@ session_start();
             </div>`;
         }
       }
-      const socketFetch = () => {
-        socket.on('connect', () => {
-          console.log('Connected to server');
-          socket.emit('request_announcements');
-        });
 
-        socket.on('receive_announcements', (announcements) => {
-          updateUnreadAnnouncementContainer(announcements.unread_announcements);
-          updateReadAnnouncementContainer(announcements.announcements);
-          console.log(announcements);
-          $(loadingSpinner).addClass('hidden');
-        });
-      }
+      $.ajax({
+        url: 'http://127.0.0.1:5000/api/announcement',
+        method: 'GET',
+        contentType: 'application/json',
+        success: (response) => {
+          console.log(response);
+          updateUnreadAnnouncementContainer(response.unread_announcements);
+          updateReadAnnouncementContainer(response.announcements);
+          loadingSpinner.classList.add('hidden');
+        },
+        error: (error) => {
+          console.log(error);
+          loadingSpinner.classList.add('hidden');
+          error_icon.classList.remove('hidden');
+          note.innerHTML = 'An error occured while fetching announcements';
+        }
 
-      socketFetch();
-
+      });
     });
   </script>
 </body>

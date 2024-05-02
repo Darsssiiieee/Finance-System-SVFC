@@ -97,7 +97,7 @@ function student_navbar_sm($currentPage)
   echo '<div class="dropdown dropdown-end">';
   echo '<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">';
   echo '<div class="w-10 rounded-full">';
-  echo '<img alt="Tailwind CSS Navbar component" src="./../../res/images/avatar/avatar_5.png" />';
+  echo '<img alt="Tailwind CSS Navbar component" src="./../../res/images/avatar/' . $_SESSION['avatar'] . '" />';
   echo '</div>';
   echo '</div>';
   echo '<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-3 gap-3 shadow bg-base-100 rounded-box w-52">';

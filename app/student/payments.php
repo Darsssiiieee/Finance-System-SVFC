@@ -4,7 +4,7 @@ if ($_SESSION['role'] !== 'Student') {
   header('Location: ./../accounts/login.php');
   exit();
 }
-$student_number = $_SESSION['student_number'];
+$student_number = $_SESSION['user_number'];
 $firstname_initial = substr($_SESSION['first_name'], 0, 1);
 $lastname_initial = substr($_SESSION['last_name'], 0, 1);
 $user_initial = $firstname_initial . $lastname_initial;
@@ -91,7 +91,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
       const loading_container = document.getElementById('loading-container');
       const loadingCircle = document.getElementById('loading-circle');
       const table = document.getElementById('payments_table');
-      const student_number = '<?php echo $_SESSION['student_number']; ?>';
+      const student_number = '<?php echo $_SESSION['user_number']; ?>';
       $.ajax({
         url: 'http://127.0.0.1:5000/api-svfc-get-student-transactions',
         method: 'POST',

@@ -4,7 +4,7 @@ if ($_SESSION['role'] !== 'Student') {
   header('Location: ./../accounts/login.php');
   exit();
 }
-$student_number = $_SESSION['student_number'];
+$student_number = $_SESSION['user_number'];
 $firstname_initial = substr($_SESSION['first_name'], 0, 1);
 $lastname_initial = substr($_SESSION['last_name'], 0, 1);
 $user_initial = $firstname_initial . $lastname_initial;

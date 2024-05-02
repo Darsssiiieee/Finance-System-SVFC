@@ -126,7 +126,6 @@
           </div>
           <?php
           $avatar = $_SESSION['avatar'];
-          echo $avatar;
           echo "<img src=\"./../../res/images/avatar/$avatar\" class=\"w-20 h-20 md:w-52 md:h-52 rounded-md shadow-xl\" alt=\"\">";
           ?>
         </div>
@@ -160,7 +159,7 @@
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
-      const student_number = '<?php echo $_SESSION['student_number'] ?>';
+      const student_number = '<?php echo $_SESSION['user_number'] ?>';
 
       function clock() {
         const today = new Date();

@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Payments</title>
+  <title>EPAY | Conversations</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <link rel="icon" type="image/x-icon" href="./../../res/images/logo.ico">
@@ -53,26 +53,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
-      $.ajax({
-        url: 'http://127.0.0.1:5000/dashboard/transactions/all',
-        type: 'GET',
-        success: (response) => {
-          response.forEach((transaction) => {
-            $('tbody').append(`
-              <tr>
-                <td>${transaction.amount}</td>
-                <td>${transaction.semester}</td>
-                <td>${transaction.student_number}</td>
-                <td>${transaction.payment_method}</td>
-                <td>${transaction.payment_date}</td>
-              </tr>
-            `);
-          });
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+
     })
   </script>
 </body>

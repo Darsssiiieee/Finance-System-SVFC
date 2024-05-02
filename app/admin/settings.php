@@ -45,9 +45,8 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
               ['name' => 'Middle Name', 'value' => $_SESSION['middle_name'], 'type' => 'text', 'placeholder' => 'Middle Name'],
               ['name' => 'Last Name', 'value' => $_SESSION['last_name'], 'type' => 'text', 'placeholder' => 'Last Name'],
               ['name' => 'Email', 'value' => $_SESSION['email'], 'type' => 'email', 'placeholder' => 'Email'],
-              ['name' => 'Phone Number', 'value' => $_SESSION['phone_number'], 'type' => 'tel', 'placeholder' => 'Phone Number'],
+              ['name' => 'Phone Number', 'value' => $_SESSION['phone'], 'type' => 'tel', 'placeholder' => 'Phone Number'],
               ['name' => 'Birth Date', 'value' => $_SESSION['birthdate'], 'type' => 'date', 'placeholder' => 'Birth Date', 'disabled' => true],
-              ['name' => 'Gender', 'value' => $_SESSION['gender'], 'type' => 'text', 'placeholder' => 'Gender', 'disabled' => true],
               ['name' => 'Home Address', 'value' => $_SESSION['home_address'], 'type' => 'text', 'placeholder' => 'Home Address'],
               ['name' => 'Barangay', 'value' => $_SESSION['barangay'], 'type' => 'text', 'placeholder' => 'Barangay'],
               ['name' => 'City', 'value' => $_SESSION['city'], 'type' => 'text', 'placeholder' => 'City'],
@@ -73,7 +72,6 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
 
           </div>
 
-
           <div class="form-control w-full md:w-1/3 gap-5 mt-6">
             <button type="submit" class="saveChanges btn w-auto font-bold btn-secondary border-none bg-[#FF6BB3] hover:scale-105">
               SAVE CHANGES
@@ -87,18 +85,9 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
     </section>
   </main>
   <script>
-    function openLogoutModal() {
-      document.getElementById("logout_modal").showModal();
-    }
-
-    function closeLogoutModal() {
-      document.getElementById("logout_modal").close();
-    }
-
-    function logout() {
-      // Redirect to logout.php
-      window.location.href = "../utils/logout.php";
-    }
+    const openLogoutModal = () => document.getElementById("logout_modal").showModal();
+    const closeLogoutModal = () => document.getElementById("logout_modal").close();
+    const logout = () => window.location.href = "./../utils/logout.php";
   </script>
 </body>
 

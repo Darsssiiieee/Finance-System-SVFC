@@ -4,7 +4,7 @@ if ($_SESSION['role'] !== 'Student') {
   header('Location: ./../accounts/login.php');
   exit();
 }
-$student_number = $_SESSION['student_number'];
+$student_number = $_SESSION['user_number'];
 $firstname_initial = substr($_SESSION['first_name'], 0, 1);
 $lastname_initial = substr($_SESSION['last_name'], 0, 1);
 $user_initial = $firstname_initial . $lastname_initial;
@@ -110,7 +110,19 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
   </style>
 </head>
 
-<body class="bg-[#F7EFD8] flex flex-col items-center w-full min-h-screen">
+<body class="bg-[#F7EFD8] relative flex flex-col items-center w-full min-h-screen">
+  <dialog id="info-modal" class="modal backdrop-blur modal-bottom sm:modal-middle">
+    <div class="modal-box flex flex-col gap-3 justify-center items-center">
+      <h3 class="font-bold modal-info text-lg"></h3>
+      <p class="py-4 hidden modal-message">Press ESC key or click the button below to close</p>
+      <span class="loading hidden pt-5 loading-spinner loading-lg"></span>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="close-btn hidden btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
   <?php
   include './components/student_navbar_sm.php';
   $currentPage = './' . basename(__FILE__);
@@ -130,7 +142,7 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
         </div>
         <div class="card shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
           <form method="post" class="card-body">
-            <input type="hidden" name="student_number" value="<?php echo $_SESSION['student_number'] ?>">
+            <input type="hidden" name="student_number" value="<?php echo $_SESSION['user_number'] ?>">
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Your Message</span>
@@ -151,6 +163,22 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(() => {
+      const changeInfoMessageAndLoadingStatus = (message, isLoading) => {
+        const infoModal = document.getElementById('info-modal');
+        const modalInfo = document.querySelector('.modal-info');
+        const modalMessage = document.querySelector('.modal-message');
+        const loadingSpinner = document.querySelector('.loading');
+        const closeBtn = document.querySelector('.close-btn');
+        if (isLoading) {
+          loadingSpinner.classList.remove('hidden');
+          closeBtn.classList.add('hidden');
+        } else {
+          loadingSpinner.classList.add('hidden');
+          closeBtn.classList.remove('hidden');
+        }
+        modalInfo.textContent = message;
+        infoModal.showModal();
+      }
       $('#submit-feedback').click((e) => {
         e.preventDefault();
         const feedback = $('textarea[name="feeback_content"]').val();
@@ -160,20 +188,23 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
           return;
         }
         $.ajax({
-          url: 'http://127.0.0.1:5000/api-svfc-send-feedback',
+          url: 'http://127.0.0.1:5000/api/send_feeback',
           method: 'POST',
           contentType: 'application/json',
           data: JSON.stringify({
             student_number: student_number,
             content: feedback
           }),
+          beforeSend: () => {
+            changeInfoMessageAndLoadingStatus('Sending feedback...', true);
+          },
           success: (data) => {
-            alert('Feedback sent successfully');
-            feedback.val('');
+            changeInfoMessageAndLoadingStatus('Feedback sent successfully.', false);
+            $('textarea[name="feeback_content"]').val('');
           },
           error: (err) => {
-            console.log(err);
-            alert('An error occured while sending feedback');
+            infoModal.close();
+            changeInfoMessageAndLoadingStatus('An error occured while sending feedback.', false);
           }
 
         })

@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EPAY | System Announcement</title>
+  <title>EPAY | Announcement</title>
   <link rel="preconnect" href="https://rsms.me/">
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -31,7 +31,6 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
 </head>
 
 <body class="bg-[#F7EFD8] flex flex-col items-center w-full min-h-screen">
-
   <dialog id="announcement_modal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <h3 class="font-bold text-lg">Add New Announcement!</h3>
@@ -72,14 +71,14 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
       <div class="w-full flex flex-col items-center">
         <div class="hero-content w-full flex-col">
           <div class="w-full flex flex-row justify-between items-center">
-            <h1 class="md:text-xl text-s=xs font-bold">System Announcement</h1>
+            <h1 class="md:text-xl text-s=xs font-bold">Announcements</h1>
             <button onclick="announcement_modal.showModal()" id="add_new_annoucement" class="btn btn-success rounded-full shadow-sm">New Announcement <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
             </button>
           </div>
           <div id="announcement_container" class="card shrink-0 w-full gap-5">
-            <div class="loading-container w-full hidden flex-col justify-center items-center gap-5"><span class="loading loading-spinner loading-lg"></span>
+            <div class="loading-container w-full flex flex-col justify-center items-center gap-5"><span class="loading loading-spinner loading-lg"></span>
               <h1>Getting Announcements, please wait...</h1>
             </div>
           </div>
@@ -159,6 +158,42 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
           }
         })
       });
+
+      $.ajax({
+        url: 'http://127.0.0.1:5000/api/admin/announcements',
+        method: 'GET',
+        success: (data) => {
+          console.log(data);
+          const announcements = data
+          loadingSpinner.classList.remove('hidden');
+          announcement_container.innerHTML = '';
+          if (data.announcements && data.announcements.length === 0) {
+            announcement_container.innerHTML = `
+                <div class="card shadow-xl bg-base-100 gap-5 p-3 w-full">
+                    <h1 class="font-bold">No Announcement Found</h1>
+                    <p>There are no announcements at the moment.</p>
+                </div>
+            `;
+          } else {
+            announcements.forEach(announcement => {
+              const announcementCard = `
+        <div class="card shadow-xl bg-base-100 gap-5 p-5 md:p-8 lg:p-10 w-full">
+            <h1 class="font-bold">${announcement.title}</h1>
+            <p>${announcement.content}</p>
+        </div>
+      `;
+              announcement_container.innerHTML += announcementCard;
+            });
+          }
+
+
+          loadingSpinner.classList.add('hidden');
+        },
+        error: (error) => {
+          alert('Something went wrong');
+          console.log(error);
+        }
+      })
     });
   </script>
 </body>
