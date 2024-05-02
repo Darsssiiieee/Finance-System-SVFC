@@ -51,7 +51,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
     ?>
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
-      <div class="flex flex-col w-full gap-5 justify-center">
+      <div class="flex flex-col w-full gap-2 justify-start">
         <h1 class="text-xl lg:text-2xl xl:text-4xl text-left font-bold">Student Overview</h1>
         <div class="flex flex-col justify-center items-center w-full gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
 
@@ -156,76 +156,40 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
       </div>
 
       <div class="flex flex-col w-full gap-5 justify-center">
-        <h1 class="text-xl lg:text-2xl xl:text-4xl text-left title-overview">Quick Statistics</h1>
-        <div class="stats shadow">
-          <div class="stat">
-            <div class="stat-figure text-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
-              </svg>
+        <h1 class="text-xl lg:text-2xl xl:text-4xl text-left font-bold">Total and Recent Payments</h1>
+        <div class="flex flex-row justify-center gap-5">
+          <div class="stats shadow h-fit p-3">
+            <div class="stat">
+              <div class="stat-figure text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                </svg>
+              </div>
+              <div class="stat-title">Total Payment:</div>
+              <div class="stat-value total-paid text-primary"><span class="loading total-loading loading-spinner loading-logout"></span></div>
             </div>
-            <div class="stat-title">Total Payment:</div>
-            <div class="stat-value total-paid text-primary">25.6K</div>
-            <div class="stat-desc">21% more than last month</div>
           </div>
+          <div class="card flex flex-col justify-center items-center w-full lg:w-1/2 gap-5">
+            <div class="card-body justify-center flex flex-col items-center shadow-2xl rounded-2xl bg-base-100 overflow-x-auto">
+              <table class="table">
+                <thead class="text-center font-bold text-black">
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-          <div class="stat">
-            <div class="stat-figure text-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
+                </tbody>
+              </table>
+              <span class="loading recent-loading loading-spinner loading-logout">
             </div>
-            <div class="stat-title">Page Views</div>
-            <div class="stat-value  text-[#FF6BB3]">2.6M</div>
-            <div class="stat-desc">21% more than last month</div>
           </div>
-
-          <div class="stat">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
-            </svg>
-            <div class="stat-value text-[#FF6BB3]">86%</div>
-            <div class="stat-title">Tasks done</div>
-            <div class="stat-desc text-[#FF6BB3]">31 tasks remaining</div>
-          </div>
-
         </div>
+
       </div>
 
-      <div class="flex flex-col justify-center items-center w-full lg:w-1/2 gap-5">
-        <h1 class="text-xl title-overview">Recent Payments</h1>
-        <div class="overflow-x-auto">
-          <table class="table">
-            <!-- head -->
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Amount</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              include './../utils/databaseConnection.php';
-
-              $result = $conn->query("CALL get_recent_transactions()");
-
-              if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                  echo "<tr>";
-                  echo "<td>" . $row["student_name"] . "</td>";
-                  echo "<td>" . $row["amount"] . "</td>";
-                  echo "<td>" . $row["date_of_transaction"] . "</td>";
-                  echo "</tr>";
-                }
-              } else {
-                echo "<td colspan='3' class='empty-message font-bold text-center'>No recent transactions</td>";
-              }
-              ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </section>
 
   </main>
@@ -235,6 +199,8 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
     const closeLogoutModal = () => document.getElementById("logout_modal").close();
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(function() {
+      const recentLoading = $('.recent-loading');
+      const totalLoading = $('.total-loading');
       const allTotalCount = $('.all-total-count');
       const totalBsitCount = $('.total-bsit-count');
       const totalBshmCount = $('.total-bshm-count');
@@ -271,12 +237,33 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
         method: 'GET',
         success: function(response) {
           console.log(response);
-          totalPaid.text(response['total_amount']);
+          totalPaid.text('PHP ' + response['total_amount']);
         },
         error: function(error) {
           console.log(error);
         }
       });
+
+      $.ajax({
+        url: 'http://127.0.0.1:5000/api/get_five_recent_payment',
+        method: 'GET',
+        success: function(response) {
+          recentLoading.removeClass('loading');
+          console.log(response);
+          response.forEach(transaction => {
+            $('tbody').append(`
+              <tr class='text-center'>
+                <td>${transaction.student_number}</td>
+                <td>${transaction.amount}</td>
+                <td>${transaction.payment_date}</td>
+              </tr>
+            `);
+          });
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      })
 
       function openLogoutModal() {
         document.getElementById("logout_modal").showModal();

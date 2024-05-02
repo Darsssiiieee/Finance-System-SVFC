@@ -71,7 +71,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
       <div class="w-full flex flex-col items-center">
         <div class="hero-content w-full flex-col">
           <div class="w-full flex flex-row justify-between items-center">
-            <h1 class="md:text-xl text-s=xs font-bold">Announcements</h1>
+            <h1 class="text-xl lg:text-2xl xl:text-4xl text-left font-bold">Announcements</h1>
             <button onclick="announcement_modal.showModal()" id="add_new_annoucement" class="btn btn-success rounded-full shadow-sm">New Announcement <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
@@ -84,8 +84,6 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
           </div>
         </div>
       </div>
-
-
     </section>
   </main>
   <script>

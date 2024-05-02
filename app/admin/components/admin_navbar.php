@@ -84,8 +84,8 @@ function navbar($currentPage)
 	echo '<div class="dropdown dropdown-end">';
 	echo '<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">';
 	echo '<div class="avatar placeholder">';
-	echo '<div class="bg-neutral text-neutral-content rounded-full w-10">';
-	echo '<span class="text-xl">' . $_SESSION['initials'] . '</span>';
+	echo '<div class="w-10 rounded-full">';
+	echo '<img alt="Tailwind CSS Navbar component" src="./../../res/images/avatar/' . $_SESSION['avatar'] . '" />';
 	echo '</div>';
 	echo '</div>';
 	echo '</div>';

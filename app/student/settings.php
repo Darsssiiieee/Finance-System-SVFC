@@ -91,28 +91,8 @@ $is_student_settings_page = ($current_url === $student_settings_url);
                 <span class="label-text
        ">Phone Number</span>
               </label>
-              <input value="<?php echo $_SESSION['phone_number'] ?>" name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
+              <input value="<?php echo $_SESSION['phone'] ?>" name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
             </div>
-
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">Birth Date</span>
-              </div>
-              <input value="<?php echo $_SESSION['birthdate'] ?>" disabled aria-disabled="true" name="birthdate" id="birthdate" type="date" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
-
-            <label class="form-control w-full">
-              <div class="label">
-                <span class="label-text">Gender</span>
-              </div>
-              <input value="<?php echo $_SESSION['gender'] ?>" disabled aria-disabled="true" name="gender" id="gender" type="text" class="input input-bordered input-secondary w-full border-[#FF6BB3]" required aria-required=true />
-              <div class="label">
-                <span id="errorLabel" class="label-text-alt"></span>
-              </div>
-            </label>
 
             <label class="form-control w-full">
               <div class="label">

@@ -28,24 +28,13 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
   navbar($currentPage);
   ?>
 
-  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
+  <main class="w-11/12 max-w-screen-2xl xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
     <?php
     include './components/admin_navbar_large.php';
     navbarLargeScreen($currentPage);
     ?>
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Amount</th>
-            <th>Semester</th>
-            <th>Student Number</th>
-            <th>Payment Method</th>
-            <th>Payment Date</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+
     </section>
   </main>
   <script>

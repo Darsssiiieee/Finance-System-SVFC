@@ -28,15 +28,15 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
   navbar($currentPage);
   ?>
 
-  <main class="w-11/12 xl:w-10/12 h-full flex mt-10 flex-row justify-center gap-5">
+  <main class="w-11/12 xl:w-10/12 max-w-screen-2xl h-full flex mt-10 flex-row justify-center gap-5">
     <?php
     include './components/admin_navbar_large.php';
     navbarLargeScreen($currentPage);
     ?>
 
-    <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
+    <section class="flex flex-col w-11/12 gap-5">
+      <h1 class="text-xl lg:text-2xl xl:text-4xl text-left font-bold">Admin Personal Information</h1>
       <div id="personalInformationForm" class="card shrink-0 w-full h-auto w-full shadow-2xl bg-base-100 mb-6 p-5 lg:p-10">
-        <h1 class="labelTitle text-3xl text-center font-extrabold">Admin Personal Information</h1>
         <form method="post" action="./review-information-admin.php" class="card-body flex flex-col justify-center gap-10 items-end">
           <div class="grid-cols-1 lg:grid-cols-3 grid gap-10 w-full">
             <?php

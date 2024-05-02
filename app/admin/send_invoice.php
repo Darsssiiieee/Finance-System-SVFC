@@ -108,12 +108,9 @@ include './../utils/databaseConnection.php';
     navbarLargeScreen($currentPage);
     ?>
     <section class="flex flex-col gap-5 justify-center items-center w-full lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
-      <div class="hero min-h-screen">
+      <div class="min-h-screen">
+        <h1 class="text-xl lg:text-2xl xl:text-4xl text-left font-bold">Send A Bill Invoice</h1>
         <div class="hero-content flex-col w-full">
-          <div class="text-center lg:text-left">
-            <h1 class="text-5xl font-bold">Send A Bill Invoice</h1>
-            <p class="py-6">This will send a notification on their email regarding this bill.</p>
-          </div>
 
           <div class="card shrink-0 w-full max-w-7xl shadow-2xl bg-base-100">
             <form id="bill-form" class="card-body w-full grid place-content-center gap-5">
