@@ -1,70 +1,14 @@
 <?php
 session_start();
-$admin_number = '<script>document.write(sessionStorage.getItem("admin_number"))</script>';
-$firstname_initial = '<script>document.write(sessionStorage.getItem("first_name").charAt(0))</script>';
-$lastname_initial = '<script>document.write(sessionStorage.getItem("last_name").charAt(0))</script>';
-$user_initial = '<script>document.write(sessionStorage.getItem("initials"))</script>';
+$admin_number = $_SESSION['user_number'];
+$user_initial = $_SESSION['initials'];
 $admin_dashboard_url = '/finance-system-svfc/app/admin/dashboard.php';
 $current_url = $_SERVER['REQUEST_URI'];
 $is_admin_dashboard_page = ($current_url === $admin_dashboard_url);
-
-include './../utils/databaseConnection.php';
-
-$all = 0;
-$program_bsit_count = 0;
-$program_beed_count = 0;
-$program_bsa_count = 0;
-$program_bshm_count = 0;
-$program_bsed_count = 0;
-
-$programs = [
-  'all' => 'All Programs',
-  'Bachelor of Science in Information Technology' => 'BSIT',
-  'Bachelor of Elementary Education' => 'BEED',
-  'Bachelor of Science in Accountancy' => 'BSA',
-  'Bachelor of Science in Hotel and Restaurant Management' => 'BSHM',
-  'Bachelor of Secondary Education' => 'BSE'
-];
-
-$results = [];
-
-foreach ($programs as $programName => $alias) {
-  $stmt = $conn->prepare("CALL get_student_by_program(?, @count)");
-  $stmt->bind_param("s", $programName);
-  $stmt->execute();
-
-  $conn->next_result();
-  $selectCount = $conn->query("SELECT @count AS student_count");
-  $rowCount = $selectCount->fetch_assoc()['student_count'];
-
-  $results[$alias] = $rowCount;
-
-  $stmt->close();
+if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
+  header('Location: ./../utils/logout.php');
+  exit();
 }
-
-foreach ($results as $alias => $count) {
-  switch ($alias) {
-    case 'all':
-      $all = $count;
-      break;
-    case 'BSIT':
-      $program_bsit_count = $count;
-      break;
-    case 'BEED':
-      $program_beed_count = $count;
-      break;
-    case 'BSA':
-      $program_bsa_count = $count;
-      break;
-    case 'BSHM':
-      $program_bshm_count = $count;
-      break;
-    case 'BSE':
-      $program_bsed_count = $count;
-      break;
-  }
-}
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +52,7 @@ $conn->close();
 
     <section class="flex flex-col w-11/12 gap-5 justify-center items-center lg:items-start lg:grid lg:grid-cols-1 lg:gap-2">
       <div class="flex flex-col w-full gap-5 justify-center">
-        <h1 class="text-xl lg:text-2xl xl:text-4xl text-left title-overview">Student Overview</h1>
+        <h1 class="text-xl lg:text-2xl xl:text-4xl text-left font-bold">Student Overview</h1>
         <div class="flex flex-col justify-center items-center w-full gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
 
           <?php
@@ -296,6 +240,7 @@ $conn->close();
       const totalBsedCount = $('.total-bsed-english-count');
       const totalBsedFilipinoCount = $('.total-bsed-filipino-count');
       const totalBsedSocialStudiesCount = $('.total-bsed-social-studies-count');
+      const totalPaid = $('.total-paid');
       $.ajax({
         url: 'http://127.0.0.1:5000/dashboard/stats',
         type: 'GET',
@@ -312,6 +257,18 @@ $conn->close();
             totalCount += value;
           }
           allTotalCount.text(totalCount);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+
+      $.ajax({
+        url: 'http://127.0.0.1:5000/dashboard/statistics/total_transactions',
+        method: 'GET',
+        success: function(response) {
+          console.log(response);
+          totalPaid.text(response['total_amount']);
         },
         error: function(error) {
           console.log(error);

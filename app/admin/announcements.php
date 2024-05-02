@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
+  header('Location: ./../utils/logout.php');
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +38,7 @@ session_start();
       <p class="py-4">This will send to all enrolled student.</p>
       <div class="modal-action">
         <form class="w-full justify-center items-center flex flex-col" method="post">
-          <input required aria-required="true" type="hidden" id="admin_number" value="<?php echo $_SESSION['admin_number'] ?>" name="admin_number">
+          <input required aria-required="true" type="hidden" id="admin_number" value="<?php echo $_SESSION['user_number'] ?>" name="admin_number">
           <label class="form-control w-full">
             <div class="label">
               <span class="label-text">Title</span>

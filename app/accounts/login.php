@@ -95,6 +95,7 @@
 
       $('#loginUser').click(function(e) {
         e.preventDefault();
+        sessionStorage.clear();
         let role = $('select[name="role"]').val();
         let usernumber = $('input[name="usernumber"]').val();
         let password = $('input[name="password"]').val();
@@ -120,20 +121,41 @@
             sessionStorage.setItem('city', response.city);
             sessionStorage.setItem('avatar', response.avatar);
             sessionStorage.setItem('initials', (response.first_name[0] + response.last_name[0]).toUpperCase())
+            $.ajax({
+              url: './../utils/set-session-variables.php',
+              type: 'POST',
+              data: {
+                user_number: $('input[name="usernumber"]').val(),
+                role: role,
+                first_name: response.first_name,
+                middle_name: response.middle_name,
+                last_name: response.last_name,
+                email: response.email,
+                phone: response.phone,
+                birthdate: response.birthdate,
+                home_address: response.home_address,
+                barangay: response.barangay,
+                city: response.city,
+                avatar: response.avatar,
+                initials: (response.first_name[0] + response.last_name[0]).toUpperCase()
+              },
+              success: function(response) {
+                console.log(response);
+              },
+              error: function(error) {
+                console.log(error);
+              }
+            })
             if (role == 'Admin') {
-              setTimeout(() => {
-                sessionStorage.setItem('admin_number', response.user_number);
-                window.location.href = './../../app/admin/dashboard.php';
-              }, 5000);
+              sessionStorage.setItem('admin_number', $('input[name="usernumber"]').val());
               showModalAndInfoTitle('Success', 'Login successful. Redirecting to admin dashboard...');
+              window.location.href = './../admin/dashboard.php';
             } else if (role == 'Student') {
-              sessionStorage.setItem('student_number', response.user_number);
+              sessionStorage.setItem('student_number', $('input[name="usernumber"]').val());
               sessionStorage.setItem('academic_program', response.academic_program);
               sessionStorage.setItem('year_level', response.year_level);
-              setTimeout(() => {
-                window.location.href = './../../app/student/dashboard.php';
-              }, 5000);
               showModalAndInfoTitle('Success', 'Login successful. Redirecting to student dashboard...');
+              window.location.href = './../student/dashboard.php';
             }
           },
           error: function(error) {
