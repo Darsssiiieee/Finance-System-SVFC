@@ -15,7 +15,7 @@
   <script src="./js/signup.js"></script>
 </head>
 
-<body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full flex justify-center">
+<body class="bg-[#F7EFD8] min-h-screen overflow-hidden relative w-full flex flex-col justify-center">
   <dialog id="status_modal" class="backdrop-blur modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <h3 id="status_message" class="font-bold text-lg"></h3>
@@ -27,6 +27,16 @@
       </div>
     </div>
   </dialog>
+  <div class="navbar">
+    <div class="flex-1">
+      <a class="btn btn-ghost text-xl">EPAY</a>
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="./login.php">Login Instead</a></li>
+      </ul>
+    </div>
+  </div>
   <main class="w-full">
     <div class="hero w-full min-h-screen">
       <div class="hero-content flex-col lg:flex-row w-11/12 lg:w-3/4 lg:justify-between">

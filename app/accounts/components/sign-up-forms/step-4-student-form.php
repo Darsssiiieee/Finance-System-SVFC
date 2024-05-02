@@ -25,11 +25,7 @@ function step_4_student_form()
       </div>
       <select name="academicprogram" id="academic_program" required aria-required="true" class="select border-[#FF6BB3] w-full max-w-xs">
         <option disabled selected>Your Academic Program</option>
-        <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
-        <option value="Bachelor of Science in Accountancy">Bachelor of Science in Accountancy</option>
-        <option value="Bachelor of Science in Hotel and Restaurant Management">Bachelor of Science in Hotel and Restaurant Management</option>
-        <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-        <option value="Bachelor of Secondary Education">Bachelor of Secondary Education</option>
+        
       </select>
       <div class="label">
         <span id="errorLabel" class="label-text-alt"></span>

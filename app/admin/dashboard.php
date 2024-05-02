@@ -1,16 +1,14 @@
 <?php
 session_start();
-$admin_number = $_SESSION['admin_number'];
-$firstname_initial = substr($_SESSION['first_name'], 0, 1);
-$lastname_initial = substr($_SESSION['last_name'], 0, 1);
-$user_initial = $firstname_initial . $lastname_initial;
+$admin_number = '<script>document.write(sessionStorage.getItem("admin_number"))</script>';
+$firstname_initial = '<script>document.write(sessionStorage.getItem("first_name").charAt(0))</script>';
+$lastname_initial = '<script>document.write(sessionStorage.getItem("last_name").charAt(0))</script>';
+$user_initial = '<script>document.write(sessionStorage.getItem("initials"))</script>';
 $admin_dashboard_url = '/finance-system-svfc/app/admin/dashboard.php';
 $current_url = $_SERVER['REQUEST_URI'];
 $is_admin_dashboard_page = ($current_url === $admin_dashboard_url);
 
 include './../utils/databaseConnection.php';
-
-
 
 $all = 0;
 $program_bsit_count = 0;
@@ -112,67 +110,104 @@ $conn->close();
       <div class="flex flex-col w-full gap-5 justify-center">
         <h1 class="text-xl lg:text-2xl xl:text-4xl text-left title-overview">Student Overview</h1>
         <div class="flex flex-col justify-center items-center w-full gap-5 lg:grid lg:grid-cols-2 xl:grid-cols-3">
-          <div class="bg-green-400 p-5 w-full rounded-xl flex flex-col">
-            <h1 class="overview-title flex font-bold gap-5">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-              </svg>
-              Total Students Enrolled
-            </h1>
-            <span class="count font-bold text-2xl text-right"><?php echo $all ?></span>
-          </div>
 
-          <div class="bg-red-400 p-5 w-full rounded-xl flex flex-col">
-            <h1 class="overview-title flex font-bold gap-5">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
-              </svg>
-              Total BSIT Students Enrolled
-            </h1>
-            <span class="count font-bold text-2xl text-right"><?php echo $program_bsit_count ?></span>
-          </div>
+          <?php
+          $course_list = [
+            [
+              'div-color' => 'bg-green-400',
+              'svg' =>
+              '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                </svg>',
+              'title' => 'Total Students Enrolled',
+              'out-span-class' => 'all-total-count',
+              'loading-span-class' => 'all-loading'
+            ],
+            [
+              'div-color' => 'bg-red-400',
+              'svg' =>
+              '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                </svg>',
+              'title' => 'Total BSIT Students Enrolled',
+              'out-span-class' => 'total-bsit-count',
+              'loading-span-class' => 'bsit-loading'
+            ],
+            [
+              'div-color' => 'bg-orange-400',
+              'svg' => '
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+                </svg>',
+              'title' => 'Total BSHM Students Enrolled',
+              'out-span-class' => 'total-bshm-count',
+              'loading-span-class' => 'bshm-loading'
+            ],
+            [
+              'div-color' => 'bg-gray-400',
+              'svg' => '
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>',
+              'title' => 'Total BEED GenEd Students Enrolled',
+              'out-span-class' => 'total-beed-gened-count',
+              'loading-span-class' => 'been-gened-loading'
+            ],
+            [
+              'div-color' => 'bg-amber-400',
+              'svg' => '
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                </svg>',
+              'title' => 'Total BSA Students Enrolled',
+              'out-span-class' => 'total-bsa-count',
+              'loading-span-class' => 'bsa-loading'
+            ],
+            [
+              'div-color' => 'bg-emerald-400',
+              'svg' => '
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>',
+              'title' => 'Total BSED English Students Enrolled',
+              'out-span-class' => 'total-bsed-english-count',
+              'loading-span-class' => 'bsed-english-loading'
+            ],
+            [
+              'div-color' => 'bg-emerald-400',
+              'svg' => '
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>',
+              'title' => 'Total BSED Filipino Students Enrolled',
+              'out-span-class' => 'total-bsed-filipino-count',
+              'loading-span-class' => 'bsed-filipino-loading'
+            ],
+            [
+              'div-color' => 'bg-emerald-400',
+              'svg' => '
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>',
+              'title' => 'Total BSED Social Studies Students Enrolled',
+              'out-span-class' => 'total-bsed-social-studies-count',
+              'loading-span-class' => 'bsed-social-studies-loading'
+            ]
+          ];
 
-          <div class="bg-orange-400 p-5 w-full rounded-xl flex flex-col">
-            <h1 class="overview-title flex font-bold gap-5">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-              </svg>
-              Total BSHM Students Enrolled
-            </h1>
-            <span class="count font-bold text-2xl text-right"><?php echo $program_bshm_count ?></span>
-          </div>
-
-          <div class="bg-gray-400 p-5 w-full rounded-xl flex flex-col">
-            <h1 class="overview-title flex font-bold gap-5">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-              </svg>
-              Total BECED Students Enrolled
-            </h1>
-            <span class="count font-bold text-2xl text-right"><?php echo $program_beed_count ?></span>
-          </div>
-
-          <div class="bg-amber-400 p-5 w-full rounded-xl flex flex-col">
-            <h1 class="overview-title flex font-bold gap-5">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
-              </svg>
-              Total BSA Students Enrolled
-            </h1>
-            <span class="count font-bold text-2xl text-right"><?php echo $program_bsa_count ?></span>
-          </div>
-
-          <div class="bg-emerald-400 p-5 w-full rounded-xl flex flex-col">
-            <h1 class="overview-title flex font-bold gap-5">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-              </svg>
-
-              Total BSED Students Enrolled
-            </h1>
-            <span class="count font-bold text-2xl text-right"><?php echo $program_bsed_count ?></span>
-          </div>
+          foreach ($course_list as $course) {
+          ?>
+            <div class="<?php echo $course['div-color']; ?> p-5 w-full rounded-xl flex flex-col">
+              <h1 class="overview-title flex font-bold gap-5">
+                <?php echo $course['svg']; ?>
+                <?php echo $course['title']; ?>
+              </h1>
+              <span class="count <?php echo $course['out-span-class']; ?> font-bold text-2xl text-right"><span class="<?php echo $course['loading-span-class']; ?> loading loading-spinner loading-md"></span></span>
+            </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
 
@@ -186,7 +221,7 @@ $conn->close();
               </svg>
             </div>
             <div class="stat-title">Total Payment:</div>
-            <div class="stat-value text-primary">25.6K</div>
+            <div class="stat-value total-paid text-primary">25.6K</div>
             <div class="stat-desc">21% more than last month</div>
           </div>
 
@@ -252,18 +287,49 @@ $conn->close();
   </main>
 
   <script>
-    function openLogoutModal() {
-      document.getElementById("logout_modal").showModal();
-    }
+    $(document).ready(function() {
+      const allTotalCount = $('.all-total-count');
+      const totalBsitCount = $('.total-bsit-count');
+      const totalBshmCount = $('.total-bshm-count');
+      const totalBeedCount = $('.total-beed-gened-count');
+      const totalBsaCount = $('.total-bsa-count');
+      const totalBsedCount = $('.total-bsed-english-count');
+      const totalBsedFilipinoCount = $('.total-bsed-filipino-count');
+      const totalBsedSocialStudiesCount = $('.total-bsed-social-studies-count');
+      $.ajax({
+        url: 'http://127.0.0.1:5000/dashboard/stats',
+        type: 'GET',
+        success: function(response) {
+          totalBsitCount.text(response['BSIT - Bachelor of Science in Information Technology']);
+          totalBshmCount.text(response['BSHM - Bachelor of Science in Hospitality Management']);
+          totalBeedCount.text(response['BEED GenEd - Bachelor of Elementary Education major in General Education']);
+          totalBsaCount.text(response['BSA - Bachelor of Science in Accountancy']);
+          totalBsedCount.text(response['BSED English - Bachelor of Secondary Education major in English']);
+          totalBsedFilipinoCount.text(response['BSED Filipino - Bachelor of Secondary Education major in Filipino']);
+          totalBsedSocialStudiesCount.text(response['BSED Social Studies - Bachelor of Secondary Education major in Social Studies']);
+          let totalCount = 0;
+          for (const [key, value] of Object.entries(response)) {
+            totalCount += value;
+          }
+          allTotalCount.text(totalCount);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
 
-    function closeLogoutModal() {
-      document.getElementById("logout_modal").close();
-    }
+      function openLogoutModal() {
+        document.getElementById("logout_modal").showModal();
+      }
 
-    function logout() {
-      // Redirect to logout.php
-      window.location.href = "./../utils/logout.php";
-    }
+      function closeLogoutModal() {
+        document.getElementById("logout_modal").close();
+      }
+
+      function logout() {
+        window.location.href = "./../utils/logout.php";
+      }
+    });
   </script>
 </body>
 

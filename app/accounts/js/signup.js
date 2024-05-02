@@ -154,6 +154,45 @@ $(document).ready(() => {
 					'Enter your information to continue.',
 				);
 			} else {
+				$('#academic_program').empty();
+				$.ajax({
+					url: 'http://127.0.0.1:5000/course/college',
+					type: 'GET',
+					beforeSend: function () {
+						$('#academic_program').empty();
+						$('#academic_program').append(
+							$('<option>', {
+								value: '',
+								text: 'Loading academic programs...',
+								disabled: true,
+								selected: true,
+							}),
+						);
+					},
+					success: function (response) {
+						$('#academic_program').empty();
+						$('#academic_program').append(
+							$('<option>', {
+								value: '',
+								text: 'Your Academic Program',
+								disabled: true,
+								selected: true,
+							}),
+						);
+						response.forEach((course) => {
+							$('#academic_program').append(
+								$('<option>', {
+									value: course,
+									text: course,
+								}),
+							);
+						});
+					},
+					error: function (error) {
+						console.log(error);
+					},
+				});
+
 				stepFourStudent.removeClass('hidden');
 				stepThreeAvatar.addClass('hidden');
 				changeCurrentProgress(4);
@@ -374,85 +413,6 @@ $(document).ready(() => {
 		);
 	});
 
-	/*
-
-@user_authentication.route('/register', methods=['POST'])
-def register():
-  # Register a new user
-  # It requires the following parameters: role, password, user_number, first_name, middle_name, last_name, email, phone_number, birthdate, gender, home_address, barangay, city, and avatar
-  try:
-    connection = connect(
-      user=os.getenv('USER'),
-      password=os.getenv('PASSWORD'),
-      port=os.getenv('PORT'),
-      database='svfc_finance'
-    )
-    data = request.get_json()
-    role = data['role']
-    password = data['password']
-    user_number = data['user_number']
-    first_name = data['first_name']
-    middle_name = data['middle_name']
-    last_name = data['last_name']
-    email = data['email']
-    phone_number = data['phone_number']
-    birthdate = data['birthdate']
-    gender = data['gender']
-    home_address = data['home_address']
-    barangay = data['barangay']
-    city = data['city']
-    avatar = data['avatar']
-    
-    if role not in ['Admin', 'Student']:
-      return jsonify({'error': 'Invalid role'}), 400
-    if not validate_email(email):
-      return jsonify({'error': 'Invalid email'}), 400
-    if gender not in ['Male', "Female", 'Non-Binary', 'Others']:
-      return jsonify({'error': 'Invalid Gender'}), 400
-    if len(password) < 8:
-      return jsonify({'error': 'Password must be at least 8 characters long'}), 400
-    if not role or not password or not user_number or not first_name or not middle_name or not last_name or not email or not phone_number or not birthdate or not gender or not home_address or not barangay or not city or not avatar:
-      return jsonify({'error': 'Missing parameters'}), 400
-
-    salt = bcrypt.gensalt()
-    if role == 'Student':
-      academic_program = data['academic_program']
-      year_level = data['year_level']
-    else:
-      academic_program = None
-      year_level = None
-
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt.encode('utf-8'))
-    params = [role, hashed_password, user_number, first_name, middle_name, last_name, email, phone_number, birthdate, gender, home_address, barangay, city, avatar, academic_program, year_level, salt]
-    try:
-      with connection.cursor() as cursor:
-        cursor.callproc('insert_user_profile', params)
-        connection.commit()
-    except Error as err:
-      if err.errno == errorcode.ER_DUP_ENTRY:
-        return jsonify({'error': 'User already exists'}), 409
-      else:
-        logging.exception('An error occurred')
-        return jsonify({'error': 'Something went wrong'}), 500
-    finally:
-      connection.close()
-
-    return jsonify({'message': 'User registered successfully'}), 201
-  except Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-      return jsonify({'error': 'Invalid credentials'}), 401
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-      return jsonify({'error': 'Database does not exist'}), 404
-    else:
-      logging.exception('An error occurred')
-      return jsonify({'error': 'Something went wrong'}), 500
-  except ValueError as err:
-    return jsonify({'error': 'Invalid date format'}), 400
-  except:
-    logging.exception('An error occurred')
-    return jsonify({'message': 'Internal Server Error'}), 500
-
-  */
 	$('#finalizeSignUpAdmin').click((e) => {
 		e.preventDefault();
 		const role = sessionStorage.getItem('role');
@@ -483,12 +443,28 @@ def register():
 							'User successfully added',
 							'Please take note of the user number: ' +
 								sessionStorage.getItem('user_number') +
-								' as this will be used for logging in as well as your password. Redirecting to the login page in 10 seconds.',
+								' as this will be used for logging in as well as your password. Please proceed to login page.',
 						);
+						$.ajax({
+							url: 'http://127.0.0.1:5000/send_mail',
+							type: 'POST',
+							contentType: 'application/json',
+							data: JSON.stringify({
+								email: sessionStorage.getItem('email'),
+								subject: 'Welcome to SVFC this is your user number.',
+								message:
+									'Welcome to the St. Vincent De Ferrer College of Camarin. Your user number is ' +
+									sessionStorage.getItem('user_number') +
+									'. Please take note of this as this will be used for logging in. Enjoy your stay!',
+							}),
+							success: function (response) {
+								console.log(response);
+							},
+							error: function (error) {
+								console.log(error);
+							},
+						});
 						sessionStorage.clear();
-						setTimeout(() => {
-							window.location.href = '../login.php';
-						}, 10000);
 					} else {
 						changeStatusModalTextsAndShowModal(
 							'Error adding user',
@@ -560,12 +536,27 @@ def register():
 							'User successfully added',
 							'Please take note of the user number: ' +
 								sessionStorage.getItem('user_number') +
-								' as this will be used for logging in as well as your password. Redirecting to the login page in 10 seconds.',
+								' as this will be used for logging in as well as your password. Please proceed to login page.',
 						);
-						sessionStorage.clear();
-						setTimeout(() => {
-							window.location.href = '../login.php';
-						}, 10000);
+						$.ajax({
+							url: 'http://127.0.0.1:5000/send_mail',
+							type: 'POST',
+							contentType: 'application/json',
+							data: JSON.stringify({
+								email: sessionStorage.getItem('email'),
+								subject: 'Welcome to SVFC this is your user number.',
+								message:
+									'Welcome to the St. Vincent De Ferrer College of Camarin. Your user number is ' +
+									sessionStorage.getItem('user_number') +
+									'. Please take note of this as this will be used for logging in. Enjoy your stay!',
+							}),
+							success: function (response) {
+								console.log(response);
+							},
+							error: function (error) {
+								console.log(error);
+							},
+						});
 					} else {
 						changeStatusModalTextsAndShowModal(
 							'Error adding user',
@@ -604,6 +595,16 @@ def register():
 						changeStatusModalTextsAndShowModal(
 							'Missing parameters',
 							'Please fill out all fields to continue.',
+						);
+					} else if (error.responseJSON.error === 'Invalid academic program') {
+						changeStatusModalTextsAndShowModal(
+							'Invalid academic program',
+							'Please select a valid academic program to continue.',
+						);
+					} else if (error.responseJSON.error === 'Invalid gender') {
+						changeStatusModalTextsAndShowModal(
+							'Invalid Gender',
+							'Please select a valid one to continue.',
 						);
 					} else if (
 						error.responseJSON.error ===

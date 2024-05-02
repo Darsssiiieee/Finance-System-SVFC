@@ -119,6 +119,7 @@
             sessionStorage.setItem('barangay', response.barangay);
             sessionStorage.setItem('city', response.city);
             sessionStorage.setItem('avatar', response.avatar);
+            sessionStorage.setItem('initials', (response.first_name[0] + response.last_name[0]).toUpperCase())
             if (role == 'Admin') {
               setTimeout(() => {
                 sessionStorage.setItem('admin_number', response.user_number);
