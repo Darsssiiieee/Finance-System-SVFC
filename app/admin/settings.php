@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin_number'])) {
-  header('location:login.php');
+if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
+  header('Location: ./../utils/logout.php');
   exit();
 }
 ?>
@@ -18,7 +18,7 @@ if (!isset($_SESSION['admin_number'])) {
   <link rel="icon" type="image/x-icon" href="./../../res/images/logo.ico">
   <link rel="preconnect" href="https://rsms.me/">
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-  <link rel="stylesheet" href="./../../styles/global.css">
+  <link rel="stylesheet" href="../../styles/global.css">
 </head>
 
 <body class="bg-[#F7EFD8] flex flex-col justify-center items-center">

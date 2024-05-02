@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin_number'])) {
-  header('location:login.php');
+if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
+  header('Location: ./../utils/logout.php');
   exit();
 }
 include './../utils/databaseConnection.php';
@@ -20,7 +20,18 @@ include './../utils/databaseConnection.php';
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: "InterVariable";
+    }
+
     .select2-container .select2-selection--single {
       border: 1px solid #d9d9d9;
       border-radius: 20px;
@@ -73,17 +84,17 @@ include './../utils/databaseConnection.php';
 </head>
 
 <body class="bg-[#F7EFD8] flex flex-col justify-center items-center">
-  <div class="toast hidden toast-end">
-    <div class="alert alert-info">
-      <span>New mail arrived.</span>
+  <dialog id="info-modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <h3 id="info-title" class="font-bold text-lg">Hello!</h3>
+      <p id="info-message" class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
     </div>
-    <div class="alert alert-success">
-      <span>Message sent successfully.</span>
-    </div>
-    <div class="alert alert-error">
-      <span>Message sent successfully.</span>
-    </div>
-  </div>
+  </dialog>
 
   <?php
   include './components/admin_navbar.php';
@@ -198,6 +209,11 @@ include './../utils/databaseConnection.php';
     const logout = () => window.location.href = "./../utils/logout.php";
     $(document).ready(function() {
       $('#student_id').select2();
+      const showMessage = (title, message) => {
+        $('#info-title').text(title);
+        $('#info-message').text(message);
+        document.getElementById('info-modal').showModal();
+      }
       $('#add_misc').click(function() {
         $('#misc_fees').append('<div class="misc-fee border-2 rounded-xl p-5">' +
           '<label class="form-control w-full max-w-xs">' +
@@ -246,9 +262,8 @@ include './../utils/databaseConnection.php';
         e.preventDefault();
         var allDisabledBills = document.querySelectorAll('input[disabled]');
         var units = document.querySelector('input[name="units"]').value;
-
         $.ajax({
-          url: 'http://127.0.0.1:5000/api-svfc-post-student-bill',
+          url: 'http://127.0.0.1:5000/dashboard/post-bill',
           method: 'POST',
           contentType: 'application/json',
           data: JSON.stringify({
@@ -288,18 +303,20 @@ include './../utils/databaseConnection.php';
 
           }),
           success: function(response) {
-            // Handle success response
-            console.log(response);
+            if (response.message === 'Bill inserted successfully.') {
+              showMessage('Success', 'Bill posted successfully.');
+            }
           },
           error: function(xhr, status, error) {
-            console.error(error);
-            console.error(status);
-            console.error(xhr);
-            var errorMessage = "An error occurred";
-            if (xhr.responseJSON && xhr.responseJSON.error) {
-              errorMessage = xhr.responseJSON.error;
+            if (xhr.responseJSON.message === 'Remarks is required for every misc fee item') {
+              showMessage('Error', 'Remarks is required for every misc fee item');
+            } else if (xhr.responseJSON.message === 'Missing Fields Detected.') {
+              showMessage('Error', 'Missing Fields Detected.');
+            } else if (xhr.responseJSON.message === 'Semester already billed.') {
+              showMessage('Error', 'Semester already billed.');
+            } else {
+              showMessage('Error', 'An error occurred.');
             }
-            console.error(errorMessage);
           }
         });
       })

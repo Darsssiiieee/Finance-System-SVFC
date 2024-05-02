@@ -79,7 +79,7 @@ function navbar($currentPage)
 	echo '<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">';
 	echo '<div class="avatar placeholder">';
 	echo '<div class="bg-neutral text-neutral-content rounded-full w-10">';
-	echo '<span class="text-xl"></span>';
+	echo '<span class="text-xl">' . $_SESSION['initials'] . '</span>';
 	echo '</div>';
 	echo '</div>';
 	echo '</div>';
