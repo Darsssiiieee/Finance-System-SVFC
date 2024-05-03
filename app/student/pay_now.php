@@ -113,6 +113,13 @@ $is_student_feedback_page = ($current_url === $student_feedback_url);
               </tr>
             `);
           });
+          if (data.list_of_bills.length === 0) {
+            $('#payments_table tbody').append(`
+              <tr class='text-center'>
+                <td colspan="4">You have no bills at the moment.</td>
+              </tr>
+            `);
+          }
         },
         error: (error) => {
           error_icon.classList.remove('hidden');

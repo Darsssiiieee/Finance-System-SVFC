@@ -155,54 +155,49 @@
 
     <div>
       <h1>Developers & Creators</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <?php
+        $cards = [
+          [
+            'imgSrc' => './res/images/froilan.jpg',
+            'title' => 'Froilan J. Aquino',
+            'description' => 'Measure what can be measured, and make measurable what cannot be',
+            'badge' => 'Developer'
+          ],
+          [
+            'imgSrc' => './res/images/Princess.png',
+            'title' => 'Princess T. Villaester',
+            'description' => '"Learn to rest not to quit!"',
+            'badge' => 'Fashion'
+          ],
+          [
+            'imgSrc' => './res/images/Darsie.jpg',
+            'title' => 'Darsie L. Lotino',
+            'description' => 'Don\'t be disappointed if people refuse to help you Remember the words of Einstein: "I am thankful to all those who said no, Because of them, I did it Myself."',
+            'badge' => 'Fashion'
+          ],
+          [
+            'imgSrc' => './res/images/KC.jpg',
+            'title' => 'Kc Angelo B. Magabo',
+            'description' => '"Life is like a rainbow, you need both sunshine and rain to see the beauty of it."',
+            'badge' => 'Design'
+          ],
+          [
+            'imgSrc' => './res/images/Harvey.jpg',
+            'title' => 'Mark Harvey D. Funda',
+            'description' => 'Don\'t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.',
+            'badge' => 'Fashion'
+          ]
+        ];
 
-      <?php
-      $cards = [
-        [
-          'imgSrc' => 'https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg',
-          'altText' => 'Shoes',
-          'title' => 'Froilan J. Aquino',
-          'description' => '',
-          'badge' => 'Developer'
-        ],
-        [
-          'imgSrc' => './res/images/Princess.png',
-          'altText' => 'Tailwind-CSS-Avatar-component',
-          'title' => 'Princess T. Villaester',
-          'description' => '"Learn to rest not to quit!"',
-          'badge' => 'Fashion'
-        ],
-        [
-          'imgSrc' => './res/images/Darsie.jpg',
-          'altText' => 'Tailwind-CSS-Avatar-component',
-          'title' => 'Darsie L. Lotino',
-          'description' => 'Don\'t be disappointed if people refuse to help you Remember the words of Einstein: "I am thankful to all those who said no, Because of them, I did it Myself."',
-          'badge' => 'Fashion'
-        ],
-        [
-          'imgSrc' => './res/images/KC.jpg',
-          'altText' => 'Tailwind-CSS-Avatar-component',
-          'title' => 'Kc Angelo B. Magabo',
-          'description' => '"Life is like a rainbow, you need both sunshine and rain to see the beauty of it."',
-          'badge' => 'Design'
-        ],
-        [
-          'imgSrc' => './res/images/Harvey.jpg',
-          'altText' => 'Tailwind-CSS-Avatar-component',
-          'title' => 'Mark Harvey D. Funda',
-          'description' => 'Don\'t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.',
-          'badge' => 'Fashion'
-        ]
-      ];
-
-      foreach ($cards as $card) {
-        echo
-        '<div class="flex items-center justify-center">
+        foreach ($cards as $card) {
+          echo
+          '<div class="flex items-center justify-center">
           <div class="card w-96 bg-base-100 shadow-xl">
               <figure>
                   <div class="avatar">
                       <div class="w-32 rounded">
-                          <img src="' . $card['imgSrc'] . '" alt="' . $card['altText'] . '" />
+                          <img src="' . $card['imgSrc'] . '" alt="developer and entities images" />
                       </div>
                   </div>
               </figure>
@@ -215,8 +210,9 @@
               </div>
           </div>
         </div>';
-      }
-      ?>
+        }
+        ?>
+      </div>
     </div>
   </main>
 

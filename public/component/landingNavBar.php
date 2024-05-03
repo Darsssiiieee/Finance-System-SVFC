@@ -13,9 +13,7 @@ function landingNavBar()
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a href="./app/accounts/sign-up.php">Get Started</a></li>
           <li><a href="./app/accounts/login.php">Log In to My Account</a></li>
-          <li><a href="./svfc.php">SVFC</a></li>
-          <li><a href="./contact-us.php">Contact Us</a></li>
-          <li><a href="./about-us.php">About Us</a></li>
+          <li><a href="./AboutUS.html">About Us</a></li>
         </ul>
       </div>
     </div>

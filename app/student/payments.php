@@ -53,7 +53,7 @@ $is_student_payments_page = ($current_url === $student_payments_url);
 
     <section class="flex flex-col w-11/12 gap-5 items-center">
       <h1 class="text-xl text-gray-600 font-bold lg:text-2xl xl:text-4xl text-left">Your Payment Transactions</h1>
-      <div class="card w-full min-h-96 p-5 bg-base-100 shadow-xl">
+      <div class="card w-full p-5 bg-base-100 shadow-xl">
         <div class="overflow-x-auto w-full flex flex-col gap-5">
           <table id="payments_table" class="table">
             <thead>
@@ -116,6 +116,13 @@ $is_student_payments_page = ($current_url === $student_payments_url);
               </tr>
             `);
           });
+          if (response.transactions.length === 0) {
+            $('#payments_table tbody').append(`
+              <tr class='text-center'>
+                <td colspan="5">You have no payments at the moment.</td>
+              </tr>
+            `);
+          }
         },
         error: function(error) {
           error_icon.classList.remove('hidden');

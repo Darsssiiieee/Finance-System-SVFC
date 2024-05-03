@@ -91,7 +91,7 @@ $is_student_settings_page = ($current_url === $student_settings_url);
                 <span class="label-text
        ">Phone Number</span>
               </label>
-              <input value="<?php echo $_SESSION['phone'] ?>" name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
+              <input value="<?php echo $_SESSION['phone_number'] ?>" name="phone_number" type="tel" placeholder="Phone Number" class="input border-[#FF6BB3] input-bordered" required />
             </div>
 
             <label class="form-control w-full">
