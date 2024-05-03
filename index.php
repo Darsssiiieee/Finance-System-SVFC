@@ -23,7 +23,7 @@
       </div>
       <div class="flex flex-col gap-3">
         <h1 class="font-bold text-3xl text-emerald-700"><span class="text-[#ff00ff]">Pay Digitally</span> - EPAY</h1>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque in sapiente, voluptatem, assumenda minus quibusdam natus ex aliquid doloremque esse placeat, perspiciatis ipsa perferendis laborum?</p>
+        <p>Welcome to EPAY, your one-stop solution for all digital payments. Get started today, digital payments at your fingertips.</p>
         <a class="btn btn-secondary" href="./app/accounts/sign-up.php">Get Started</a>
       </div>
     </div>
@@ -42,8 +42,8 @@
             <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
             <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
           </svg>
-          <h1>Lorem, ipsum.</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
+          <h1>Secure Transactions</h1>
+          <p>With EPAY, your transactions are secure and encrypted to the highest standards. You can trust us with your money.</p>
         </div>
 
         <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
@@ -54,8 +54,8 @@
             <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
             <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
           </svg>
-          <h1>Lorem, ipsum.</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
+          <h1>Fast Transfers</h1>
+          <p>EPAY ensures your transfers are fast and instantaneous. No more waiting for hours for your transactions to complete.</p>
         </div>
 
         <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
@@ -63,8 +63,8 @@
             <polyline points="16 18 22 12 16 6"></polyline>
             <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
-          <h1>Lorem, ipsum.</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
+          <h1>Reliable Infrastructure</h1>
+          <p>Our robust and reliable infrastructure ensures that our services are always available when you need them.</p>
         </div>
 
         <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
@@ -72,8 +72,8 @@
             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
             <line x1="1" y1="10" x2="23" y2="10"></line>
           </svg>
-          <h1>Lorem, ipsum.</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
+          <h1>User-Friendly Interface</h1>
+          <p>Our user-friendly interface makes it easy for anyone to use EPAY. Making transactions has never been easier.</p>
         </div>
 
         <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
@@ -82,8 +82,8 @@
             <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
           </svg>
-          <h1>Lorem, ipsum.</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
+          <h1>User-Friendly Interface</h1>
+          <p>Our user-friendly interface makes it easy for anyone to use EPAY. Making transactions has never been easier.</p>
         </div>
 
         <div class="border flex flex-col gap-3 border-black rounded-xl p-3">
@@ -91,8 +91,8 @@
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
-          <h1>Lorem, ipsum.</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ea at maiores dolore neque ipsam omnis impedit numquam quod nesciunt est aliquam minima, quisquam voluptates.</p>
+          <h1>Modern Interface</h1>
+          <p>Our modern interface incorporates the latest design trends, providing a fresh and contemporary user experience.</p>
         </div>
       </div>
     </div>
@@ -102,9 +102,8 @@
 
       <div class="grid grid-cols-1 gap-5">
         <div class="flex flex-col border-2 rounded-lg border-black p-5">
-          <img src="" alt="">
-          <h1>Juan DeLa Cruz</h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non nulla voluptatibus unde assumenda temporibus possimus harum deserunt aspernatur, ex aliquam?</p>
+          <h1>Modern Interface</h1>
+          <p>Our modern interface incorporates the latest design trends, providing a fresh and contemporary user experience.</p>
           <div class="rating">
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
@@ -114,9 +113,8 @@
           </div>
         </div>
         <div class="flex flex-col border-2 rounded-lg border-black p-5">
-          <img src="" alt="">
-          <h1>Juan DeLa Cruz</h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non nulla voluptatibus unde assumenda temporibus possimus harum deserunt aspernatur, ex aliquam?</p>
+          <h1>Jane Smith</h1>
+          <p>"I love the low fees and fast transfers. EPAY is now my go-to for all online transactions."</p>
           <div class="rating">
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
@@ -126,9 +124,8 @@
           </div>
         </div>
         <div class="flex flex-col border-2 rounded-lg border-black p-5">
-          <img src="" alt="">
-          <h1>Juan DeLa Cruz</h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non nulla voluptatibus unde assumenda temporibus possimus harum deserunt aspernatur, ex aliquam?</p>
+          <h1>Robert Johnson</h1>
+          <p>"The 24/7 support is fantastic. I had an issue and it was resolved quickly. Great service!"</p>
           <div class="rating">
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" checked />
@@ -138,14 +135,35 @@
           </div>
         </div>
         <div class="flex flex-col border-2 rounded-lg border-black p-5">
-          <img src="" alt="">
-          <h1>Juan DeLa Cruz</h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non nulla voluptatibus unde assumenda temporibus possimus harum deserunt aspernatur, ex aliquam?</p>
+          <h1>Mary Davis</h1>
+          <p>"I appreciate the secure transactions and the peace of mind it gives me. EPAY is trustworthy."</p>
           <div class="rating">
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" checked />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+          </div>
+        </div>
+        <div class="flex flex-col border-2 rounded-lg border-black p-5">
+          <h1>James Miller</h1>
+          <p>"The modern interface is sleek and easy to navigate. EPAY has made online payments a breeze."</p>
+          <div class="rating">
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" checked />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+          </div>
+        </div>
+        <div class="flex flex-col border-2 rounded-lg border-black p-5">
+          <h1>Patricia Wilson</h1>
+          <p>"EPAY's global reach is impressive. I can send money to my family overseas with no issues."</p>
+          <div class="rating">
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" checked />
+            <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
             <input type="radio" name="rating-4" class="mask mask-star-2 bg-green-500" />
           </div>
         </div>
