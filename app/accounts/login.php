@@ -108,39 +108,41 @@
             user_number: usernumber,
             password: password
           }),
-          success: function(response) {
+          success: function(data) {
+            console.log(data);
             sessionStorage.setItem('role', role);
-            sessionStorage.setItem('first_name', response.first_name);
-            sessionStorage.setItem('middle_name', response.middle_name);
-            sessionStorage.setItem('last_name', response.last_name);
-            sessionStorage.setItem('email', response.email);
-            sessionStorage.setItem('phone', response.phone);
-            sessionStorage.setItem('birthdate', response.birthdate);
-            sessionStorage.setItem('home_address', response.home_address);
-            sessionStorage.setItem('barangay', response.barangay);
-            sessionStorage.setItem('city', response.city);
-            sessionStorage.setItem('avatar', response.avatar);
-            sessionStorage.setItem('initials', (response.first_name[0] + response.last_name[0]).toUpperCase())
+            sessionStorage.setItem('first_name', data.first_name);
+            sessionStorage.setItem('middle_name', data.middle_name);
+            sessionStorage.setItem('last_name', data.last_name);
+            sessionStorage.setItem('email', data.email);
+            sessionStorage.setItem('phone_number', data.phone_number);
+            sessionStorage.setItem('birthdate', data.birthdate);
+            sessionStorage.setItem('gender', data.gender);
+            sessionStorage.setItem('home_address', data.home_address);
+            sessionStorage.setItem('barangay', data.barangay);
+            sessionStorage.setItem('city', data.city);
+            sessionStorage.setItem('avatar', data.avatar);
+            sessionStorage.setItem('initials', (data.first_name[0] + data.last_name[0]).toUpperCase())
             $.ajax({
               url: './../utils/set-session-variables.php',
               type: 'POST',
               data: {
                 user_number: $('input[name="usernumber"]').val(),
                 role: role,
-                first_name: response.first_name,
-                middle_name: response.middle_name,
-                last_name: response.last_name,
-                email: response.email,
-                phone: response.phone,
-                birthdate: response.birthdate,
-                home_address: response.home_address,
-                barangay: response.barangay,
-                city: response.city,
-                avatar: response.avatar,
-                initials: (response.first_name[0] + response.last_name[0]).toUpperCase()
+                first_name: data.first_name,
+                middle_name: data.middle_name,
+                last_name: data.last_name,
+                email: data.email,
+                phone_number: data.phone_number,
+                birthdate: data.birthdate,
+                home_address: data.home_address,
+                barangay: data.barangay,
+                city: data.city,
+                avatar: data.avatar,
+                initials: (data.first_name[0] + data.last_name[0]).toUpperCase()
               },
-              success: function(response) {
-                console.log(response);
+              success: function(data) {
+                console.log(data);
               },
               error: function(error) {
                 console.log(error);
@@ -152,8 +154,8 @@
               window.location.href = './../admin/dashboard.php';
             } else if (role == 'Student') {
               sessionStorage.setItem('student_number', $('input[name="usernumber"]').val());
-              sessionStorage.setItem('academic_program', response.academic_program);
-              sessionStorage.setItem('year_level', response.year_level);
+              sessionStorage.setItem('academic_program', data.academic_program);
+              sessionStorage.setItem('year_level', data.year_level);
               showModalAndInfoTitle('Success', 'Login successful. Redirecting to student dashboard...');
               window.location.href = './../student/dashboard.php';
             }

@@ -45,7 +45,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
               ['name' => 'Middle Name', 'value' => $_SESSION['middle_name'], 'type' => 'text', 'placeholder' => 'Middle Name'],
               ['name' => 'Last Name', 'value' => $_SESSION['last_name'], 'type' => 'text', 'placeholder' => 'Last Name'],
               ['name' => 'Email', 'value' => $_SESSION['email'], 'type' => 'email', 'placeholder' => 'Email'],
-              ['name' => 'Phone Number', 'value' => $_SESSION['phone'], 'type' => 'tel', 'placeholder' => 'Phone Number'],
+              ['name' => 'Phone Number', 'value' => $_SESSION['phone_number'], 'type' => 'tel', 'placeholder' => 'Phone Number'],
               ['name' => 'Birth Date', 'value' => $_SESSION['birthdate'], 'type' => 'date', 'placeholder' => 'Birth Date', 'disabled' => true],
               ['name' => 'Home Address', 'value' => $_SESSION['home_address'], 'type' => 'text', 'placeholder' => 'Home Address'],
               ['name' => 'Barangay', 'value' => $_SESSION['barangay'], 'type' => 'text', 'placeholder' => 'Barangay'],
