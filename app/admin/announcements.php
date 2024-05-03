@@ -176,6 +176,7 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
             announcements.forEach(announcement => {
               const announcementCard = `
         <div class="card shadow-xl bg-base-100 gap-5 p-5 md:p-8 lg:p-10 w-full">
+        <div><button data-id=${announcement.announcement_id} class="btn btn-error rounded-full shadow-sm delete-btn">Delete</button></div>
             <h1 class="font-bold">${announcement.title}</h1>
             <p>${announcement.content}</p>
         </div>
@@ -184,14 +185,30 @@ if (!isset($_SESSION['user_number']) || ($_SESSION['role'] !== 'Admin')) {
             });
           }
 
-
           loadingSpinner.classList.add('hidden');
+
+          $('.delete-btn').click((e) => {
+            const announcementId = $(e.target).data('id');
+            console.log('Delete button clicked for announcement id:', announcementId);
+            $.ajax({
+              url: 'http://127.0.0.1:5000/api/announcement/delete',
+              method: 'DELETE',
+              contentType: 'application/json',
+              data: JSON.stringify({
+                announcement_id: announcementId
+              }),
+              success: (data) => {
+                alert('Announcement deleted successfully.')
+                console.log(data);
+              },
+              error: (error) => {
+                alert('Something went wrong');
+                console.log(error);
+              }
+            })
+          });
         },
-        error: (error) => {
-          alert('Something went wrong');
-          console.log(error);
-        }
-      })
+      });
     });
   </script>
 </body>
